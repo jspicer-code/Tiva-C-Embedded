@@ -1,1 +1,1 @@
-# eee4243
+# EEE4243 Embedded Systems
