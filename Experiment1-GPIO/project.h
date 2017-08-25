@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <time.h>		// required for hibernate.h tm structure
 
+#include "inc/TM4C123GH6PM.h"
 #include "inc/hw_memmap.h"
 
 #include "driverlib/adc.h"

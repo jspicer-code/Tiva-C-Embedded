@@ -412,13 +412,6 @@
         </Group>
         <Group>
           <GroupName>src</GroupName>
-          <Files>
-            <File>
-              <FileName>example.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\example.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>

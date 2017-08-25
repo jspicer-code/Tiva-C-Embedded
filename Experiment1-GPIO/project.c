@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "project.h"
-#include "TM4C123GH6PM.h"
+
 //*****************************************************************************
 //
 // The error routine that is called if the driver library encounters an error.
@@ -37,9 +37,9 @@ int main(void)
     // enable the GPIO pin for digital function.
 		GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3 | GPIO_PIN_2 | GPIO_PIN_1);
 		
-		// PIN_0 is normally locked.  Need to write a special passcode and make it configurable...	
-		GPIOF->LOCK = 0x4C4F434B;
-		GPIOF->CR = 0x1;
+		// PIN_0 is normally locked.  Need to write a special passcode and commit it.
+		GPIO_PORTF_LOCK_R = GPIO_LOCK_KEY;
+		GPIO_PORTF_CR_R = 0x1;
 		
 		// Enable the GPIO pin for the switches (PF0 and PF4).  Set the direction as input, and
     // enable the GPIO pin for digital function.
