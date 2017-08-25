@@ -1,5 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include <time.h>		// required for hibernate.h tm structure
+
 #include "inc/hw_memmap.h"
 
 #include "driverlib/adc.h"
