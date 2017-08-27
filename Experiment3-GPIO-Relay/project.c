@@ -57,6 +57,7 @@ int main(void)
 			input = GPIO_PORTE_DATA_R;
 			isSW1Down = (input >> 1) & 0x01;
 			
+			// If the switch is down, turn on the outputs.  Otherwise, turn them off.
 			if (isSW1Down) {
 				GPIO_PORTE_DATA_R = GPIO_PIN_2 | GPIO_PIN_3;
 			}
