@@ -5,5 +5,5 @@ This experiment tests the SysTick timer and PLL on the EV-TM4C123GLX board.  The
 
 Three LEDs are connected to three GPIO output ports and turned on/off after the SysTick timer counts down to zero and rolls over.  The LEDs turn on/off in a shifting pattern from right to left.  The red, onboard LED is also made to blink at the same rate.  
 
-[![](http://img.youtube.com/vi/kNR2bn99Wfo/1.jpg)](https://youtu.be/kNR2bn99Wfo)<br>
-[Watch the video](https://youtu.be/kNR2bn99Wfo)
+[![](http://img.youtube.com/vi/_GmFn_izdOk/1.jpg)](https://youtu.be/_GmFn_izdOk)<br>
+[Watch the video](https://youtu.be/_GmFn_izdOk)
