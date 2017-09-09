@@ -58,7 +58,7 @@ void SetLEDColor(int selection)
 	
 }
 
-// Returns when the test switch (SW1) is down.
+// Returns true if the test switch (SW1) is down.
 bool IsTestSwitchDown(void)
 {
 	return !PF4;
