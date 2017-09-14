@@ -42,7 +42,4 @@
 #include "driverlib/watchdog.h"
 #include "tm4c123gh6pm.h"
 
-#include "src/PLL_Util.h"
-#include "src/SysTick_Util.h"
-#include "src/GPIO_Util.h"
-#include "src/UART_Util.h"
+#include "src/HAL.h"

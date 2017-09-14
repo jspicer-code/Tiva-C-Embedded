@@ -421,44 +421,49 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>GPIO_Util.c</FileName>
+              <FileName>GPIO_HAL.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\GPIO_Util.c</FilePath>
+              <FilePath>.\src\GPIO_HAL.c</FilePath>
             </File>
             <File>
-              <FileName>GPIO_Util.h</FileName>
+              <FileName>GPIO_HAL.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\GPIO_Util.h</FilePath>
+              <FilePath>.\src\GPIO_HAL.h</FilePath>
             </File>
             <File>
-              <FileName>PLL_Util.c</FileName>
+              <FileName>PLL_HAL.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\PLL_Util.c</FilePath>
+              <FilePath>.\src\PLL_HAL.c</FilePath>
             </File>
             <File>
-              <FileName>PLL_Util.h</FileName>
+              <FileName>PLL_HAL.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\PLL_Util.h</FilePath>
+              <FilePath>.\src\PLL_HAL.h</FilePath>
             </File>
             <File>
-              <FileName>SysTick_Util.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SysTick_Util.h</FilePath>
-            </File>
-            <File>
-              <FileName>SysTick_Util.c</FileName>
+              <FileName>SysTick_HAL.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\SysTick_Util.c</FilePath>
+              <FilePath>.\src\SysTick_HAL.c</FilePath>
             </File>
             <File>
-              <FileName>UART_Util.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\UART_Util.c</FilePath>
-            </File>
-            <File>
-              <FileName>UART_Util.h</FileName>
+              <FileName>SysTick_HAL.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\UART_Util.h</FilePath>
+              <FilePath>.\src\SysTick_HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_HAL.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\UART_HAL.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART_HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\UART_HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL.h</FilePath>
             </File>
           </Files>
         </Group>

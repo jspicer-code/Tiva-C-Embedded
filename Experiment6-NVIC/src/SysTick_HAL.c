@@ -5,12 +5,24 @@
 // Hardware:  TM4C123 Tiva board
 
 #include <stdint.h>
-#include "SysTick_Util.h"
+#include "HAL.h"
 #include "tm4c123gh6pm.h"
 
-void SysTick_Init(void)
+
+// Stores the number of ticks in 10ms based on the bus clock frequency.
+static uint32_t NumTicksPer10ms;
+
+int SysTick_Init(void)
 {
 	
+	// Return failure if the PLL hasn't been initialized.
+	if (BusClockFreq == 0) {
+		return -1;
+	}
+	
+	// Establish the number of ticks in 10ms for later use...
+	NumTicksPer10ms = BusClockFreq * 0.01;
+
 	// 1) Disable SysTick during initialization.
 	NVIC_ST_CTRL_R = 0;
 	
@@ -23,6 +35,8 @@ void SysTick_Init(void)
 	// 4) Set clock source to core clock and enable 
 	NVIC_ST_CTRL_R = NVIC_ST_CTRL_CLK_SRC | NVIC_ST_CTRL_ENABLE;
 	
+	// Success
+	return 0;
 }
 
 void SysTick_Wait(uint32_t delay)
@@ -43,8 +57,7 @@ void SysTick_Wait10ms(uint32_t delay)
 {
 	uint32_t i;
 	for (i = 0; i < delay; i++) {
-		// NOTE:  This currently assumes a bus frequency of 80MHz!!
-		SysTick_Wait(800000);
+		SysTick_Wait(NumTicksPer10ms);
 	}
 	
 }

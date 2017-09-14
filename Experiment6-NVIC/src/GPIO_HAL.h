@@ -1,8 +1,11 @@
-// File:  GPIO_Util.h
+// File:  GPIO_HAL.h
 // Author: JS
-// Date:  9/9/17
-// Purpose: GPIO utilities
+// Date:  9/14/17
+// Purpose: GPIO hardware abstraction layer
 // Hardware:  TM4C123 Tiva board
+
+#ifndef GPIO_HAL_H
+#define GPIO_HAL_H
 
 #define PA2 (*((volatile uint32_t*)0x42087F88)) 
 #define PA3 (*((volatile uint32_t*)0x42087F8C)) 
@@ -33,19 +36,12 @@
 #define PIN_6		0x40
 #define PIN_7		0x80
 
-
 typedef enum DO_Drive { DRIVE_2MA, DRIVE_4MA, DRIVE_8MA } DO_Drive_t;
 typedef enum DI_Pull { PULL_NONE, PULL_UP, PULL_DOWN } DI_Pull_t;
 
-void GPIO_PortA_Init(void);
-void GPIO_PortA_EnableDO(uint8_t pinMap, DO_Drive_t drive);
-void GPIO_PortA_EnableDI(uint8_t pinMap, DI_Pull_t pull);
+void GPIO_Init_Port(PortName_t port);
+void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive);
+void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull);
+void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl);
 
-void GPIO_PortE_Init(void);
-void GPIO_PortE_EnableDO(uint8_t pinMap, DO_Drive_t drive);
-void GPIO_PortE_EnableDI(uint8_t pinMap, DI_Pull_t pull);
-
-void GPIO_PortF_Init(void);
-void GPIO_PortF_EnableDO(uint8_t pinMap, DO_Drive_t drive);
-void GPIO_PortF_EnableDI(uint8_t pinMap, DI_Pull_t pull);
-
+#endif

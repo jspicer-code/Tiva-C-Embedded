@@ -13,11 +13,11 @@ void InitHardware()
 {
 	PLL_Init80MHz();
 
-	GPIO_PortF_Init();
-	GPIO_PortF_EnableDO(PIN_1 | PIN_2 | PIN_3, DRIVE_2MA);
-	GPIO_PortF_EnableDI(PIN_4, PULL_UP);
+	GPIO_Init_Port(PORTF);
+	GPIO_EnableDO(PORTF, PIN_1 | PIN_2 | PIN_3, DRIVE_2MA);
+	GPIO_EnableDI(PORTF, PIN_4, PULL_UP);
 	
-	UART_UART5_Init();
+	UART_Init(UART5, 9600);
 
 	SysTick_Init();
 }
@@ -26,17 +26,17 @@ void InitHardware()
 void PrintMenu(void)
 {
 	
-	UART_UART5_WriteString("\n\r\n\r");		
-	UART_UART5_WriteString("Select an LED color:\n\r");
-	UART_UART5_WriteString("1) Black (OFF)\n\r");
-	UART_UART5_WriteString("2) Blue\n\r");
-	UART_UART5_WriteString("3) Green\n\r");
-	UART_UART5_WriteString("4) Cyan\n\r");
-	UART_UART5_WriteString("5) Red\n\r");
-	UART_UART5_WriteString("6) Magenta\n\r");
-	UART_UART5_WriteString("7) Yellow\n\r");
-	UART_UART5_WriteString("8) White\n\r");
-	UART_UART5_WriteString(">");	
+	UART_WriteString(UART5, "\n\r\n\r");		
+	UART_WriteString(UART5, "Select an LED color:\n\r");
+	UART_WriteString(UART5, "1) Black (OFF)\n\r");
+	UART_WriteString(UART5, "2) Blue\n\r");
+	UART_WriteString(UART5, "3) Green\n\r");
+	UART_WriteString(UART5, "4) Cyan\n\r");
+	UART_WriteString(UART5, "5) Red\n\r");
+	UART_WriteString(UART5, "6) Magenta\n\r");
+	UART_WriteString(UART5, "7) Yellow\n\r");
+	UART_WriteString(UART5, "8) White\n\r");
+	UART_WriteString(UART5, ">");	
 
 }
 
@@ -73,7 +73,7 @@ void SendTestPattern()
 		SysTick_Wait10ms(10);
 
 		// An upper-case ASCII 'U' results in square wave.
-		UART_UART5_WriteChar('U');
+		UART_WriteChar(UART5, 'U');
 
 	}
 }
@@ -96,7 +96,7 @@ int main()
 		
 		do 
 		{
-			selection = UART_UART5_ReadChar();
+			selection = UART_ReadChar(UART5);
 			
 			if (IsTestSwitchDown())
 			{

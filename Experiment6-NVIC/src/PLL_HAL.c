@@ -5,8 +5,11 @@
 // Hardware:  TM4C123 Tiva board
 
 #include <stdint.h>
-#include "PLL_Util.h"
+#include "HAL.h"
 #include "tm4c123gh6pm.h"
+
+
+uint32_t BusClockFreq;
 
 void PLL_Init80MHz(void)
 {
@@ -39,5 +42,7 @@ void PLL_Init80MHz(void)
 	
 	// 8) Clear BYPASS to enable PLL.
 	SYSCTL_RCC2_R &= ~SYSCTL_RCC2_BYPASS2;
+	
+	BusClockFreq = 80000000;
 	
 }
