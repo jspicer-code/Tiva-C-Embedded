@@ -7,6 +7,8 @@
 #ifndef UART_HAL_H
 #define UART_HAL_H
 
+typedef void (*PFN_RxCallback)(char c);
+	
 typedef enum {
 	UART0,
 	UART1,
@@ -22,6 +24,7 @@ int UART_Init(UART_ID_t uartId, uint32_t baud);
 void UART_WriteChar(UART_ID_t uartId, char c);
 void UART_WriteString(UART_ID_t uartId, char* sz);
 char UART_ReadChar(UART_ID_t uartId);
+int UART_EnableRxInterrupt(UART_ID_t uartId, PFN_RxCallback callback);
 
 #endif
 

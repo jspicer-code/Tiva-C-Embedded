@@ -17,6 +17,7 @@
 #define UART6_REG_BASE	((volatile uint32_t *)0x40012000)
 #define UART7_REG_BASE	((volatile uint32_t *)0x40013000)
 
+
 typedef struct {     
 	uint32_t  DR;  
 	uint32_t  RSR_ECR_;
@@ -54,6 +55,8 @@ const volatile uint32_t * UARTBaseAddress[] = {
 	UART6_REG_BASE,
 	UART7_REG_BASE
 };
+
+PFN_RxCallback Rx_Callback;
 
 
 int UART_Init(UART_ID_t uartId, uint32_t baud)
@@ -93,7 +96,7 @@ int UART_Init(UART_ID_t uartId, uint32_t baud)
 	//
 	baudRateDivisor = (16*baud);
 	uart->IBRD = (BusClockFreq / baudRateDivisor); // 0x208; 
-	uart->FBRD = (((BusClockFreq % baudRateDivisor) * 64) / baudRateDivisor); //  0x35;
+	uart->FBRD = (((BusClockFreq % baudRateDivisor) * 64) / baudRateDivisor) + 0.5; //  0x35;
 	
 	
 	// Use the system clock for the clock source.
@@ -155,3 +158,73 @@ char UART_ReadChar(UART_ID_t uartId)
 }
 
 
+int UART_EnableRxInterrupt(UART_ID_t uartId, PFN_RxCallback callback)
+{
+	volatile UARTRegs_t* uart = (volatile UARTRegs_t*)UARTBaseAddress[uartId];
+	
+	Rx_Callback = callback;
+
+	uart->IM |= UART_IM_RXIM;
+
+	switch (uartId) {
+		
+		case UART5:
+			//
+			// This is IRQ 61.  Note that the handler function (in this file) must be assigned to the
+			// Vectors table in the startup_*.S file and specified in that file with an EXTERN directive
+			// (so the linker can find it).
+			// 
+			// Register 44: Interrupt 60-63 Priority (PRI15), offset 0x43C
+			NVIC_PRI15_R = (NVIC_PRI15_R & 0xFFFF00FF) | 0x00004000; // priority 2
+		
+			// Enable...
+			NVIC_EN1_R |= 0x20000000; // bit 29
+		
+			break;
+		
+		default:
+			// TODO: Implement other UART ISRs as needed.
+			return -1;
+
+	}
+	
+	return 0;
+}	
+
+void UART5Handler(void)
+{
+	volatile int readback;
+	char c;
+	
+	volatile UARTRegs_t* uart = (volatile UARTRegs_t*)UARTBaseAddress[UART5];
+	
+	if (uart->MIS & 0x0010) {
+		
+		// Read the received character.
+		c = uart->DR;
+		
+		// Clear the Rx interrupt flag.
+		uart->ICR = 0x0010;
+		
+		// A read forces clearing of the interrupt flag.
+		readback = uart->ICR;	
+		
+		// Invoke the call back if registered.
+		if (Rx_Callback) {
+			Rx_Callback(c);
+		}
+		
+	}
+	else {
+		
+		// This clears other interrupt flags besides Rx in case	the handler is invoked
+		//	for any other reason (which it shouldn't).
+		uart->ICR = uart->MIS;
+		readback = uart->ICR;
+		
+	}
+	
+	
+	
+	
+}

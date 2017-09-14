@@ -37,7 +37,7 @@
 ; This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
 ;
 ;******************************************************************************
-
+	
 ;******************************************************************************
 ;
 ; <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
@@ -93,6 +93,8 @@ __heap_limit
 ; The vector table.
 ;
 ;******************************************************************************
+		EXTERN	UART5Handler
+		
         EXPORT  __Vectors
 __Vectors
         DCD     StackMem + Stack            ; Top of Stack
@@ -172,7 +174,7 @@ __Vectors
         DCD     IntDefaultHandler           ; SSI3 Rx and Tx
         DCD     IntDefaultHandler           ; UART3 Rx and Tx
         DCD     IntDefaultHandler           ; UART4 Rx and Tx
-        DCD     IntDefaultHandler           ; UART5 Rx and Tx
+        DCD     UART5Handler           		; UART5 Rx and Tx
         DCD     IntDefaultHandler           ; UART6 Rx and Tx
         DCD     IntDefaultHandler           ; UART7 Rx and Tx
         DCD     0                           ; Reserved

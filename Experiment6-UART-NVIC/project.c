@@ -8,19 +8,63 @@
 #include <stdio.h>
 #include <stdint.h>
 
+
+enum {
+	STATE_MENU,
+	STATE_SELECTION,
+	STATE_LEDS,
+	STATE_TEST_PATTERN
+} AppState;
+
+uint8_t LEDColor;
+
+void RxCallback(char c)
+{
+	switch (AppState) {
+		
+		case STATE_SELECTION:
+			
+			if (c >= '1' && c <= '8') {
+				LEDColor = (c & 0x07) - 1;
+				AppState = STATE_LEDS;
+			}
+			else if (c == 'u' || c == 'U') {
+				AppState = STATE_TEST_PATTERN;
+			}
+			
+			break;
+	
+		case STATE_TEST_PATTERN:
+			
+			if (c == 'u' || c == 'U') {
+				AppState = STATE_MENU;
+			}
+			break;
+		
+	}
+}
+
+
 // Initializes the PLL, UART, SysTick, and ports needed for the program.
 void InitHardware()
 {
+	__disable_irq();
+	
 	PLL_Init80MHz();
+
+	SysTick_Init();
 
 	GPIO_Init_Port(PORTF);
 	GPIO_EnableDO(PORTF, PIN_1 | PIN_2 | PIN_3, DRIVE_2MA);
 	GPIO_EnableDI(PORTF, PIN_4, PULL_UP);
 	
 	UART_Init(UART5, 9600);
+	UART_EnableRxInterrupt(UART5, RxCallback);
 
-	SysTick_Init();
+	__enable_irq();
 }
+
+
 
 // Transmits the color selection menu over the UART.
 void PrintMenu(void)
@@ -36,16 +80,17 @@ void PrintMenu(void)
 	UART_WriteString(UART5, "6) Magenta\n\r");
 	UART_WriteString(UART5, "7) Yellow\n\r");
 	UART_WriteString(UART5, "8) White\n\r");
+	UART_WriteString(UART5, "U) Test Pattern (Press U again to Stop)\n\r");
 	UART_WriteString(UART5, ">");	
 
 }
 
 // Turns on/off the LEDs based on the user's color selection.
-void SetLEDColor(int selection)
+void SetLEDColor(uint8_t rgbColor)
 {
 	// The selection entry is already an RGB bit pattern.  Just need to 
 	// 	subtract one to make it zero based.
-	uint8_t rgbColor = selection - 1;
+	//uint8_t rgbColor = LEDColor; //selection - 1;
 	
 	// PF1 == RED
 	PF1 = (rgbColor & 0x4) >> 2;
@@ -67,15 +112,11 @@ bool IsTestSwitchDown(void)
 // Transmits the character 'U' every 100ms for scope testing
 void SendTestPattern()
 {
-	while (IsTestSwitchDown()) {
+	// Wait 100 ms.
+	SysTick_Wait10ms(10);
 
-		// Wait 100 ms.
-		SysTick_Wait10ms(10);
-
-		// An upper-case ASCII 'U' results in square wave.
-		UART_WriteChar(UART5, 'U');
-
-	}
+	// An upper-case ASCII 'U' results in square wave.
+	UART_WriteChar(UART5, 'U');
 }
 
 // Main function.  Initializes the hardware then loops doing the following:
@@ -85,28 +126,32 @@ void SendTestPattern()
 // 4. If the user's selection is valid, turn on the corresponding LED color.  Otherwise, ignore the selection.
 int main()
 {
-	char selection;
 	
 	InitHardware();
 	
 	while (true) 
 	{
 		
-		PrintMenu();
-		
-		do 
+		switch (AppState)
 		{
-			selection = UART_ReadChar(UART5);
-			
-			if (IsTestSwitchDown())
-			{
-				SendTestPattern();
-			}
-			
-		} 
-		while (selection < '1' || selection > '8');
+			case STATE_MENU:
+				PrintMenu();
+				AppState = STATE_SELECTION;
+				break;
 		
-		SetLEDColor(selection);
+			case STATE_SELECTION:
+				// do nothing
+				break;
+			
+			case STATE_LEDS:
+				SetLEDColor(LEDColor);
+				AppState = STATE_MENU;
+				break;
+			
+			case STATE_TEST_PATTERN:
+				SendTestPattern();
+				break;
+		}	
 		
 	}
 	
