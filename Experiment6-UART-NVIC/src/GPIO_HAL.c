@@ -39,6 +39,8 @@ typedef struct {
 } GPIORegs_t;
 
 
+// A lookup up table for base addresses of the ports
+//	Use a PortName_t value for an index.
 const volatile uint32_t * GPIOBaseAddress[] = {
 	GPIO_PORTA_DATA_BITS_R,
 	GPIO_PORTB_DATA_BITS_R,
@@ -51,7 +53,6 @@ const volatile uint32_t * GPIOBaseAddress[] = {
 
 void GPIO_Init_Port(PortName_t port)
 {
-
 	uint32_t portBit = (0x1 << (uint8_t)port);
 	
 	// Clock gating control register - enables the GPIO function for the port.
@@ -68,8 +69,7 @@ void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive)
 		
 	volatile GPIORegs_t* gpio = (volatile GPIORegs_t*)GPIOBaseAddress[port];
 	
-	if (port == PORTF && pinMap & 0x01) 
-	{
+	if (port == PORTF && pinMap & 0x01) {
 		// PORTF PIN_0 is normally locked.  Need to write a special passcode and commit it.
 		gpio->LOCK = GPIO_LOCK_KEY;
 		gpio->CR = 0x01;
@@ -107,8 +107,7 @@ void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull)
 	
 	volatile GPIORegs_t* gpio = (volatile GPIORegs_t*)GPIOBaseAddress[port];
 	
-	if (port == PORTF && pinMap & 0x01) 
-	{
+	if (port == PORTF && pinMap & 0x01)  {
 		// PORTF PIN_0 is normally locked.  Need to write a special passcode and commit it.
 		gpio->LOCK = GPIO_LOCK_KEY;
 		gpio->CR = 0x01;

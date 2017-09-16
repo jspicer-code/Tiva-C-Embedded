@@ -1,7 +1,7 @@
 // File:  project.c
 // Author: JS
 // Date:  9/9/17
-// Purpose: UART Experiment
+// Purpose: UART Experiment w/Interrupt
 // Hardware:  TM4C123 Tiva board
 
 #include "project.h"
@@ -9,6 +9,7 @@
 #include <stdint.h>
 
 
+// Program states.
 enum {
 	STATE_MENU,
 	STATE_SELECTION,
@@ -16,8 +17,14 @@ enum {
 	STATE_TEST_PATTERN
 } AppState;
 
+
+// Holds the current LED color
 uint8_t LEDColor;
 
+// This function is called back by the Receive (Rx) UART interrupt handler
+//	when a new character has arrived on the serial port.  Its purpose is
+//	to examine the character input and change states for the main() function
+//	to process.
 void RxCallback(char c)
 {
 	switch (AppState) {
@@ -25,8 +32,12 @@ void RxCallback(char c)
 		case STATE_SELECTION:
 			
 			if (c >= '1' && c <= '8') {
+			
+				// The selection entry is already an RGB bit pattern.  Just need to 
+				// 	subtract one and mask out the upper bits.
 				LEDColor = (c & 0x07) - 1;
 				AppState = STATE_LEDS;
+			
 			}
 			else if (c == 'u' || c == 'U') {
 				AppState = STATE_TEST_PATTERN;
@@ -88,10 +99,6 @@ void PrintMenu(void)
 // Turns on/off the LEDs based on the user's color selection.
 void SetLEDColor(uint8_t rgbColor)
 {
-	// The selection entry is already an RGB bit pattern.  Just need to 
-	// 	subtract one to make it zero based.
-	//uint8_t rgbColor = LEDColor; //selection - 1;
-	
 	// PF1 == RED
 	PF1 = (rgbColor & 0x4) >> 2;
 	
@@ -103,13 +110,8 @@ void SetLEDColor(uint8_t rgbColor)
 	
 }
 
-// Returns true if the test switch (SW1) is down.
-bool IsTestSwitchDown(void)
-{
-	return !PF4;
-}
 
-// Transmits the character 'U' every 100ms for scope testing
+// Transmits the character 'U' for scope testing
 void SendTestPattern()
 {
 	// Wait 100 ms.
@@ -119,11 +121,7 @@ void SendTestPattern()
 	UART_WriteChar(UART5, 'U');
 }
 
-// Main function.  Initializes the hardware then loops doing the following:
-// 1. Send the selection menu
-// 2. Wait for a selection character to be pressed.
-// 3. If the onboard SW1 is held down, transmit a test pattern until SW1 is released.
-// 4. If the user's selection is valid, turn on the corresponding LED color.  Otherwise, ignore the selection.
+// Main function.  Initializes the hardware then loops while state changes occur.
 int main()
 {
 	
@@ -134,20 +132,26 @@ int main()
 		
 		switch (AppState)
 		{
+			// Print the selection menu and transition to the selection state.
 			case STATE_MENU:
 				PrintMenu();
 				AppState = STATE_SELECTION;
 				break;
 		
+			// Remain in this state until the user makes a menu selection.
 			case STATE_SELECTION:
 				// do nothing
 				break;
 			
+			// The user has made a valid selection, so write to the LEDs and transition
+			//	back to the menu state.		
 			case STATE_LEDS:
 				SetLEDColor(LEDColor);
 				AppState = STATE_MENU;
 				break;
 			
+			// The user has selected to write the test pattern, so remain in this state
+			//	until they have selected to go back to the menu.
 			case STATE_TEST_PATTERN:
 				SendTestPattern();
 				break;

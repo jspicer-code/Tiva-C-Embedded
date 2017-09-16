@@ -8,7 +8,7 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
-
+// Holds the currently configured bus clock frequency.
 uint32_t BusClockFreq;
 
 void PLL_Init80MHz(void)

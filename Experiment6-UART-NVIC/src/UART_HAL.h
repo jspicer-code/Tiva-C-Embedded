@@ -7,8 +7,10 @@
 #ifndef UART_HAL_H
 #define UART_HAL_H
 
+// Signature of the Receive (Rx) character callback function 
 typedef void (*PFN_RxCallback)(char c);
 	
+// These are service layer names for the ports.
 typedef enum {
 	UART0,
 	UART1,

@@ -7,6 +7,7 @@
 #ifndef HAL_H
 #define HAL_H
 
+// These are service layer names for the ports.
 typedef enum { 
 	PORTA = 0, 
 	PORTB = 1, 
