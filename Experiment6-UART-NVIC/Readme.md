@@ -1,9 +1,9 @@
-# Experiment5-UART
+# Experiment6-UART-NVIC
 
 ## Overview
-This experiment sets up UART5 on the Tiva board and connects to the PC using an FTDI RS-232 to 3.3v converter cable. The embedded application transmits a selection menu to the PC that allows the user to choose one of eight colors to display on the tri-color LED. PuTTY is used as the terminal program on the PC. 
+This experiment is a continuation of the previous experiment that tests out the UART on the Tiva board.   Instead of using an RS232 to TTL converter cable, it uses a Maxim 3232 transceiver chip with external tantalum (0.1uF) capacitors.
 
-A scope probe was hooked up to the TX pin (PE5) to view the waveform of the characters transmitted from the board. To see a more regular, periodic signal, the embedded app transmits the letter 'U' repeatedly when SW1 is held down and a menu selection is made. This appears on the oscilloscope as a series of alternating pulses.
+The code now uses an interrupt handler instead of polling the UART for received characters.  It has also been refactored to use a state machine, and the hardware functions were improved to eliminate redundancy and create a better level of abstraction for the calling program(s).
 
-[![](http://img.youtube.com/vi/AObu1TXMY2k/1.jpg)](https://youtu.be/AObu1TXMY2k)<br>
-[Watch the video](https://youtu.be/AObu1TXMY2k)
+[![](http://img.youtube.com/vi/Sd4p9AEHWPo/1.jpg)](https://youtu.be/Sd4p9AEHWPo)<br>
+[Watch the video](https://youtu.be/Sd4p9AEHWPo)

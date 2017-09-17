@@ -223,8 +223,5 @@ void UART5Handler(void)
 		readback = uart->ICR;
 		
 	}
-	
-	
-	
-	
+
 }
