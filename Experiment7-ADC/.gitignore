@@ -1,0 +1,10 @@
+**/Listings
+**/Objects
+**/rvmdk
+**/RTE
+*~
+*.uvguix*
+*.uvoptx*
+*.uvoptx
+*.scvd
+JlinkLog.txt
