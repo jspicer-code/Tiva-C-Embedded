@@ -1,9 +1,9 @@
-# Experiment6-UART-NVIC
+# Experiment7-ADC
 
 ## Overview
-This experiment is a continuation of the previous experiment that tests out the UART on the Tiva board.   Instead of using an RS232 to TTL converter cable, it uses a Maxim 3232 transceiver chip with external tantalum (0.1uF) capacitors.
+This experiment tests out the ADC on the Tiva board.  It is the basic implementation of a volt meter that samples the voltage on a 10K potentiometer which is connected between 3.3V and ground.  The voltage sample is converted to decimal and displayed on two seven-segment displays, up to 1/10th of a volt.  
 
-The code now uses an interrupt handler instead of polling the UART for received characters.  It has also been refactored to use a state machine, and the hardware functions were improved to eliminate redundancy and create a better level of abstraction for the calling program(s).
+The ADC is software triggered and uses SS3 and AIN0 (pin PE3).  The displays are driven by two ULN2803A Darlington transistor arrays, one per display.  One GPIO pin used for each segment of the display and connected to the input of an array transistor.  Turning on the GPIO pin causes current to sink through the LED segment into the open collector output of the transistor.
 
-[![](http://img.youtube.com/vi/Sd4p9AEHWPo/2.jpg)](https://youtu.be/Sd4p9AEHWPo)<br>
-[Watch the video](https://youtu.be/Sd4p9AEHWPo)
+[![](http://img.youtube.com/vi/BE-GWVR0DsE/1.jpg)](https://youtu.be/BE-GWVR0DsE)<br>
+[Watch the video](https://youtu.be/BE-GWVR0DsE)
