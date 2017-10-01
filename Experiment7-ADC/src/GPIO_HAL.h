@@ -14,6 +14,13 @@
 #define PA6 (*((volatile uint32_t*)0x42087F98)) 
 #define PA7 (*((volatile uint32_t*)0x42087F9C)) 
 
+#define PB2 (*((volatile uint32_t*)0x420A7F88)) 
+#define PB3 (*((volatile uint32_t*)0x420A7F8C)) 
+#define PB4 (*((volatile uint32_t*)0x420A7F90)) 
+#define PB5 (*((volatile uint32_t*)0x420A7F94)) 
+#define PB6 (*((volatile uint32_t*)0x420A7F98)) 
+#define PB7 (*((volatile uint32_t*)0x420A7F9C)) 
+
 #define PE0 (*((volatile uint32_t*)0x42487F80))
 #define PE1 (*((volatile uint32_t*)0x42487F84))
 #define PE2 (*((volatile uint32_t*)0x42487F88))
@@ -39,9 +46,10 @@
 typedef enum DO_Drive { DRIVE_2MA, DRIVE_4MA, DRIVE_8MA } DO_Drive_t;
 typedef enum DI_Pull { PULL_NONE, PULL_UP, PULL_DOWN } DI_Pull_t;
 
-void GPIO_Init_Port(PortName_t port);
+void GPIO_InitPort(PortName_t port);
 void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive);
 void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull);
 void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl);
+void GPIO_EnableAltAnalog(PortName_t port, uint8_t pinMap);
 
 #endif

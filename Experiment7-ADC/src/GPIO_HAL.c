@@ -51,7 +51,7 @@ const volatile uint32_t * GPIOBaseAddress[] = {
 };
 
 
-void GPIO_Init_Port(PortName_t port)
+void GPIO_InitPort(PortName_t port)
 {
 	uint32_t portBit = (0x1 << (uint8_t)port);
 	
@@ -153,7 +153,7 @@ void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl)
 	gpio->DEN |= pinMap;
 	gpio->AMSEL &= ~pinMap;
 	
-	// Enable pins 4 & 5 for alternate function.
+	// Enable pins for alternate function.
 	gpio->AFSEL |= pinMap;
 	
 	for (i = 0; i < 8; i++) {
@@ -165,4 +165,17 @@ void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl)
 	// Set the pin control function for each pin.
 	gpio->PCTL |= pctlValue;
 
+}
+
+
+void GPIO_EnableAltAnalog(PortName_t port, uint8_t pinMap)
+{
+	volatile GPIORegs_t* gpio = (volatile GPIORegs_t*)GPIOBaseAddress[port];
+
+	// Enable pins for analog and disable for digital.
+	gpio->DEN &= ~pinMap;
+	gpio->AMSEL |= pinMap;
+	
+	// Enable pins for alternate function.
+	gpio->AFSEL |= pinMap;
 }

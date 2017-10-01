@@ -21,6 +21,7 @@ typedef enum {
 #include "SysTick_HAL.h"
 #include "UART_HAL.h"
 #include "GPIO_HAL.h"
+#include "ADC_HAL.h"
 
 #endif
 

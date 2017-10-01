@@ -395,6 +395,16 @@
               <FileType>1</FileType>
               <FilePath>.\project.c</FilePath>
             </File>
+            <File>
+              <FileName>VoltMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\VoltMeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>VoltMeter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\VoltMeter.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -420,6 +430,16 @@
         <Group>
           <GroupName>src</GroupName>
           <Files>
+            <File>
+              <FileName>SevenSegDisplay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SevenSegDisplay.h</FilePath>
+            </File>
+            <File>
+              <FileName>SevenSegDisplay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\SevenSegDisplay.c</FilePath>
+            </File>
             <File>
               <FileName>GPIO_HAL.c</FileName>
               <FileType>1</FileType>
@@ -464,6 +484,16 @@
               <FileName>HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\HAL.h</FilePath>
+            </File>
+            <File>
+              <FileName>ADC_HAL.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\ADC_HAL.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC_HAL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\ADC_HAL.h</FilePath>
             </File>
           </Files>
         </Group>

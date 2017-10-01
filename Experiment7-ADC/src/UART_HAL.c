@@ -75,7 +75,7 @@ int UART_Init(UART_ID_t uartId, uint32_t baud)
 	switch (uartId) {
 		
 		case UART5:
-			GPIO_Init_Port(PORTE);
+			GPIO_InitPort(PORTE);
 			break;
 		
 		default:
