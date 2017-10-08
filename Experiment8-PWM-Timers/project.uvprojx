@@ -513,7 +513,7 @@
             <File>
               <FileName>Utilities.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Utilities.c</FilePath>
+              <FilePath>.\src\Utilities.c</FilePath>
             </File>
           </Files>
         </Group>

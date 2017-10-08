@@ -8,8 +8,10 @@
 #include "Utilities.h"
 #include <string.h>
 
+// At 80MHz, this is the number of bus cycles for a 25kHz PWM frequency.
 #define PWM_PERIOD		3200
 
+// The timer ISR stores the tach pulse count in this variable.
 static uint32_t tachPulseCount;
 
 void DisplayRPM()
@@ -30,8 +32,9 @@ void DisplayRPM()
 	
 		char strCount[16];
 		itoa(rpm, strCount);
-		
 		strcat(message, strCount);
+		
+		// Add some space to clear out the previous value.
 		strcat(message, "     ");
 		
 		UART_WriteString(UART5, message);	
@@ -64,11 +67,14 @@ void InitHardware()
 	
 	PLL_Init80MHz();
 	
+	// Enable the the onboard LED.
 	GPIO_InitPort(PORTF);
 	GPIO_EnableDO(PORTF, PIN_1, DRIVE_2MA);
 	
 	ADC_Enable(ADC0, AIN0);
-		
+	
+	// The PWM period is calculated to be the number of ticks to achieve
+	//	a frequency of 25kHz.
 	PWM_Enable(PWMModule0, PWM3, PWM_PERIOD, PWM_PERIOD / 2);
 	
 	// There are 80 million system ticks in one second.
@@ -93,14 +99,21 @@ void RunFan(void)
 	// Sample the ADC.
 	adcSample = ADC_Sample(ADC0);	
 	
-	// Convert it to a percentage of it maximum range.
+	// Convert it to a percentage of its maximum range.
+	//	Don't allow it to go to 100% or the fan speed drops, 
+	//	apparently unable to find an input pulse.
 	percentage = ((float)adcSample / 4095.0f);
+	if (percentage > 0.999f) {
+		percentage = 0.999f;
+	};
 	
 	// Apply the percentage to the PWM period to obtain the duty cycle.
 	duty = (uint32_t)(percentage * (float)PWM_PERIOD);
 
+	// Set the duty cycle
 	PWM_SetDuty(PWMModule0, PWM3, duty);
 		
+	// Read the later tach count and display it.
 	DisplayRPM();
 	
 }

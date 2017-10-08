@@ -198,13 +198,6 @@ void Timer_ResetInputCounter(TimerBlock_t block)
 	
 }
 
-void Timer_ClearInputCounter(TimerBlock_t block)
-{
-	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];
-	timer->TAV = 0;
-}
-
-
 uint32_t Timer_ReadCounterValue(TimerBlock_t block)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];

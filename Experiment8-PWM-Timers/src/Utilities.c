@@ -1,7 +1,14 @@
+// File:  Utilities.c
+// Author: JS
+// Date:  10/06/17
+// Purpose: Misc. utility functions.
+// Hardware:  TM4C123 Tiva board
+
 #include "Utilities.h"
 #include <string.h>
 
 /* itoa:  convert n to characters in s */
+/* This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language */
 void itoa(int n, char s[])
 {
 	 int i, sign;
@@ -19,6 +26,7 @@ void itoa(int n, char s[])
 }
 
 /* reverse:  reverse string s in place */
+/* This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language */
 void reverse(char s[])
 {
 	 int i, j;

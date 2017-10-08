@@ -25,7 +25,6 @@ int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, PFN_TimerCa
 int Timer_InitInputCounter(TimerBlock_t block);
 void Timer_ResetInputCounter(TimerBlock_t block);
 uint32_t Timer_ReadCounterValue(TimerBlock_t block);
-void Timer_ClearInputCounter(TimerBlock_t block);
 
 
 #endif

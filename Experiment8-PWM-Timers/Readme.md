@@ -1,9 +1,9 @@
-# Experiment7-ADC
+# Experiment8-PWM-Timers
 
 ## Overview
-This experiment tests out the ADC on the Tiva board.  It is the basic implementation of a volt meter that samples the voltage on a 10K potentiometer which is connected between 3.3V and ground.  The voltage sample is converted to decimal and displayed on two seven-segment displays, up to 1/10th of a volt.  
+This experiment is the implementation of a fan speed controller that tests out the PWM and timer block features of the Tiva board.  It uses a 12V fan that has a PWM control input and tachometer output.  To vary the fan speed, a potentiometer was connected to one of the ADC inputs on the board, and the ADC sample converted to a duty cycle.  Turning the pot in one direction narrows the pulse and slows down the fan, and in the other direction it widens the pulse and speeds up the fan.
 
-The ADC is software triggered and uses SS3 and AIN0 (pin PE3).  The displays are driven by two ULN2803A Darlington transistor arrays, one per display.  One GPIO pin is used for each segment of the display and connected to the input of a transistor.  Turning on the GPIO pin causes current to sink through the LED segment into the open collector output of the transistor.
+The fan's tachometer output is a square wave.  Every two pulses represent one revolution of the fan.  To count the pulses, an input edge counter (timer) was set up on the board to count the rising edges, and another timer (count-down) was set up to raise an interrupt every second.  Inside the ISR, the tach pulse count is read and stored in a shared variable, and then both timers are reset to do this again every second.  The main program reads the stored pulse count, converts it to RPM, and then writes the value to the UART where it is displayed on the PC.
 
-[![](http://img.youtube.com/vi/BE-GWVR0DsE/1.jpg)](https://youtu.be/BE-GWVR0DsE)<br>
-[Watch the video](https://youtu.be/BE-GWVR0DsE)
+[![](http://img.youtube.com/vi/nJTgNQMfvj8/2.jpg)](https://youtu.be/nJTgNQMfvj8)<br>
+[Watch the video](https://youtu.be/nJTgNQMfvj8)
