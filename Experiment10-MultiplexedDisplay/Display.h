@@ -9,7 +9,7 @@
 
 #include <stdint.h>
 
-// This structure holds all the io ports used by the display.
+// This structure holds the io port bit-band addresses used by the display.
 typedef struct {
 	
 	volatile uint32_t* bcdA;
