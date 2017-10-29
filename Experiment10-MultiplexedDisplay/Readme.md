@@ -9,5 +9,5 @@ The software utilizes one of the Timer blocks of the TM4C123 that raises and int
 
 The application runs in one of two modes, depending on the position of the switch on the board:  counter or ADC output.  The counter mode shows the value of a counter that increments every second, and ADC mode shows the digital output (0-4095) from an ADC input connected to a potentiometer on the board.  
 
-[![](http://img.youtube.com/vi/v5YLxzM2EFQ/1.jpg)](https://youtu.be/msRxsZsFCN4)<br>
+[![](http://img.youtube.com/vi/msRxsZsFCN4/1.jpg)](https://youtu.be/msRxsZsFCN4)<br>
 [Watch the video](https://youtu.be/msRxsZsFCN4)
