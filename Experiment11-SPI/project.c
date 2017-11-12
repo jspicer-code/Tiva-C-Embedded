@@ -43,22 +43,26 @@ int main()
 	while (1) 
 	{			
 		
-		if (!(*SW1)) {
-			// Shift pattern
-			value = 0x1 << (counter % 8);
-		}
-		else if (!(*SW2)) {
-			// Counting pattern
-			value = counter;
-		}
-		else {
-			// Toggle pattern.
-			value = toggler;
-		}
+		// If both switches are pressed, hold the current value.
+		if (!(*SW1 == 0 && *SW2 == 0)) {
 		
-		// Serialize the pattern value...
-		SPI_Write(SSI1, value);
+			if (*SW1 == 0) {
+				// Toggle pattern.
+				value = toggler;	// Shift pattern
+			}
+			else if (*SW2 == 0) {
+				// Counting pattern
+				value = counter;
+			}
+			else {
+				value = 0x1 << (counter % 8);
+			}
 	
+		}
+	
+		// Serialize the value...
+		SPI_Write(SSI1, value);
+			
 		// Wait 100ms...
 		SysTick_Wait10ms(10);
 
