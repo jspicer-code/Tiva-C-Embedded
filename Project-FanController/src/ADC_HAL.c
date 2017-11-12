@@ -105,6 +105,12 @@ void ADC_Enable(ADCModule module, ADCChannel channel)
 				GPIO_EnableAltAnalog(PORTE, 0x04);
 				break;
 			
+			case AIN3:
+				// Initialize PORTE and enable PE0
+				GPIO_InitPort(PORTE);
+				GPIO_EnableAltAnalog(PORTE, 0x01);
+				break;
+			
 			default:
 				// TODO:  Implement for other channels as needed.
 				abort();

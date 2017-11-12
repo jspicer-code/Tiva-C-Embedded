@@ -83,7 +83,7 @@ void InitHardware()
 	displayPorts.digit3Enable = &PB7;
 	Display_Initialize(&displayPorts);
 	
-	// PE3=ADC Pot
+	// PE0=ADC Pot
 	ADC_Enable(ADC0, AIN3);
 	
 	// PE2=ADC Thermistor
