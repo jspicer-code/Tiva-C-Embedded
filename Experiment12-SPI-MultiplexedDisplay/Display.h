@@ -1,6 +1,6 @@
 // File:  Display.h
 // Author: JS
-// Date:  10/28/17
+// Date:  11/18/17
 // Purpose: Multiplexed display service module.
 // Hardware:  TM4C123 Tiva board
 
