@@ -7,5 +7,5 @@ Four of the eight outputs from the 74HC595 are used to provide the BCD inputs to
 
 To demonstrate the circuit, potentiometers were hooked up to two of the board's ADCs and their digital outputs (0-4095) sent to the display.  A three-way switch controls which ADC output is displayed or blanks out the display if set to the middle position.
 
-[![](http://img.youtube.com/vi/KHmJOviVY9Y/1.jpg)](https://youtu.be/KHmJOviVY9Y)<br>
+[![](http://img.youtube.com/vi/KHmJOviVY9Y/2.jpg)](https://youtu.be/KHmJOviVY9Y)<br>
 [Watch the video](https://youtu.be/KHmJOviVY9Y)
