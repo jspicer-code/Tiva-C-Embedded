@@ -1,6 +1,6 @@
 // File:  project.c
 // Author: JS
-// Date:  10/4/17
+// Date:  11/18/17
 // Purpose: MuxDisplay + SPI experiment
 // Hardware:  TM4C123 Tiva board
 

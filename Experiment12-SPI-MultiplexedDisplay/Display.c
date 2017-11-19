@@ -1,6 +1,6 @@
 // File:  Display.c
 // Author: JS
-// Date:  10/28/17
+// Date:  11/18/17
 // Purpose: Multiplexed display service module.
 // Hardware:  TM4C123 Tiva board
 
@@ -56,6 +56,7 @@ void TimerCallback(void)
 	if (activeDigit >= 4) {
 		
 		if (blank) {
+			// The BCD decoder blanks the segments when the value is 0xF;
 			digitValues[0] = digitValues[1] = digitValues[2] = digitValues[3] = 0xF;
 		}
 		else {
@@ -65,8 +66,11 @@ void TimerCallback(void)
 		activeDigit = 0;	
 	}
 
+	// The upper nibble decides which of the four digits will be turned on
+	//	and the bottom nibble contains its BCD value.
 	uint8_t value = (0x1 << (activeDigit + 4)) | digitValues[activeDigit];
 	
+	// Serialize the digit info the external shift register.
 	SPI_Write(SSI1, value);	
 
 }
@@ -74,6 +78,7 @@ void TimerCallback(void)
 void Display_Initialize(void)
 {
 	
+	// Configure SPI.
 	SPI_Enable(SSI1);
 	
 	// There are 80000 system ticks in one millisecond.
