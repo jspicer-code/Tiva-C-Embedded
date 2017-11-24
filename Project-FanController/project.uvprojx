@@ -378,7 +378,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source</GroupName>
+          <GroupName>startup</GroupName>
           <Files>
             <File>
               <FileName>startup_rvmdk.S</FileName>
@@ -386,127 +386,29 @@
               <FilePath>.\startup_rvmdk.S</FilePath>
             </File>
             <File>
-              <FileName>project.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\project.h</FilePath>
-            </File>
-            <File>
               <FileName>project.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\project.c</FilePath>
             </File>
-            <File>
-              <FileName>Display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Display.c</FilePath>
-            </File>
-            <File>
-              <FileName>Display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Display.h</FilePath>
-            </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Libraries</GroupName>
-          <Files>
-            <File>
-              <FileName>driverlib.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>.\inc\driverlib.lib</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Documentation</GroupName>
         </Group>
         <Group>
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>GPIO_HAL.c</FileName>
+              <FileName>FanController.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\GPIO_HAL.c</FilePath>
+              <FilePath>.\src\FanController.c</FilePath>
             </File>
             <File>
-              <FileName>GPIO_HAL.h</FileName>
+              <FileName>FanController.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\GPIO_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>PLL_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\PLL_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>PLL_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\PLL_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>SysTick_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\SysTick_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>SysTick_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SysTick_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>UART_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\UART_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>UART_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\UART_HAL.h</FilePath>
+              <FilePath>.\src\FanController.h</FilePath>
             </File>
             <File>
               <FileName>HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>ADC_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\ADC_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>ADC_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\ADC_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>PWM_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\PWM_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>PWM_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\PWM_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>Timer_HAL.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Timer_HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>Timer_HAL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Timer_HAL.c</FilePath>
-            </File>
-            <File>
-              <FileName>Utilities.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utilities.h</FilePath>
-            </File>
-            <File>
-              <FileName>Utilities.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Utilities.c</FilePath>
             </File>
             <File>
               <FileName>Thermistor.c</FileName>
@@ -517,6 +419,116 @@
               <FileName>Thermistor.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Thermistor.h</FilePath>
+            </File>
+            <File>
+              <FileName>Display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Display.c</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_ADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_GPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_GPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_GPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_GPIO.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PLL.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_PLL.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PLL.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_PLL.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_PWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_PWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_SPI.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_SPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SysTick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_SysTick.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_SysTick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_SysTick.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_Timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_Timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_Timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_UART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_UART.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_UART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_UART.h</FilePath>
+            </File>
+            <File>
+              <FileName>Strings.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Strings.c</FilePath>
+            </File>
+            <File>
+              <FileName>Strings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Strings.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>inc</GroupName>
+          <Files>
+            <File>
+              <FileName>tm4c123gh6pm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\tm4c123gh6pm.h</FilePath>
             </File>
           </Files>
         </Group>

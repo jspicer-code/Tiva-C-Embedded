@@ -1,0 +1,22 @@
+// File:  FanController.h
+// Author: JSpicer
+// Date:  11/24/17
+// Purpose: FanController service layer module
+// Hardware:  TM4C123 Tiva board
+
+#ifndef FAN_CONTROLLER_H
+#define FAN_CONTROLLER_H
+
+#include <stdint.h>
+#include "HAL.h"
+
+typedef struct {
+	
+	PinDef_t		heartBeatLED;
+	
+} FanController_Config_t;
+
+void FanController_Run(FanController_Config_t* config);
+
+
+#endif

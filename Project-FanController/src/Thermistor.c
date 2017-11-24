@@ -1,7 +1,11 @@
+// File:  Thermistor.h
+// Author: JSpicer
+// Date:  10/20/17
+// Purpose: Thermistor utilities
+// Hardware:  TM4C123 Tiva board
 
 #include <stdint.h>
 #include "Thermistor.h"
-
 
 // Use the following forumla in the Vishay Excel spreadsheet to convert
 //	the temperature to the ADC output.
