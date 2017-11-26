@@ -59,7 +59,7 @@ const volatile uint32_t * UARTBaseAddress[] = {
 PFN_RxCallback Rx_Callback;
 
 
-int UART_Init(UART_ID_t uartId, uint32_t baud)
+int UART_Enable(UART_ID_t uartId, uint32_t baud)
 {
 	uint32_t baudRateDivisor;
 	

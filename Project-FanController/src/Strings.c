@@ -8,7 +8,7 @@
 
 /* itoa:  convert n to characters in s */
 /* This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language */
-void parseInt(int n, char s[])
+void itoa(int n, char s[])
 {
 	 int i, sign;
 
@@ -46,4 +46,31 @@ void reverse(char s[])
 			 s[i] = s[j];
 			 s[j] = c;
 	 }
+}
+
+/* isspace:  return true if the character is whitespace. */
+int isspace(char c)
+{
+	return (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c =='\f' || c == '\r');
+}
+
+/* isdigit:  return true if the character is a digit. */
+int isdigit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+/* atoi:  convert string s to integer */
+int atoi(const char *s)
+{
+    int n, sign;
+    
+    while (isspace(*s))
+        s++;                        /* skip whitespace */
+    sign = (*s == '-') ? -1 : 1;
+    if (*s == '+' || *s == '-')     /* skip sign */
+        s++;
+    for (n = 0; isdigit(*s); s++)
+        n = 10 * n + (*s -'0');
+    return sign * n;
 }

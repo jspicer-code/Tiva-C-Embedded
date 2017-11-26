@@ -396,6 +396,21 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
+              <FileName>Console.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Console.c</FilePath>
+            </File>
+            <File>
+              <FileName>Console.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Console.h</FilePath>
+            </File>
+            <File>
+              <FileName>ControlSettings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\ControlSettings.h</FilePath>
+            </File>
+            <File>
               <FileName>FanController.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\FanController.c</FilePath>

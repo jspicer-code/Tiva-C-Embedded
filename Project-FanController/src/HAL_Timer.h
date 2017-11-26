@@ -22,7 +22,7 @@ typedef enum {
 } TimerBlock_t;
 
 int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, uint8_t priority, PFN_TimerCallback callback);
-int Timer_InitInputCounter(TimerBlock_t block);
+int Timer_EnableInputCounter(TimerBlock_t block);
 void Timer_ResetInputCounter(TimerBlock_t block);
 uint32_t Timer_ReadCounterValue(TimerBlock_t block);
 

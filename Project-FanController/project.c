@@ -11,28 +11,23 @@
 int main()
 {
 	
-	FanController_Config_t	config;
+	FanController_IOConfig_t ioConfig;
 	
-	config.heartBeatLED = PINDEF(PORTF, PIN3);
-	config.autoModeSwitch = PINDEF(PORTA, PIN4);
-	config.manualModeSwitch = PINDEF(PORTB, PIN6);
-	config.fanRelay = PINDEF(PORTA, PIN7);
-	config.tachDisplaySwitch = PINDEF(PORTB, PIN7);
-	config.tempDisplaySwitch = PINDEF(PORTB, PIN2);
+	ioConfig.heartBeatLED = PINDEF(PORTF, PIN3);
+	ioConfig.autoModeSwitch = PINDEF(PORTA, PIN4);
+	ioConfig.manualModeSwitch = PINDEF(PORTB, PIN6);
+	ioConfig.fanRelay = PINDEF(PORTA, PIN7);
+	ioConfig.tachDisplaySwitch = PINDEF(PORTB, PIN7);
+	ioConfig.tempDisplaySwitch = PINDEF(PORTB, PIN2);	
+	ioConfig.displaySSI = SSI0;
+	ioConfig.displayTimer = TIMER0;
+	ioConfig.speedPot = ANALOGDEF(ADC0, AIN3);
+	ioConfig.thermistor = ANALOGDEF(ADC1, AIN10);
+	ioConfig.pwm = PWMDEF(PWMModule0, PWM3);
+	ioConfig.rpmTimer = TIMER1;
+	ioConfig.tachCounter = TIMER2;
+	ioConfig.uart = UART5;
 	
-	config.displaySSI = SSI0;
-	config.displayTimer = TIMER0;
-	
-	config.speedPot = ANALOGDEF(ADC0, AIN3);
-	config.thermistor = ANALOGDEF(ADC1, AIN10);
-	
-	config.pwm = PWMDEF(PWMModule0, PWM3);
-	
-	config.rpmTimer = TIMER1;
-	config.tachCounter = TIMER2;
-	
-	config.uart = UART5;
-	
-	FanController_Run(&config);
+	FanController_Run(&ioConfig);
 	
 }

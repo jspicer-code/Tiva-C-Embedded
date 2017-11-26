@@ -15,9 +15,9 @@ typedef enum {
 	SSI1 = 1,
 	SSI2 = 2,
 	SSI3 = 3
-} SSIModule;
+} SSIModule_t;
 
-int SPI_Enable(SSIModule module);
-void SPI_Write(SSIModule module, uint8_t data);
+int SPI_Enable(SSIModule_t module);
+void SPI_Write(SSIModule_t module, uint8_t data);
 
 #endif

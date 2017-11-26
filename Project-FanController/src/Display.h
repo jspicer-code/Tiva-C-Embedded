@@ -10,7 +10,7 @@
 #include <stdint.h>
 #include "HAL.h"
 
-void Display_Initialize(SSIModule ssiModule, TimerBlock_t timerBlock);
+void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock);
 void Display_Update(uint32_t value);
 void Display_Blank(void);
 

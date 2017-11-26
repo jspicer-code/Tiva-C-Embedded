@@ -19,7 +19,7 @@ typedef struct {
 	PinDef_t			tachDisplaySwitch;
 	PinDef_t			tempDisplaySwitch;
 	
-	SSIModule 		displaySSI;
+	SSIModule_t 	displaySSI;
 	TimerBlock_t 	displayTimer;
 	
 	AnalogDef_t		speedPot;
@@ -32,9 +32,10 @@ typedef struct {
 	
 	UART_ID_t			uart;
 	
-} FanController_Config_t;
+} FanController_IOConfig_t;
 
-void FanController_Run(FanController_Config_t* pConfig);
+
+void FanController_Run(FanController_IOConfig_t* pIOConfig);
 
 
 #endif

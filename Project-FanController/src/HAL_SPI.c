@@ -35,7 +35,7 @@ const volatile uint32_t * SSIBaseAddress[] = {
 };
 
 
-int SPI_Enable(SSIModule module)
+int SPI_Enable(SSIModule_t module)
 {
 	
 	// For now, require the bus clock to be 80MHz.
@@ -93,7 +93,7 @@ int SPI_Enable(SSIModule module)
 }
 
 
-void SPI_Write(SSIModule module, uint8_t data)
+void SPI_Write(SSIModule_t module, uint8_t data)
 {
 	// Overlay the SSI register structure on top of the SSIx memory region...
 	volatile SSIRegs_t* ssi = (volatile SSIRegs_t*)SSIBaseAddress[module];

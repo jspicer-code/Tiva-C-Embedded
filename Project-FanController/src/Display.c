@@ -8,7 +8,7 @@
 #include "Display.h"
 #include "HAL.h"
 
-static SSIModule ssiModule_;
+static SSIModule_t ssiModule_;
 
 // Current display value.
 static uint32_t displayValue = 0;
@@ -21,26 +21,26 @@ void ExtractDigits(uint32_t value, uint32_t digits[4])
 	digits[0] = value / 1000;
 	value -= (digits[0] * 1000);
 	
-// Uncomment to blank leading digits that are zero.
-//	if (digits[0] == 0) {
-//		digits[0] = 0xF;
-//	}
+	// Blank leading digits that are zero.
+	if (digits[0] == 0) {
+		digits[0] = 0xF;
+	}
 
 	digits[1] = value / 100;
 	value -= (digits[1] * 100);
 
-// Uncomment to blank leading digits that are zero.
-//	if (digits[1] == 0 && digits[0] == 0xF) {
-//		digits[1] = 0xF;
-//	}
+	// Blank leading digits that are zero.
+	if (digits[1] == 0 && digits[0] == 0xF) {
+		digits[1] = 0xF;
+	}
 	
 	digits[2] = value / 10;
 	value -= (digits[2] * 10);
 
-// Uncomment to blank leading digits that are zero.
-//	if (digits[2] == 0 && digits[1] == 0xF) {
-//		digits[2] = 0xF;
-//	}
+	// Blank leading digits that are zero.
+	if (digits[2] == 0 && digits[1] == 0xF) {
+		digits[2] = 0xF;
+	}
 	
 	digits[3] = value; 
 
@@ -77,7 +77,7 @@ void TimerCallback(void)
 
 }
 
-void Display_Initialize(SSIModule ssiModule, TimerBlock_t timerBlock)
+void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 {
 	// The SSI module will be used by the timer callback, so save a copy.
 	ssiModule_ = ssiModule;
@@ -87,6 +87,7 @@ void Display_Initialize(SSIModule ssiModule, TimerBlock_t timerBlock)
 	
 	// There are 80000 system ticks in one millisecond.
 	Timer_EnableTimerPeriodic(timerBlock, 80000, 0, TimerCallback);
+
 }
 
 

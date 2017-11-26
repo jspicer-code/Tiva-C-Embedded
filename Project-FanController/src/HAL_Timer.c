@@ -178,7 +178,7 @@ int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, uint8_t pri
 }	
 
 
-int Timer_InitInputCounter(TimerBlock_t block)
+int Timer_EnableInputCounter(TimerBlock_t block)
 {
 	switch (block) {
 		
