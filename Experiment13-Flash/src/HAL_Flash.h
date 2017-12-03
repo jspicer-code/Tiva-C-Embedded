@@ -9,7 +9,7 @@
 
 void Flash_Enable(void);
 int Flash_Erase(int blockCount);
-int Flash_Write(const uint32_t* data, int wordCount);
-void Flash_Read(uint32_t* data, int wordCount);
+int Flash_Write(const void* data, int wordCount);
+void Flash_Read(void* data, int wordCount);
 
 #endif

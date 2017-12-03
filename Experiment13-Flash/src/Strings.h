@@ -13,6 +13,9 @@ void reverse(char s[]);
 // strlen: counts the number of s. 
 int strlen(const char* s);
 
+// strncpy:  copy the source string into the destination not exceeding n characters. 
+char* strncpy(char *dst, const char *src, int n);
+
 /* isspace:  return true if the character is whitespace. */
 int isspace(char c);
 

@@ -9,7 +9,7 @@
 
 // The TM4C123 has 256 KiB of Flash memory located from addresses 0 to 0x0003FFFF
 //	Make sure that the base address used here does not overlap with code and data!
-//	Examine the linker's .map file to get clear picture on where code/data is stored.
+//	Examine the linker's .map file to see where code/data is stored.
 #define FLASH_BASE_ADDR			((volatile uint32_t*)0x00020000)
 
 // This holds the key required for erase and write operations.  Set it during Enable().
@@ -58,7 +58,7 @@ int Flash_Erase(int blockCount)
 }
 
 
-int Flash_Write(const uint32_t* data, int wordCount)
+int Flash_Write(const void* data, int wordCount)
 {
 		
 	// Make sure Enable was called.
@@ -67,7 +67,7 @@ int Flash_Write(const uint32_t* data, int wordCount)
 	}
 	
 	// Must erase the data first.  A write may only change a bit from 1 to 0, so if the
-	//	bit is already zero, the write fails.  Erasing will set all bits to 1s.
+	//	bit is already zero, the write fails.  Erasing will set all bits to 1's.
 	//  Calculate the number of 1KiB blocks that the data will span and erase that many.
 	int blockCount = ((wordCount * sizeof(uint32_t)) / 1024) + 1;
 	Flash_Erase(blockCount);
@@ -76,7 +76,7 @@ int Flash_Write(const uint32_t* data, int wordCount)
 	for (int i = 0; i < wordCount; i++) {
 	
 		// Set the data register.  This the word that will be written.
-		FLASH_FMD_R = data[i];
+		FLASH_FMD_R = ((volatile uint32_t*)data)[i];
 		
 		// Clear then set the OFFSET address field (17:0) with the write address.
 		FLASH_FMA_R &= 0xFFFC0000;  
@@ -96,12 +96,11 @@ int Flash_Write(const uint32_t* data, int wordCount)
 
 
 
-void Flash_Read(uint32_t* data, int wordCount)
+void Flash_Read(void* data, int wordCount)
 {
-	
-	// Copy the number of words into the target data buffer...
+	// Copy the count of bytes into the target data buffer...
 	for (int i = 0; i < wordCount; i++) {
-			data[i] = FLASH_BASE_ADDR[i];
+		((uint32_t*)data)[i] = FLASH_BASE_ADDR[i];
 	}
 	
 }

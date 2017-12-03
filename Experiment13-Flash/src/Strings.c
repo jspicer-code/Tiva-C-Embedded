@@ -48,6 +48,23 @@ void reverse(char s[])
 	 }
 }
 
+/* strncpy:  copy the source string into the destination not exceeding n characters. */
+char* strncpy(char *dst, const char *src, int n)
+{
+	
+	int i = 0;
+	for (; i < n && src[i]; i++) {
+		dst[i] = src[i];
+	}
+	
+	for (int j = i; j < n; j++) {
+		dst[j] = '\0';
+	}
+	
+	return dst;
+}
+
+
 /* isspace:  return true if the character is whitespace. */
 int isspace(char c)
 {
