@@ -396,54 +396,9 @@
           <GroupName>src</GroupName>
           <Files>
             <File>
-              <FileName>Console.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Console.c</FilePath>
-            </File>
-            <File>
-              <FileName>Console.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Console.h</FilePath>
-            </File>
-            <File>
-              <FileName>ControlSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\ControlSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>FanController.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\FanController.c</FilePath>
-            </File>
-            <File>
-              <FileName>FanController.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FanController.h</FilePath>
-            </File>
-            <File>
               <FileName>HAL.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\HAL.h</FilePath>
-            </File>
-            <File>
-              <FileName>Thermistor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Thermistor.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thermistor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Thermistor.h</FilePath>
-            </File>
-            <File>
-              <FileName>Display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\Display.c</FilePath>
-            </File>
-            <File>
-              <FileName>Display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display.h</FilePath>
             </File>
             <File>
               <FileName>HAL_ADC.c</FileName>
@@ -454,6 +409,16 @@
               <FileName>HAL_ADC.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\HAL_ADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_Flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\HAL_Flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_Flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\HAL_Flash.h</FilePath>
             </File>
             <File>
               <FileName>HAL_GPIO.c</FileName>

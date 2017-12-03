@@ -55,6 +55,7 @@ typedef struct {
 #include "HAL_PWM.h"
 #include "HAL_Timer.h"
 #include "HAL_SPI.h"
+#include "HAL_Flash.h"
 
 #endif
 

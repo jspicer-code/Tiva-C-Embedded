@@ -1,5 +1,5 @@
 // File:  Thermistor.h
-// Author: JS
+// Author: JSpicer
 // Date:  10/20/17
 // Purpose: Thermistor utilities
 // Hardware:  TM4C123 Tiva board

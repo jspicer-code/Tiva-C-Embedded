@@ -95,11 +95,7 @@ __heap_limit
 ; The vector table.
 ;
 ;******************************************************************************
-		EXTERN	Timer_Timer0Handler
-		EXTERN	Timer_Timer1Handler
-		EXTERN	Timer_Timer2Handler
-		EXTERN	UART5Handler
-		
+	
         EXPORT  __Vectors
 __Vectors
         DCD     StackMem + Stack            ; Top of Stack
@@ -137,11 +133,11 @@ __Vectors
         DCD     IntDefaultHandler           ; ADC Sequence 2
         DCD     IntDefaultHandler           ; ADC Sequence 3
         DCD     IntDefaultHandler           ; Watchdog timer
-        DCD     Timer_Timer0Handler         ; Timer 0 subtimer A
+        DCD     IntDefaultHandler         	; Timer 0 subtimer A
         DCD     IntDefaultHandler           ; Timer 0 subtimer B
-        DCD     Timer_Timer1Handler       	; Timer 1 subtimer A
+        DCD     IntDefaultHandler       	; Timer 1 subtimer A
         DCD     IntDefaultHandler           ; Timer 1 subtimer B
-        DCD     Timer_Timer2Handler         ; Timer 2 subtimer A
+        DCD     IntDefaultHandler         	; Timer 2 subtimer A
         DCD     IntDefaultHandler           ; Timer 2 subtimer B
         DCD     IntDefaultHandler           ; Analog Comparator 0
         DCD     IntDefaultHandler           ; Analog Comparator 1
@@ -179,7 +175,7 @@ __Vectors
         DCD     IntDefaultHandler           ; SSI3 Rx and Tx
         DCD     IntDefaultHandler           ; UART3 Rx and Tx
         DCD     IntDefaultHandler           ; UART4 Rx and Tx
-        DCD     UART5Handler      			; UART5 Rx and Tx
+        DCD     IntDefaultHandler      		; UART5 Rx and Tx
         DCD     IntDefaultHandler           ; UART6 Rx and Tx
         DCD     IntDefaultHandler           ; UART7 Rx and Tx
         DCD     0                           ; Reserved

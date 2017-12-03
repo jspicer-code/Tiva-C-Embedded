@@ -1,7 +1,11 @@
+// File:  Thermistor.h
+// Author: JSpicer
+// Date:  10/20/17
+// Purpose: Thermistor utilities
+// Hardware:  TM4C123 Tiva board
 
 #include <stdint.h>
 #include "Thermistor.h"
-
 
 // Use the following forumla in the Vishay Excel spreadsheet to convert
 //	the temperature to the ADC output.
@@ -351,7 +355,6 @@ static const uint32_t TempData_Celsius[] = {
 static int Search(uint32_t value, const uint32_t* array, int startIndex, int endIndex)
 {
 	//assert(startIndex >= 0 && endIndex >= 0);
-	
 	int foundIndex = -1;
 		
 	if (value <= array[startIndex]) {
@@ -364,7 +367,7 @@ static int Search(uint32_t value, const uint32_t* array, int startIndex, int end
 		while (foundIndex == -1) {
 			
 			int midIndex = startIndex + ((endIndex - startIndex) / 2);
-			
+		
 			if (midIndex == startIndex) {
 				foundIndex = startIndex;
 			}
@@ -376,7 +379,7 @@ static int Search(uint32_t value, const uint32_t* array, int startIndex, int end
 			}
 			else {
 				startIndex = midIndex;
-			}
+			}		
 		}
 	}
 	
@@ -405,7 +408,7 @@ int Therm_GetTemperature(uint32_t adcSample, ThermScale_t scale)
 	
 	// Search for the table index that is less than or equal to the ADC input. 
 	int foundIndex = Search(adcSample, array, startIndex, endIndex);
-	
+
 	// Round up to the next temperature if necessary.
 	if (foundIndex + 1 <= endIndex) {
 
