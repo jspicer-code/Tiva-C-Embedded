@@ -8,6 +8,9 @@
 #include "tm4c123gh6pm.h"
 #include "HAL.h"
 
+// This structure represents the registers associated with the GPIO port.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
 	uint32_t DATA_BITS[255];
 	uint32_t DATA;
@@ -49,6 +52,7 @@ const volatile uint32_t * GPIOBaseAddress[] = {
 	GPIO_PORTF_DATA_BITS_R
 };
 
+// Gets the pin number from the PinDef_t structure (which contains pin bit flags).
 static int GetPinNumber(PinDef_t pinDef) 
 {
 	for (int i = 0; i < 8; i++) {

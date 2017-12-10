@@ -13,11 +13,14 @@ void reverse(char s[]);
 // strlen: counts the number of s. 
 int strlen(const char* s);
 
-/* isspace:  return true if the character is whitespace. */
+// strncpy:  copy the source string into the destination not exceeding n characters. 
+char* strncpy(char *dst, const char *src, int n);
+
+// isspace:  return true if the character is whitespace. 
 int isspace(char c);
 
-/* isdigit:  return true if the character is a digit. */
+// isdigit:  return true if the character is a digit. 
 int isdigit(char c);
 
-/* atoi:  convert string s to integer */
+// atoi:  convert string s to integer 
 int atoi(const char *s);

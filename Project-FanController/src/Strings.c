@@ -1,13 +1,14 @@
 // File:  Strings.c
 // Author: JSpicer
 // Date:  10/06/17
-// Purpose: Misc. string utility functions.
+// Purpose: Misc. string utility functions.  Most of these functions appeared
+//	 in the first edition of Kernighan and Ritchie's The C Programming Language.
 // Hardware:  TM4C123 Tiva board
 
 #include "Strings.h"
 
-/* itoa:  convert n to characters in s */
-/* This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language */
+// itoa:  convert n to characters in s 
+// This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language 
 void itoa(int n, char s[])
 {
 	 int i, sign;
@@ -24,6 +25,7 @@ void itoa(int n, char s[])
 	 reverse(s);
 }
 
+// Returns the lenght of a null-terminated string.
 int strlen(const char* s)
 {
 	int length = 0;
@@ -34,8 +36,8 @@ int strlen(const char* s)
 }
 
 
-/* reverse:  reverse string s in place */
-/* This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language */
+// reverse:  reverse string s in place 
+// This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language 
 void reverse(char s[])
 {
 	 int i, j;
@@ -48,19 +50,36 @@ void reverse(char s[])
 	 }
 }
 
-/* isspace:  return true if the character is whitespace. */
+// strncpy:  copy the source string into the destination not exceeding n characters.
+char* strncpy(char *dst, const char *src, int n)
+{
+	
+	int i = 0;
+	for (; i < n && src[i]; i++) {
+		dst[i] = src[i];
+	}
+	
+	for (int j = i; j < n; j++) {
+		dst[j] = '\0';
+	}
+	
+	return dst;
+}
+
+
+// isspace:  return true if the character is whitespace.
 int isspace(char c)
 {
 	return (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c =='\f' || c == '\r');
 }
 
-/* isdigit:  return true if the character is a digit. */
+// isdigit:  return true if the character is a digit.
 int isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-/* atoi:  convert string s to integer */
+// atoi:  convert string s to integer
 int atoi(const char *s)
 {
     int n, sign;

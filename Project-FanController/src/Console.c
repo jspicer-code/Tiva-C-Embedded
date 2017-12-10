@@ -1,18 +1,24 @@
 // File:  Console.h
 // Author: JSpicer
 // Date:  11/25/17
-// Purpose: Console interaction for Temperature Control Setting
+// Purpose: Serial port console interaction for Temperature Control settings
 // Hardware:  TM4C123 Tiva board
 
 #include "HAL.h"
 #include "Strings.h"
-#include "ControlSettings.h"
+#include "TemperatureSettings.h"
 
+// This is the maximum size of the input buffer.  If the user types
+//	more characters than this they will be discarded.  Make sure the
+//	input does require more than this. 
 #define MAX_BUFFER				16
+
+// These characters trigger specific console actions.
 #define CHAR_ESCAPE				0x1B
 #define CHAR_ENTER				'\r'
 #define CHAR_BACKSPACE		0x7F
 
+// These are monikers for the console screens.
 enum {
 	SCREEN_MAIN,
 	SCREEN_SCALE,
@@ -23,11 +29,16 @@ enum {
 } currentScreen_;
 	
 	
+// The UART id will bet stored here during Init for other module functions to use.
 static UART_ID_t uart_;
 
 void Console_Init(UART_ID_t uart)
 {
+	
+	// Store the UART id for other functions to use.
 	uart_ = uart;
+	
+	// Start at the main screen.
 	currentScreen_ = SCREEN_MAIN;
 }
 
@@ -39,12 +50,12 @@ static void PrintMainScreen(void)
 	UART_WriteString(uart_, "Temperature Control Settings:\n\r");
 	UART_WriteString(uart_, " 1) Scale\n\r");
 	UART_WriteString(uart_, " 2) Calibration Offset\n\r");
-	UART_WriteString(uart_, " 3) Automatic Mode Limits\n\r");
+	UART_WriteString(uart_, " 3) Temperature Limits\n\r");
 	UART_WriteString(uart_, ">");	
 }
 
 // Prints the temperature scale screen.
-static void PrintScaleScreen(ControlSettings_t* settings)
+static void PrintScaleScreen(TemperatureSettings_t* settings)
 {
 	UART_WriteString(uart_, "\n\r\n\r");		
 	UART_WriteString(uart_, "Select the temperature scale (ESC for previous menu):\n\r");
@@ -56,7 +67,7 @@ static void PrintScaleScreen(ControlSettings_t* settings)
 }
 
 // Prints the calibration screen.
-static void PrintCalibrationScreen(ControlSettings_t* settings)
+static void PrintCalibrationScreen(TemperatureSettings_t* settings)
 {
 	char offset[16];
 	itoa(settings->calibrationOffset, offset);
@@ -72,7 +83,7 @@ static void PrintCalibrationScreen(ControlSettings_t* settings)
 }
 
 // Prints the calibration screen.
-static void PrintRangeScreen(ControlSettings_t* settings)
+static void PrintRangeScreen(TemperatureSettings_t* settings)
 {
 	char low[16];
 	char high[16];
@@ -81,7 +92,7 @@ static void PrintRangeScreen(ControlSettings_t* settings)
 
 	UART_WriteString(uart_, "\n\r\n\r");	
 	
-	UART_WriteString(uart_, "Automatic Mode Limits: ");
+	UART_WriteString(uart_, "Temperature Limits: ");
 	UART_WriteString(uart_, low);
 	UART_WriteString(uart_, "-");
 	UART_WriteString(uart_, high);
@@ -94,7 +105,7 @@ static void PrintRangeScreen(ControlSettings_t* settings)
 }
 
 // Prints the low temperature limit.
-static void PrintLowLimitScreen(ControlSettings_t* settings)
+static void PrintLowLimitScreen(TemperatureSettings_t* settings)
 {
 	char low[16];
 	itoa(settings->lowTemp, low);
@@ -110,7 +121,7 @@ static void PrintLowLimitScreen(ControlSettings_t* settings)
 }
 
 // Prints the high temperature limit.
-static void PrintHighLimitScreen(ControlSettings_t* settings)
+static void PrintHighLimitScreen(TemperatureSettings_t* settings)
 {
 	char high[16];
 	itoa(settings->highTemp, high);
@@ -125,6 +136,7 @@ static void PrintHighLimitScreen(ControlSettings_t* settings)
 	UART_WriteString(uart_, ">");	
 }
 
+// Handles input for the main screen.
 void HandleMainScreen(const char* input)
 {
 	
@@ -150,38 +162,46 @@ void HandleMainScreen(const char* input)
 
 }
 
-
-void HandleScaleScreen(const char* input, ControlSettings_t* settings)
+// Handles input for the Scale screen.
+int HandleScaleScreen(const char* input, TemperatureSettings_t* settings)
 {
 	
+	int save = 0;
 	int selection = atoi(input);
 	
 	switch (selection) {
 		
 		case 1:
 			settings->scale = THERM_FAHRENHEIT;
+			save = 1;
 			break;
 		
 		case 2:
 			settings->scale = THERM_CELSIUS;
+			save = 1;
 			break;
 		
 		default:
 			break;
 	}
 
+	return save;
+	
 }
 
-
-void HandleCalibrationScreen(const char* input, ControlSettings_t* settings)
+// Handles input for the calibration screen.
+int HandleCalibrationScreen(const char* input, TemperatureSettings_t* settings)
 {
 	if (strlen(input) > 0) {
 		settings->calibrationOffset = atoi(input);
+		return 1;
 	}
+	
+	return 0;
 }
 
-
-void HandleRangeScreen(const char* input, ControlSettings_t* settings)
+// Handles input for the temperature range screen.
+void HandleRangeScreen(const char* input)
 {
 	
 	int selection = atoi(input);
@@ -202,22 +222,30 @@ void HandleRangeScreen(const char* input, ControlSettings_t* settings)
 
 }
 
-void HandleLowLimitScreen(const char* input, ControlSettings_t* settings)
+// Handles input for the LOW limit screen.
+int HandleLowLimitScreen(const char* input, TemperatureSettings_t* settings)
 {
 	if (strlen(input) > 0) {
 		settings->lowTemp = atoi(input);
+		return 1;
 	}
+	
+	return 0;
 }
 
-void HandleHighLimitScreen(const char* input, ControlSettings_t* settings)
+// Handles input for the HIGH limit screen.
+int HandleHighLimitScreen(const char* input, TemperatureSettings_t* settings)
 {
 	if (strlen(input) > 0) {
 		settings->highTemp = atoi(input);
+		return 1;
 	}
+	
+	return 0;
 }
 
-
-void PrintCurrentScreen(ControlSettings_t* settings)
+// Selection logic to decide which screen to print.Prints the current screen.
+void PrintCurrentScreen(TemperatureSettings_t* settings)
 {
 	
 	switch (currentScreen_) {
@@ -252,7 +280,8 @@ void PrintCurrentScreen(ControlSettings_t* settings)
 	
 }
 
-void Console_HandleInput(char c, ControlSettings_t* settings)
+// Handles input for a single character typed to the console.
+void Console_HandleInput(char c, TemperatureSettings_t* settings)
 {
 	static char buffer[MAX_BUFFER]; // Up to (MAX_BUFFER - 1) chars + null byte.
 	static int bufferLen = 0;
@@ -280,6 +309,8 @@ void Console_HandleInput(char c, ControlSettings_t* settings)
 	}
 	else if (c == CHAR_ENTER) {
 		
+		int save = 0;
+		
 		switch (currentScreen_) {
 			
 			case SCREEN_MAIN:
@@ -287,27 +318,32 @@ void Console_HandleInput(char c, ControlSettings_t* settings)
 				break;
 			
 			case SCREEN_SCALE:
-				HandleScaleScreen(buffer, settings);
+				save = HandleScaleScreen(buffer, settings);
 				break;
 			
 			case SCREEN_CALIBRATION:
-				HandleCalibrationScreen(buffer, settings);
+				save = HandleCalibrationScreen(buffer, settings);
 				break;
 			
 			case SCREEN_LIMIT_RANGE:
-				HandleRangeScreen(buffer, settings);
+				HandleRangeScreen(buffer);
 				break;
 			
 			case SCREEN_LIMIT_LOW:
-				HandleLowLimitScreen(buffer, settings);
+				save = HandleLowLimitScreen(buffer, settings);
 				break;
 			
 			case SCREEN_LIMIT_HIGH:
-				HandleHighLimitScreen(buffer, settings);
+				save = HandleHighLimitScreen(buffer, settings);
 				break;
 			
 		}
-	
+		
+		// If the handler assigned a setting, then write the settings to Flash.
+		if (save) {
+			Flash_Write(settings, sizeof(TemperatureSettings_t) / 4);
+		}
+		
 		PrintCurrentScreen(settings);
 		
 		buffer[0] = '\0';

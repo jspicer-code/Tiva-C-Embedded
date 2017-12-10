@@ -1,7 +1,8 @@
 // File:  HAL_GPIO.h
 // Author: JSpicer
 // Date:  9/14/17
-// Purpose: GPIO hardware abstraction layer
+// Purpose: GPIO hardware abstraction layer.  The functions here
+//	can be used for configuing digital and analog I/O.
 // Hardware:  TM4C123 Tiva board
 
 #ifndef GPIO_HAL_H
@@ -9,53 +10,55 @@
 
 #include <stdint.h>
 
-#define PA2 (*((volatile uint32_t*)0x42087F88)) 
-#define PA3 (*((volatile uint32_t*)0x42087F8C)) 
-#define PA4 (*((volatile uint32_t*)0x42087F90)) 
-#define PA5 (*((volatile uint32_t*)0x42087F94)) 
-#define PA6 (*((volatile uint32_t*)0x42087F98)) 
-#define PA7 (*((volatile uint32_t*)0x42087F9C)) 
-
-#define PB2 (*((volatile uint32_t*)0x420A7F88)) 
-#define PB3 (*((volatile uint32_t*)0x420A7F8C)) 
-#define PB4 (*((volatile uint32_t*)0x420A7F90)) 
-#define PB5 (*((volatile uint32_t*)0x420A7F94)) 
-#define PB6 (*((volatile uint32_t*)0x420A7F98)) 
-#define PB7 (*((volatile uint32_t*)0x420A7F9C)) 
-
-#define PC4 (*((volatile uint32_t*)0x420C7F90)) 
-#define PC5 (*((volatile uint32_t*)0x420C7F94)) 
-#define PC6 (*((volatile uint32_t*)0x420C7F98)) 
-#define PC7 (*((volatile uint32_t*)0x420C7F9C)) 
-	
-#define PD0 (*((volatile uint32_t*)0x420E7F80)) 
-#define PD1 (*((volatile uint32_t*)0x420E7F84)) 
-#define PD2 (*((volatile uint32_t*)0x420E7F88)) 
-#define PD3 (*((volatile uint32_t*)0x420E7F8C)) 
-
-#define PE0 (*((volatile uint32_t*)0x42487F80))
-#define PE1 (*((volatile uint32_t*)0x42487F84))
-#define PE2 (*((volatile uint32_t*)0x42487F88))
-#define PE3 (*((volatile uint32_t*)0x42487F8C))
-#define PE4 (*((volatile uint32_t*)0x42487F90))
-#define PE5 (*((volatile uint32_t*)0x42487F94))
-
-#define PF0 (*((volatile uint32_t*)0x424A7F80))
-#define PF1 (*((volatile uint32_t*)0x424A7F84))
-#define PF2 (*((volatile uint32_t*)0x424A7F88))
-#define PF3 (*((volatile uint32_t*)0x424A7F8C))
-#define PF4 (*((volatile uint32_t*)0x424A7F90))
-
-
+// Names for output drive strength
 typedef enum DO_Drive { DRIVE_2MA, DRIVE_4MA, DRIVE_8MA } DO_Drive_t;
+
+// Names for the internal pull-up resistor types.
 typedef enum DI_Pull { PULL_NONE, PULL_UP, PULL_DOWN } DI_Pull_t;
 
+//------------------------- GPIO_InitPort ----------------------------
+// Initializes a GPIO port for IO usage.
+// Inputs:  port - the name of the port to initialize.
+// Outputs:  none.
 void GPIO_InitPort(PortName_t port);
+
+//------------------------- GPIO_EnableDO ----------------------------
+// Enables a set of pins on a GPIO port for digital output.
+// Inputs:  port - the name of the port to initialize.
+//	        pinMap - a map of pins to enable.
+//          drive - the output drive strength to configure
+//          pull - the internal pull-up resistor type to configure.
+// Outputs:  none.
 void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive, DI_Pull_t pull);
+
+//------------------------- GPIO_EnableDI ----------------------------
+// Enables a set of pins on a GPIO port for digital input.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+//          pull - the internal pull-up resistor type to configure.
+// Outputs:  none.
 void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull);
+
+
+//------------------------- GPIO_EnableAltDigital --------------------
+// Enables a set of pins on a GPIO port for an alternate digital function.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+//          ctl - the alternate digital function id (see datasheet).
+// Outputs:  none.
 void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl);
+
+//------------------------- GPIO_EnableAltAnalog --------------------
+// Enables a set of pins on a GPIO port for analog usage.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+// Outputs:  none.
 void GPIO_EnableAltAnalog(PortName_t port, uint8_t pinMap);
 
+//------------------------- GPIO_GetBitBandIOAddress( --------------------
+// Gets the bit-band IO address for a pin definition.
+// Inputs:  pinDef - pin definition
+// Outputs:  pointer with value of bit band address.
 volatile uint32_t* GPIO_GetBitBandIOAddress(PinDef_t pinDef);
 
 #endif

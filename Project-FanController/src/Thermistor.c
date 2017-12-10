@@ -11,7 +11,8 @@
 //	the temperature to the ADC output.
 // =CONCATENATE(TEXT(40960000/(C30+10000),"###"),",")
 
-// Fahrenheit table:  0-212 degrees
+// Fahrenheit table:  0-212 degrees.  Note that this array is marked "const" 
+//	and should therefore be stored in Flash by the downloader.
 static const uint32_t TempData_Fahrenheit[] = {	
 	432,	
 	444,
@@ -228,7 +229,8 @@ static const uint32_t TempData_Fahrenheit[] = {
 	3836
 };
 
-// Celsius table:  -17 to 100 degrees
+// Celsius table:  -17 to 100 degrees.  Note that this array is marked "const" 
+//	and should therefore be stored in Flash by the downloader.
 static const uint32_t TempData_Celsius[] = {	
 	449,
 	472,
@@ -354,9 +356,9 @@ static const uint32_t TempData_Celsius[] = {
 // Performs a binary search on a temperature table.
 static int Search(uint32_t value, const uint32_t* array, int startIndex, int endIndex)
 {
-	//assert(startIndex >= 0 && endIndex >= 0);
-	int foundIndex = -1;
+	int foundIndex = -1;  // -1 means not found.
 		
+	// If the value is out of bounds, then choose the extreme index. 
 	if (value <= array[startIndex]) {
 		foundIndex = startIndex;
 	}
@@ -364,6 +366,9 @@ static int Search(uint32_t value, const uint32_t* array, int startIndex, int end
 		foundIndex = endIndex;
 	}
 	else {
+		
+		// Divide and conquer until the searched-for value falls between
+		//	two adjacent indices.  The found index will be the lower of the two
 		while (foundIndex == -1) {
 			
 			int midIndex = startIndex + ((endIndex - startIndex) / 2);
@@ -386,7 +391,7 @@ static int Search(uint32_t value, const uint32_t* array, int startIndex, int end
 	return foundIndex;
 }
 
-// Get the temperature in the give scale based on the ADC output.
+// Get the temperature in the given scale based on the ADC output.
 int Therm_GetTemperature(uint32_t adcSample, ThermScale_t scale) 
 {
 	int startIndex = 0;
@@ -394,7 +399,7 @@ int Therm_GetTemperature(uint32_t adcSample, ThermScale_t scale)
 	const uint32_t* array;
 	int arraySize;
 	
-	// Choose which temperature data table to search.
+	// Choose which temperature data table to search and its size.
 	if (scale == THERM_FAHRENHEIT) {
 		array = TempData_Fahrenheit;
 		arraySize = sizeof(TempData_Fahrenheit);
@@ -404,9 +409,10 @@ int Therm_GetTemperature(uint32_t adcSample, ThermScale_t scale)
 		arraySize = sizeof(TempData_Celsius);
 	}
 	
+	// Determine the ending index of the chosen table.
 	endIndex = (arraySize / sizeof(uint32_t)) - 1;
 	
-	// Search for the table index that is less than or equal to the ADC input. 
+	// Search for the table index that is less than or equal to the ADC value. 
 	int foundIndex = Search(adcSample, array, startIndex, endIndex);
 
 	// Round up to the next temperature if necessary.

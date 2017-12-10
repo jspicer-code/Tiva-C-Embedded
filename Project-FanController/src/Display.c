@@ -4,16 +4,17 @@
 // Purpose: Multiplexed display service module.
 // Hardware:  TM4C123 Tiva board
 
-
 #include "Display.h"
 #include "HAL.h"
 
+// Holds the SSI module used by the display
 static SSIModule_t ssiModule_;
 
-// Current display value.
+// Current display value and blank status.
 static uint32_t displayValue = 0;
 static uint32_t blank = 0;
 
+// Extract the four digits of a number into an array.
 void ExtractDigits(uint32_t value, uint32_t digits[4])
 {
 	// Break the value into individual decimal digits.
@@ -46,6 +47,10 @@ void ExtractDigits(uint32_t value, uint32_t digits[4])
 
 }
 
+// This function is called back by the timer interrupt every millisecond.
+//	It is responsible for the multiplexing of the display, and writes
+//	(via SPI) an encoded data byte for a different digit including its 
+//	BCD value and a bit that will turn on its common anode.
 void TimerCallback(void)
 {
 	static int activeDigit = -1;
@@ -89,7 +94,6 @@ void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 	Timer_EnableTimerPeriodic(timerBlock, 80000, 0, TimerCallback);
 
 }
-
 
 void Display_Update(uint32_t value)
 {

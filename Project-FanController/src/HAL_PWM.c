@@ -9,10 +9,13 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
+// These are base IO addresses of the PWM modules.
 #define PWM0_REG_BASE 	((volatile uint32_t *)0x40028000)
 #define PWM1_REG_BASE		((volatile uint32_t *)0x40029000)
 
-
+// This structure represents the registers associated with a PWM module.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
 	uint32_t  CTL;
 	uint32_t  SYNC;
@@ -108,12 +111,11 @@ typedef struct {
 	uint32_t  PP;
 } PWMRegs_t;
 
-
+// This array is a look table to resolve the PWM module name to its base address.
 const volatile uint32_t * PWMBaseAddress[] = {
 	PWM0_REG_BASE,
 	PWM1_REG_BASE,
 };
-
 
 void PWM_Enable(PWMModule module, PWMChannel channel, uint16_t period, uint16_t duty)
 {
@@ -196,9 +198,6 @@ void PWM_Enable(PWMModule module, PWMChannel channel, uint16_t period, uint16_t 
 		
 	};
 
-	
-	
-	
 }
 
 void PWM_SetDuty(PWMModule module, PWMChannel channel, uint16_t duty)

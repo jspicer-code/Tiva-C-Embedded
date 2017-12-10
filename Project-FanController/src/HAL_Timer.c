@@ -9,6 +9,7 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
+// These are the base IO addresses of the timer blocks.
 #define TIMER0_REG_BASE 	((volatile uint32_t *)0x40030000)
 #define TIMER1_REG_BASE		((volatile uint32_t *)0x40031000)
 #define TIMER2_REG_BASE		((volatile uint32_t *)0x40032000)
@@ -16,7 +17,9 @@
 #define TIMER4_REG_BASE		((volatile uint32_t *)0x40034000)
 #define TIMER5_REG_BASE		((volatile uint32_t *)0x40035000)	
 
-
+// This structure represents the registers associated with a timer block.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
 	uint32_t  CFG;
 	uint32_t  TAMR;
@@ -49,7 +52,7 @@ typedef struct {
 	uint32_t  PP;
 } TimerRegs_t;
 
-
+// This array is a look table to resolve the timer block name to its base address.
 const volatile uint32_t * TimerBaseAddress[] = {
 	TIMER0_REG_BASE,
 	TIMER1_REG_BASE,
@@ -59,9 +62,10 @@ const volatile uint32_t * TimerBaseAddress[] = {
 	TIMER5_REG_BASE,
 };
 
-PFN_TimerCallback Timer0_Callback;
-PFN_TimerCallback Timer1_Callback;
-PFN_TimerCallback Timer2_Callback;
+// These hold the function pointers to the callback functions invoked in the interrupt handlers.
+static PFN_TimerCallback Timer0_Callback;
+static PFN_TimerCallback Timer1_Callback;
+static PFN_TimerCallback Timer2_Callback;
 
 int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, uint8_t priority, PFN_TimerCallback callback)
 {
@@ -184,12 +188,12 @@ int Timer_EnableInputCounter(TimerBlock_t block)
 		
 		case TIMER1:
 			SYSCTL_RCGCTIMER_R |= 2;	
-			GPIO_EnableAltDigital(PORTB, PIN_4, 0x7);
+			GPIO_EnableAltDigital(PORTB, PIN4, 0x7);
 			break;
 		
 		case TIMER2:
 			SYSCTL_RCGCTIMER_R |= 4;	
-			GPIO_EnableAltDigital(PORTB, PIN_0, 0x7);
+			GPIO_EnableAltDigital(PORTB, PIN0, 0x7);
 			break;
 		
 		default:
@@ -237,6 +241,8 @@ uint32_t Timer_ReadCounterValue(TimerBlock_t block)
 	return count; 
 }
 
+// Generic handler (called by the interrupt handles) which clears the interrupt flags 
+//	and invokes the user callback as needed.
 static void TimerHandler(volatile TimerRegs_t* timer, PFN_TimerCallback callback)
 {
 	volatile int readback;
@@ -264,18 +270,21 @@ static void TimerHandler(volatile TimerRegs_t* timer, PFN_TimerCallback callback
 	}
 }
 
+// Timer0 interrupt handler.  Must be configured in the IRQ vector table.
 void Timer_Timer0Handler(void)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[TIMER0];
 	TimerHandler(timer, Timer0_Callback);
 }
 
+// Timer1 interrupt handler.  Must be configured in the IRQ vector table.
 void Timer_Timer1Handler(void)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[TIMER1];
 	TimerHandler(timer, Timer1_Callback);
 }
 
+// Timer2 interrupt handler.  Must be configured in the IRQ vector table.
 void Timer_Timer2Handler(void)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[TIMER2];
