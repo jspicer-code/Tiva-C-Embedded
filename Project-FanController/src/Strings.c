@@ -1,8 +1,9 @@
 // File:  Strings.c
 // Author: JSpicer
 // Date:  10/06/17
-// Purpose: Misc. string utility functions.  Most of these functions appeared
-//	 in the first edition of Kernighan and Ritchie's The C Programming Language.
+// Purpose: Misc. string utility functions.  These functions appeared
+//		in the first edition of Kernighan and Ritchie's The C Programming Language
+//		and the implementation is derived from there.
 // Hardware:  TM4C123 Tiva board
 
 #include "Strings.h"

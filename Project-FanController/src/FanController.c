@@ -6,7 +6,7 @@
 #include "Thermistor.h"
 #include "TemperatureSettings.h"
 #include "Console.h"
-#include "Strings.h"
+
 
 // At 80MHz, this is the number of bus cycles for a 25kHz PWM frequency.
 #define PWM_PERIOD		3200
