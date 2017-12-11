@@ -1,15 +1,14 @@
 // File:  Strings.c
 // Author: JSpicer
 // Date:  10/06/17
-// Purpose: Misc. string utility functions.  These functions appeared
-//		in the first edition of Kernighan and Ritchie's The C Programming Language
-//		and the implementation is derived from there.
+// Purpose: Misc. string utility functions.
 // Hardware:  TM4C123 Tiva board
 
 #include "Strings.h"
 
 // itoa:  convert n to characters in s 
-// This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language 
+// This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language.
+// Derived from https://en.wikibooks.org/wiki/C_Programming/stdlib.h/itoa
 void itoa(int n, char s[])
 {
 	 int i, sign;
@@ -39,6 +38,7 @@ int strlen(const char* s)
 
 // reverse:  reverse string s in place 
 // This function appeared in the first edition of Kernighan and Ritchie's The C Programming Language 
+// Derived from https://en.wikibooks.org/wiki/C_Programming/stdlib.h/itoa
 void reverse(char s[])
 {
 	 int i, j;
@@ -81,6 +81,7 @@ int isdigit(char c)
 }
 
 // atoi:  convert string s to integer
+// Derived from https://github.com/thvdburgt/KnR-The-C-Programming-Language-Solutions/blob/master/Chapter%205/5-6/atoi.c
 int atoi(const char *s)
 {
     int n, sign;

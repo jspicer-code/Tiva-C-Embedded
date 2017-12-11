@@ -302,21 +302,29 @@ static int SetFanSpeed(int speedPot, int temperature)
 	
 		case FANMODE_TEMP:
 	
-			// Turn on the fan if the temperature is ABOVE the lower limit, and scale its
-			//	speed into range with the high limit.  Also, make the minimum percentage 1%
-			//	and scale the ADC value into the other 99% so that the speed is between 1-100.
-			if (temperature > controlSettings_.lowTemp) {
-				float range = (float)(controlSettings_.highTemp - controlSettings_.lowTemp);
-				percentage = 0.01f + (0.99f *((float)(temperature - controlSettings_.lowTemp) / range));
+			// Turn on the fan if the temperature is EQUAL TO or ABOVE the lower limit,
+			//	and map its speed into range with the high limit between 1-100%.
+			if (temperature >= controlSettings_.lowTemp) {
+				
+				float range = (float)(controlSettings_.highTemp - controlSettings_.lowTemp);				
+				
+				// If the range is zero, then this is thermostatic contol - full speed.
+				//	If the range is greater than zero, then use a linear speed range.
+				//	Otherwise, if high is less than low, the fan stays off.
+				if (range == 0.0f) {
+					percentage = 1.0;
+				}
+				else if (range > 0.0f) {
+					percentage = 0.01f + (0.99f *((float)(temperature - controlSettings_.lowTemp) / range));
+				}			
 			}
 			break;
 			
 		case FANMODE_MANUAL:
 			
 			// Convert the ADC sample to a percentage of its maximum range.
-			// 	Make the minimum percentage 1% and scale the ADC value into the other 99%
-			//	so that the speed is between 1-100.
-			percentage  = 0.01f + (0.99f * (float)(speedPot / 4095.0f));
+			// 	Map the percentage into 1-100%.
+			percentage  = 0.01f + (speedPot / 4096.0f);
 			break;
 
 		case FANMODE_OFF:

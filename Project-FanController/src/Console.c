@@ -104,7 +104,7 @@ static void PrintRangeScreen(TemperatureSettings_t* settings)
 	UART_WriteString(uart_,"\n\r");
 		
 	UART_WriteString(uart_, "Select the temperature limit to change (ESC for previous menu):\n\r");
-	UART_WriteString(uart_, " 1) Low (Turn Off)\n\r");
+	UART_WriteString(uart_, " 1) Low (Minimum Speed)\n\r");
 	UART_WriteString(uart_, " 2) High (Maximum Speed)\n\r");
 	UART_WriteString(uart_, ">");	
 }
