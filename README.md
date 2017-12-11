@@ -2,6 +2,9 @@
 
 This repository contains projects and experiments for the EEE4243 Embedded Systems course.
 
+# Final Project
+In Progress...
+
 # Experiments
 
 ## Experiment13-Flash
