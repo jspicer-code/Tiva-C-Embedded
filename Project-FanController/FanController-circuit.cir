@@ -7,7 +7,7 @@ Shape Version=11.00
 Screen=1536,864
 MCAPVersion=11.0.0.3
 Key ID=Demo
-NLCnt=325
+NLCnt=320
 TXCnt=61
 
 [shapedef]
@@ -251,8 +251,8 @@ PinCnt=0
 Name=Fixed Analog
 Definition=ANALOG STATE
 Shape=Fixed
-Mask=2304
-Used=59
+Mask=2816
+Used=61
 memo=Provides a fixed DC voltage
 Label Offset=-14,-7,-6,-27
 PinCnt=1
@@ -263,7 +263,7 @@ Name=Ground
 Definition=Ground
 Shape=Ground
 Mask=1793
-Used=160
+Used=163
 memo=Ground
 Label Offset=0,0,0,0
 PinCnt=1
@@ -287,8 +287,8 @@ Power=0.5
 Name=Diode
 Definition=Diode
 Shape=Diode
-Mask=4865
-Used=67
+Mask=5633
+Used=68
 memo=Diode
 Label Offset=17,10,12,12
 PinCnt=2
@@ -299,8 +299,8 @@ Pin="Cathode",0,0,-20,-8
 Name=Resistor
 Definition=Resistor
 Shape=Resistor
-Mask=6657
-Used=273
+Mask=7425
+Used=282
 memo=Resistor
 Label Offset=18,6,8,11
 PinCnt=2
@@ -385,8 +385,8 @@ PinCnt=0
 Name=Capacitor
 Definition=Capacitor
 Shape=Capacitor
-Mask=6657
-Used=52
+Mask=7681
+Used=62
 memo=Capacitor
 Label Offset=16,12,12,12
 PinCnt=2
@@ -2515,7 +2515,7 @@ V
 [Comp]
 Name=MAX4028
 Style=ShowPinText
-Px=824,1072
+Px=840,1072
 
 [Attr]
 ON=7,116,PART
@@ -2527,17 +2527,17 @@ ON=30,140,PACKAGE
 V=SO-16
 
 [Wire]
-Pxs=808,1064,816,1064
+Pxs=824,1064,832,1064
 
 [Wire]
-Pxs=712,1096,808,1096
+Pxs=728,1096,824,1096
 
 [Wire]
-Pxs=808,1096,816,1096
+Pxs=824,1096,832,1096
 
 [Comp]
 Name=Capacitor
-Px=648,1080
+Px=664,1080
 Rot=4
 
 [Attr]
@@ -2554,11 +2554,11 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=808,1080,816,1080
+Pxs=824,1080,832,1080
 
 [Comp]
 Name=Capacitor
-Px=712,1128
+Px=728,1128
 Rot=4
 
 [Attr]
@@ -2575,20 +2575,20 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=808,1112,816,1112
+Pxs=824,1112,832,1112
 
 [Wire]
-Pxs=760,1064,808,1064
+Pxs=776,1064,824,1064
 
 [Wire]
-Pxs=808,1128,816,1128
+Pxs=824,1128,832,1128
 
 [Wire]
-Pxs=696,1080,808,1080
+Pxs=712,1080,824,1080
 
 [Comp]
 Name=Capacitor
-Px=712,1064
+Px=728,1064
 Rot=4
 
 [Attr]
@@ -2605,20 +2605,20 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=712,1064,712,1096
+Pxs=728,1064,728,1096
 
 [Wire]
-Pxs=712,1112,808,1112
+Pxs=728,1112,824,1112
 
 [Wire]
-Pxs=712,1112,712,1128
+Pxs=728,1112,728,1128
 
 [Wire]
-Pxs=760,1128,808,1128
+Pxs=776,1128,824,1128
 
 [Comp]
 Name=Capacitor
-Px=648,1144
+Px=664,1144
 Rot=4
 
 [Attr]
@@ -2635,25 +2635,25 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=696,1144,816,1144
+Pxs=712,1144,832,1144
 
 [Comp]
 Name=Ground
-Px=616,1096
+Px=632,1096
 Rot=7
 
 [Wire]
-Pxs=648,1080,648,1144
+Pxs=664,1080,664,1144
 
 [Wire]
-Pxs=616,1080,648,1080
+Pxs=632,1080,664,1080
 
 [Wire]
-Pxs=616,1080,616,1096
+Pxs=632,1080,632,1096
 
 [Comp]
 Name=Input Port
-Px=576,1160
+Px=592,1160
 Rot=4
 
 [Attr]
@@ -2671,7 +2671,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=576,1184
+Px=592,1184
 Rot=4
 
 [Attr]
@@ -2684,26 +2684,26 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=792,1160,816,1160
+Pxs=808,1160,832,1160
 
 [Wire]
-Pxs=640,1176,800,1176
+Pxs=656,1176,816,1176
 
 [Wire]
-Pxs=640,1176,640,1184
+Pxs=656,1176,656,1184
 
 [Wire]
-Pxs=800,1176,816,1176
+Pxs=816,1176,832,1176
 
 [Wire]
-Pxs=624,1184,640,1184
+Pxs=640,1184,656,1184
 
 [Wire]
-Pxs=624,1160,792,1160
+Pxs=640,1160,808,1160
 
 [Comp]
 Name=Input Port
-Px=968,1160
+Px=984,1160
 Rot=4
 
 [Attr]
@@ -2721,7 +2721,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=968,1184
+Px=984,1184
 Rot=4
 
 [Attr]
@@ -2738,13 +2738,13 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=904,1160,968,1160
+Pxs=920,1160,984,1160
 
 [Wire]
-Pxs=904,1176,968,1176
+Pxs=920,1176,984,1176
 
 [Wire]
-Pxs=968,1176,968,1184
+Pxs=984,1176,984,1184
 
 [Comp]
 Name=Input Port
@@ -2778,36 +2778,6 @@ Style=8192
 ON=0,0,PACKAGE
 V
 
-[Comp]
-Name=Capacitor
-Px=944,776
-Rot=5
-
-[Attr]
-ON=12,-26,PART
-V=C6
-
-[Attr]
-ON=12,-40,CAPACITANCE
-V=220u
-Style=8192
-
-[Attr]
-ON=0,0,PACKAGE
-V
-
-[Wire]
-Pxs=696,664,944,664
-
-[Wire]
-Pxs=944,664,944,728
-
-[Wire]
-Pxs=944,776,944,808
-
-[Wire]
-Pxs=888,808,944,808
-
 [Object]
 Object=Rectangle
 CBorder=#C0C0C0
@@ -2840,7 +2810,7 @@ Px=11,537,471,1270
 
 [Comp]
 Name=Output Port
-Px=576,1208
+Px=592,1208
 Rot=4
 
 [Attr]
@@ -2853,14 +2823,14 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=624,1208,672,1208
+Pxs=640,1208,688,1208
 
 [Wire]
-Pxs=672,1208,672,1216
+Pxs=688,1208,688,1216
 
 [Comp]
 Name=Ground
-Px=672,1216
+Px=688,1216
 Rot=7
 
 [Grid Text]
@@ -2875,7 +2845,7 @@ CBorder=None
 
 [Grid Text]
 Text="C2-"
-Px=808,1128
+Px=824,1128
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -2883,7 +2853,7 @@ CBorder=None
 
 [Grid Text]
 Text="V-"
-Px=816,1144
+Px=832,1144
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -2891,7 +2861,7 @@ CBorder=None
 
 [Grid Text]
 Text="R2IN"
-Px=800,1176
+Px=816,1176
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -2899,7 +2869,7 @@ CBorder=None
 
 [Grid Text]
 Text="T2OUT"
-Px=792,1160
+Px=808,1160
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -2907,7 +2877,7 @@ CBorder=None
 
 [Grid Text]
 Text="R2OUT"
-Px=888,1176
+Px=904,1176
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -2915,7 +2885,7 @@ CBorder=None
 
 [Grid Text]
 Text="T2IN"
-Px=888,1160
+Px=904,1160
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -3261,7 +3231,7 @@ CBorder=None
 
 [Grid Text]
 Text="C2+"
-Px=808,1112
+Px=824,1112
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -3269,7 +3239,7 @@ CBorder=None
 
 [Grid Text]
 Text="C1-"
-Px=808,1096
+Px=824,1096
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -3277,7 +3247,7 @@ CBorder=None
 
 [Grid Text]
 Text="V+"
-Px=808,1080
+Px=824,1080
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -3285,7 +3255,7 @@ CBorder=None
 
 [Grid Text]
 Text="C1+"
-Px=808,1064
+Px=824,1064
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -3522,9 +3492,9 @@ PrinterScale=-1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-SB 3=0,568
+SB 3=0,96
 Scale 3=1.3333333333333333
-Px=2075,349
+Px=1123,1212
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000
