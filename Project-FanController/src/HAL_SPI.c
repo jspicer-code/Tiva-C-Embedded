@@ -39,6 +39,10 @@ const volatile uint32_t * SSIBaseAddress[] = {
 	SSI3_REG_BASE
 };
 
+//----------------------- SPI_Enable --------------------------
+// Enables the specified SSI module/channel for SPI
+// Inputs:  module - the SSI module name.
+// Outputs:  none.
 int SPI_Enable(SSIModule_t module)
 {
 	
@@ -95,7 +99,11 @@ int SPI_Enable(SSIModule_t module)
 	return 0;
 }
 
-
+//----------------------- SPI_Write ---------------------------
+// Writes a byte of data to the SPI bus.
+// Inputs:  module - the SSI module name.
+//          data - the data byte to write.
+// Outputs:  none.
 void SPI_Write(SSIModule_t module, uint8_t data)
 {
 	// Overlay the SSI register structure on top of the SSIx memory region...

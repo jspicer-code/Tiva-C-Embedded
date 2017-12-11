@@ -15,6 +15,11 @@
 // This holds the key required for erase and write operations.  Set it during Enable().
 static uint16_t	flashKey_ = 0;
 
+//------------------------- Flash_Enable --------------------------
+// Enables the Flash HAL module.  Must be called once prior to Erase
+//	Write, and Read operations.
+// Inputs:  none.
+// Outputs:  none.
 void Flash_Enable(void)
 {
 	// If the KEY flag (bit 4) is set, then the key is 0xA442.
@@ -28,7 +33,10 @@ void Flash_Enable(void)
 	
 }
 
-
+//------------------------- Flash_Erase ----------------------------
+// Erases a block for Flash memory
+// Inputs:  blockCount - the number of blocks to erase.
+// Outputs:  none.
 int Flash_Erase(int blockCount)
 {
 	
@@ -57,7 +65,11 @@ int Flash_Erase(int blockCount)
 	return 0;
 }
 
-
+//------------------------- Flash_Write ----------------------------
+// Writes data to Flash memory
+// Inputs:  data - a pointer to the data to write.  Must be a multiple
+//            of words in size.
+// Outputs: wordCount - the number of words of data to write.
 int Flash_Write(const void* data, int wordCount)
 {
 		
@@ -95,7 +107,11 @@ int Flash_Write(const void* data, int wordCount)
 }
 
 
-
+//------------------------- Flash_Write ----------------------------
+// Reads data from Flash memory
+// Inputs:  data - a pointer to the data buffer where Flash memory will
+//            be copied.
+// Outputs: wordCount - the number of words of data to read.
 void Flash_Read(void* data, int wordCount)
 {
 	// Copy the count of bytes into the target data buffer...

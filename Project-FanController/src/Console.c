@@ -32,6 +32,11 @@ enum {
 // The UART id will bet stored here during Init for other module functions to use.
 static UART_ID_t uart_;
 
+//-------------------------- Console_Init----------------------------
+// Initializes the Console module.  Must be called once during program 
+//	start up.
+// Inputs:  uart - The HAL UART_ID that will be used for console I/O.
+// Outputs:  none
 void Console_Init(UART_ID_t uart)
 {
 	
@@ -280,7 +285,12 @@ void PrintCurrentScreen(TemperatureSettings_t* settings)
 	
 }
 
-// Handles input for a single character typed to the console.
+//----------------------- Console_HandleInput -----------------------
+// Handles the input of single character typed to the console.
+// Inputs:  c - the character typed.
+//          settings - a pointer to the TemperatureSettings structure
+//		         to display and save to Flash.
+// Outputs: none
 void Console_HandleInput(char c, TemperatureSettings_t* settings)
 {
 	static char buffer[MAX_BUFFER]; // Up to (MAX_BUFFER - 1) chars + null byte.

@@ -11,6 +11,10 @@
 // Holds the currently configured bus clock frequency.
 static uint32_t busClockFreq_;
 
+//------------------------- PLL_Init80MHz ----------------------------
+// Initializes the PLL to a bus clock frequency of 80MHz.
+// Inputs:  none.
+// Outputs:  none.
 void PLL_Init80MHz(void)
 {
 	
@@ -47,7 +51,10 @@ void PLL_Init80MHz(void)
 	
 }
 
-
+//----------------------- PLL_GetBusClockFreq ------------------------
+// Gets the PLL bus clock frequency.
+// Inputs:  none.
+// Outputs:  the configured bus clock frequency or zero if uninitialized.
 uint32_t PLL_GetBusClockFreq(void)
 {
 	return busClockFreq_;

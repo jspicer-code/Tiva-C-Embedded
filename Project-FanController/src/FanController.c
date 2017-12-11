@@ -154,13 +154,14 @@ static int InitHardware(FanController_IOConfig_t* pIOConfig)
 	PWM_Enable(pIOConfig->pwm.module, pIOConfig->pwm.channel, PWM_PERIOD, PWM_PERIOD / 2);
 	
 	// Enable the RPM timer.  At 80MHz, there are 80 million system ticks in one second.
+	//	Second highest interrupt priority.  The Display will take the highest.
 	Timer_EnableTimerPeriodic(pIOConfig->rpmTimer, 80000000, 2, RpmTimerCallback);
 	
 	// Enable and reset the tach pulse input counter.
 	Timer_EnableInputCounter(pIOConfig->tachCounter);
 	Timer_ResetInputCounter(pIOConfig->tachCounter);
 	
-	// Enable the UART and configure it with an Rx interrupt.
+	// Enable the UART and configure it with an Rx interrupt.  Lowest priority interrupt.
 	UART_Enable(pIOConfig->uart, 9600);
 	UART_EnableRxInterrupt(pIOConfig->uart, 7, UartRxCallback);
 	
@@ -410,6 +411,12 @@ static void Scan(void)
 	
 }
 
+//----------------------- FanController_Run --------------------------
+// Runs the FanController.  This is the main entry point.  Blocks and 
+//   doesn't return.  Should be called by the main() function upon startup.
+// Inputs:  pIOConfig - a pointer to the IO configuration that the 
+//   FanController should use.
+// Outputs:  none
 void FanController_Run(FanController_IOConfig_t* pIOConfig)
 {
 	

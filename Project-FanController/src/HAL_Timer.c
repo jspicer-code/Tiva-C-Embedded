@@ -67,6 +67,15 @@ static PFN_TimerCallback Timer0_Callback;
 static PFN_TimerCallback Timer1_Callback;
 static PFN_TimerCallback Timer2_Callback;
 
+//------------------ Timer_EnableTimerPeriodic --------------------------
+// Initializes a timer block for periodic (count down) mode.  
+//	Each time the timer expires it invokes the callback function
+//	at restarts.
+// Inputs:  block - the hardware time block to use.
+//          interval - the number of bus cycles per countdown interval.
+//          priority - interrupt priority.
+//          callback - function to callback when the timer expires.
+// Outputs:  none.
 int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, uint8_t priority, PFN_TimerCallback callback)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];
@@ -181,7 +190,12 @@ int Timer_EnableTimerPeriodic(TimerBlock_t block, uint32_t interval, uint8_t pri
 	return 0;
 }	
 
-
+//------------------ Timer_EnableInputCounter --------------------------
+// Initializes a timer block for input edge counter mode.
+//	The timer keeps an accumulator of the number of times
+//	a rising edge pulse is detected on its associated input.  
+// Inputs:  block - the hardware timer block to use.
+// Outputs:  none.
 int Timer_EnableInputCounter(TimerBlock_t block)
 {
 	switch (block) {
@@ -205,6 +219,10 @@ int Timer_EnableInputCounter(TimerBlock_t block)
 	return 0;
 }	
 
+//------------------ Timer_ResetInputCounter --------------------------
+// Resets the accumulator of a timer configured for input edge counter mode.
+// Inputs:  block - the hardware timer block to use.
+// Outputs:  none.
 void Timer_ResetInputCounter(TimerBlock_t block)
 {
 	
@@ -234,6 +252,10 @@ void Timer_ResetInputCounter(TimerBlock_t block)
 	
 }
 
+//------------------ Timer_ReadCounterValue --------------------------
+// Reads the accumulator of a timer configured for input edge counter mode.
+// Inputs:  block - the hardware timer block to use.
+// Outputs:  accumlator value.
 uint32_t Timer_ReadCounterValue(TimerBlock_t block)
 {
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];

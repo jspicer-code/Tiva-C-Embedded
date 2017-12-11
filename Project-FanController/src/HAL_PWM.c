@@ -117,6 +117,14 @@ const volatile uint32_t * PWMBaseAddress[] = {
 	PWM1_REG_BASE,
 };
 
+//----------------------- PWM_Enable --------------------------
+// Enables the specified PWM module/channel with a given period 
+//	and duty cycle.
+// Inputs:  module - the PWM module name.
+//          channel - the PWM channel name.
+//          period - the pulse period.
+//          duty - the number of bus cycles for initial duty cycle 
+// Outputs:  none.
 void PWM_Enable(PWMModule module, PWMChannel channel, uint16_t period, uint16_t duty)
 {
 	// Overlay the PWM register structure on top of the PWMx memory region...
@@ -200,6 +208,12 @@ void PWM_Enable(PWMModule module, PWMChannel channel, uint16_t period, uint16_t 
 
 }
 
+//----------------------- PWM_SetDuty --------------------------
+// Set the duty cycle of an enabled PWM module/channel
+// Inputs:  module - the PWM module name.
+//          channel - the PWM channel name.
+//          duty - the number of bus cycles for the duty cycle.
+// Outputs:  none.
 void PWM_SetDuty(PWMModule module, PWMChannel channel, uint16_t duty)
 {
 	// Overlay the PWM register structure on top of the PWMx memory region...

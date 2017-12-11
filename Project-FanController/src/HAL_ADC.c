@@ -92,6 +92,13 @@ const volatile uint32_t * ADCBaseAddress[] = {
 	ADC1_REG_BASE,
 };
 
+
+//----------------------- ADC_Enable --------------------------
+// Enables the specified ADC module/channel for input.  
+//	This configures a single channel sequencer for single sample.
+// Inputs:  module - the ADC module name.
+//          channel - the ADC channel name.
+// Outputs:  none.
 void ADC_Enable(ADCModule module, ADCChannel channel)
 {
 		uint8_t moduleBit = 0x1 << ((uint8_t)module);
@@ -161,7 +168,10 @@ void ADC_Enable(ADCModule module, ADCChannel channel)
 }
 
 
-
+//----------------------- ADC_Sample --------------------------
+// Reads the digital output of the enabled ADC module.
+// Inputs:  module - the ADC module name.
+// Outputs:  none.
 uint32_t ADC_Sample(ADCModule module)
 {
 	volatile uint32_t result;

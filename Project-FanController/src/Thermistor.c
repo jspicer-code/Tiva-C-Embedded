@@ -391,7 +391,12 @@ static int Search(uint32_t value, const uint32_t* array, int startIndex, int end
 	return foundIndex;
 }
 
-// Get the temperature in the given scale based on the ADC output.
+//----------------------- Therm_GetTemperature --------------------------
+// Gets the temperature in the given scale for the Vishay NTCASCWE3
+//	 thermistor based on an analog input. 
+// Inputs:  adcSample - the digital output of an ADC, between 0-4095.
+//          scale - the temperature scale, i.e. Fahrenheit or Celsius.
+// Outputs:  the temperature in the given scale.
 int Therm_GetTemperature(uint32_t adcSample, ThermScale_t scale) 
 {
 	int startIndex = 0;

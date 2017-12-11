@@ -82,6 +82,12 @@ void TimerCallback(void)
 
 }
 
+//----------------------- Display_Initialize --------------------------
+// Initializes the display module.
+// Inputs:  ssiModule - the SSI module to use in the HAL for SPI 
+//            communication with the display shift register.
+//          timerBlock - the HAL timer block to use for the refresh cycle.
+// Outputs:  none
 void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 {
 	// The SSI module will be used by the timer callback, so save a copy.
@@ -95,6 +101,10 @@ void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 
 }
 
+//----------------------- Display_Update --------------------------
+// Assigns a new value to be shown on the display.
+// Inputs:  value - an integer value (0-9999) to show on the displayl.
+// Outputs:  none.
 void Display_Update(uint32_t value)
 {
 	// Store the new display value.  It will get picked up by the
@@ -106,7 +116,10 @@ void Display_Update(uint32_t value)
 	blank = 0;
 }
 
-
+//----------------------- Display_Blank --------------------------
+// Blanks the entire display (all digits off).
+// Inputs:  none
+// Outputs:  none
 void Display_Blank(void)
 {
 	displayValue = 0;
