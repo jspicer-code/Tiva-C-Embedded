@@ -7,11 +7,15 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
+// These are the base IO addresses of the SSI modules.
 #define SSI0_REG_BASE 	((volatile uint32_t *)0x40008000)
 #define SSI1_REG_BASE		((volatile uint32_t *)0x40009000)
 #define SSI2_REG_BASE		((volatile uint32_t *)0x4000A000)
 #define SSI3_REG_BASE		((volatile uint32_t *)0x4000B000)
 
+// This structure represents the registers associated with an SSI module.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
   uint32_t  CR0;
   uint32_t  CR1;
@@ -27,6 +31,7 @@ typedef struct {
   uint32_t  CC;
 } SSIRegs_t;
 
+// This array is a look table to resolve the SSI module name to its base address.
 const volatile uint32_t * SSIBaseAddress[] = {
 	SSI0_REG_BASE,
 	SSI1_REG_BASE,
@@ -34,14 +39,17 @@ const volatile uint32_t * SSIBaseAddress[] = {
 	SSI3_REG_BASE
 };
 
-
+//----------------------- SPI_Enable --------------------------
+// Enables the specified SSI module/channel for SPI
+// Inputs:  module - the SSI module name.
+// Outputs:  none.
 int SPI_Enable(SSIModule_t module)
 {
 	
 	// For now, require the bus clock to be 80MHz.
 	// TODO:  Will need to work out a way to set an arbitrary bit rate with or
 	//	without knowing the bus clock frequency.
-	if (BusClockFreq != 80000000) {
+	if (PLL_GetBusClockFreq() != 80000000) {
 		return -1;
 	}
 	
@@ -49,7 +57,6 @@ int SPI_Enable(SSIModule_t module)
 	volatile SSIRegs_t* ssi = (volatile SSIRegs_t*)SSIBaseAddress[module];
 	
 	switch (module) {
-		
 		
 		case SSI0:
 			GPIO_EnableAltDigital(PORTA, 0x2C, 0x02);
@@ -92,7 +99,11 @@ int SPI_Enable(SSIModule_t module)
 	return 0;
 }
 
-
+//----------------------- SPI_Write ---------------------------
+// Writes a byte of data to the SPI bus.
+// Inputs:  module - the SSI module name.
+//          data - the data byte to write.
+// Outputs:  none.
 void SPI_Write(SSIModule_t module, uint8_t data)
 {
 	// Overlay the SSI register structure on top of the SSIx memory region...

@@ -97,7 +97,6 @@ __heap_limit
 ;******************************************************************************
 		EXTERN	Timer_Timer0Handler
 		EXTERN	Timer_Timer1Handler
-		EXTERN	Timer_Timer2Handler
 		EXTERN	UART5Handler
 		
         EXPORT  __Vectors
@@ -141,7 +140,7 @@ __Vectors
         DCD     IntDefaultHandler           ; Timer 0 subtimer B
         DCD     Timer_Timer1Handler       	; Timer 1 subtimer A
         DCD     IntDefaultHandler           ; Timer 1 subtimer B
-        DCD     Timer_Timer2Handler         ; Timer 2 subtimer A
+        DCD     IntDefaultHandler        	; Timer 2 subtimer A
         DCD     IntDefaultHandler           ; Timer 2 subtimer B
         DCD     IntDefaultHandler           ; Analog Comparator 0
         DCD     IntDefaultHandler           ; Analog Comparator 1

@@ -9,9 +9,13 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
+// These are base IO addresses of the ADC modules.
 #define ADC0_REG_BASE 	((volatile uint32_t *)0x40038000)
 #define ADC1_REG_BASE		((volatile uint32_t *)0x40039000)
 
+// This structure represents the registers associated with the ADC module.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
    uint32_t  ACTSS;
    uint32_t  RIS;
@@ -82,11 +86,19 @@ typedef struct {
    uint32_t  CC;
 } ADCRegs_t;
 
+// This array is a look table to resolve the ADC module name to its base address.
 const volatile uint32_t * ADCBaseAddress[] = {
 	ADC0_REG_BASE,
 	ADC1_REG_BASE,
 };
 
+
+//----------------------- ADC_Enable --------------------------
+// Enables the specified ADC module/channel for input.  
+//	This configures a single channel sequencer for single sample.
+// Inputs:  module - the ADC module name.
+//          channel - the ADC channel name.
+// Outputs:  none.
 void ADC_Enable(ADCModule module, ADCChannel channel)
 {
 		uint8_t moduleBit = 0x1 << ((uint8_t)module);
@@ -156,7 +168,10 @@ void ADC_Enable(ADCModule module, ADCChannel channel)
 }
 
 
-
+//----------------------- ADC_Sample --------------------------
+// Reads the digital output of the enabled ADC module.
+// Inputs:  module - the ADC module name.
+// Outputs:  none.
 uint32_t ADC_Sample(ADCModule module)
 {
 	volatile uint32_t result;

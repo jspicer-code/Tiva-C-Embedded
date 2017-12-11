@@ -4,16 +4,17 @@
 // Purpose: Multiplexed display service module.
 // Hardware:  TM4C123 Tiva board
 
-
 #include "Display.h"
 #include "HAL.h"
 
+// Holds the SSI module used by the display
 static SSIModule_t ssiModule_;
 
-// Current display value.
+// Current display value and blank status.
 static uint32_t displayValue = 0;
 static uint32_t blank = 0;
 
+// Extract the four digits of a number into an array.
 void ExtractDigits(uint32_t value, uint32_t digits[4])
 {
 	// Break the value into individual decimal digits.
@@ -46,6 +47,10 @@ void ExtractDigits(uint32_t value, uint32_t digits[4])
 
 }
 
+// This function is called back by the timer interrupt every millisecond.
+//	It is responsible for the multiplexing of the display, and writes
+//	(via SPI) an encoded data byte for a different digit including its 
+//	BCD value and a bit that will turn on its common anode.
 void TimerCallback(void)
 {
 	static int activeDigit = -1;
@@ -77,6 +82,12 @@ void TimerCallback(void)
 
 }
 
+//----------------------- Display_Initialize --------------------------
+// Initializes the display module.
+// Inputs:  ssiModule - the SSI module to use in the HAL for SPI 
+//            communication with the display shift register.
+//          timerBlock - the HAL timer block to use for the refresh cycle.
+// Outputs:  none
 void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 {
 	// The SSI module will be used by the timer callback, so save a copy.
@@ -90,7 +101,10 @@ void Display_Initialize(SSIModule_t ssiModule, TimerBlock_t timerBlock)
 
 }
 
-
+//----------------------- Display_Update --------------------------
+// Assigns a new value to be shown on the display.
+// Inputs:  value - an integer value (0-9999) to show on the displayl.
+// Outputs:  none.
 void Display_Update(uint32_t value)
 {
 	// Store the new display value.  It will get picked up by the
@@ -102,7 +116,10 @@ void Display_Update(uint32_t value)
 	blank = 0;
 }
 
-
+//----------------------- Display_Blank --------------------------
+// Blanks the entire display (all digits off).
+// Inputs:  none
+// Outputs:  none
 void Display_Blank(void)
 {
 	displayValue = 0;

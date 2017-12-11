@@ -9,8 +9,12 @@
 #include "tm4c123gh6pm.h"
 
 // Holds the currently configured bus clock frequency.
-uint32_t BusClockFreq;
+static uint32_t busClockFreq_;
 
+//------------------------- PLL_Init80MHz ----------------------------
+// Initializes the PLL to a bus clock frequency of 80MHz.
+// Inputs:  none.
+// Outputs:  none.
 void PLL_Init80MHz(void)
 {
 	
@@ -43,6 +47,16 @@ void PLL_Init80MHz(void)
 	// 8) Clear BYPASS to enable PLL.
 	SYSCTL_RCC2_R &= ~SYSCTL_RCC2_BYPASS2;
 	
-	BusClockFreq = 80000000;
+	busClockFreq_ = 80000000;
 	
 }
+
+//----------------------- PLL_GetBusClockFreq ------------------------
+// Gets the PLL bus clock frequency.
+// Inputs:  none.
+// Outputs:  the configured bus clock frequency or zero if uninitialized.
+uint32_t PLL_GetBusClockFreq(void)
+{
+	return busClockFreq_;
+}
+

@@ -8,6 +8,9 @@
 #include "tm4c123gh6pm.h"
 #include "HAL.h"
 
+// This structure represents the registers associated with the GPIO port.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {
 	uint32_t DATA_BITS[255];
 	uint32_t DATA;
@@ -49,6 +52,7 @@ const volatile uint32_t * GPIOBaseAddress[] = {
 	GPIO_PORTF_DATA_BITS_R
 };
 
+// Gets the pin number from the PinDef_t structure (which contains pin bit flags).
 static int GetPinNumber(PinDef_t pinDef) 
 {
 	for (int i = 0; i < 8; i++) {
@@ -59,6 +63,10 @@ static int GetPinNumber(PinDef_t pinDef)
 	return 0;
 }
 
+//------------------------- GPIO_GetBitBandIOAddress( --------------------
+// Gets the bit-band IO address for a pin definition.
+// Inputs:  pinDef - pin definition
+// Outputs:  pointer with value of bit band address.
 volatile uint32_t* GPIO_GetBitBandIOAddress(PinDef_t pinDef)
 {	
 	const volatile uint32_t * baseAddress = GPIOBaseAddress[pinDef.port];
@@ -72,7 +80,10 @@ volatile uint32_t* GPIO_GetBitBandIOAddress(PinDef_t pinDef)
 }
 
 
-
+//------------------------- GPIO_InitPort ----------------------------
+// Initializes a GPIO port for IO usage.
+// Inputs:  port - the name of the port to initialize.
+// Outputs:  none.
 void GPIO_InitPort(PortName_t port)
 {
 	
@@ -88,7 +99,13 @@ void GPIO_InitPort(PortName_t port)
 	}
 }
 
-
+//------------------------- GPIO_EnableDO ----------------------------
+// Enables a set of pins on a GPIO port for digital output.
+// Inputs:  port - the name of the port to initialize.
+//	        pinMap - a map of pins to enable.
+//          drive - the output drive strength to configure
+//          pull - the internal pull-up resistor type to configure.
+// Outputs:  none.
 void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive, DI_Pull_t pull)
 {
 		
@@ -147,6 +164,12 @@ void GPIO_EnableDO(PortName_t port, uint8_t pinMap, DO_Drive_t drive, DI_Pull_t 
 	
 }
 
+//------------------------- GPIO_EnableDI ----------------------------
+// Enables a set of pins on a GPIO port for digital input.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+//          pull - the internal pull-up resistor type to configure.
+// Outputs:  none.
 void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull)
 {
 	
@@ -190,6 +213,12 @@ void GPIO_EnableDI(PortName_t port, uint8_t pinMap, DI_Pull_t pull)
 	
 }
 
+//------------------------- GPIO_EnableAltDigital --------------------
+// Enables a set of pins on a GPIO port for an alternate digital function.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+//          ctl - the alternate digital function id (see datasheet).
+// Outputs:  none.
 void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl)
 {
 	GPIO_InitPort(port);
@@ -216,7 +245,11 @@ void GPIO_EnableAltDigital(PortName_t port, uint8_t pinMap, uint8_t ctl)
 
 }
 
-
+//------------------------- GPIO_EnableAltAnalog --------------------
+// Enables a set of pins on a GPIO port for analog usage.
+// Inputs:  port - the name of the port to enable.
+//	        pinMap - a map of pins to enable.
+// Outputs:  none.
 void GPIO_EnableAltAnalog(PortName_t port, uint8_t pinMap)
 {
 	GPIO_InitPort(port);

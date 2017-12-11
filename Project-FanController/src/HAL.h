@@ -9,7 +9,7 @@
 
 #include <stdint.h>
 
-// These are service layer names for the HW ports.
+// Names for the IO ports.
 typedef enum { 
 	PORTA = 0, 
 	PORTB = 1, 
@@ -19,7 +19,8 @@ typedef enum {
 	PORTF = 5
 } PortName_t;	
 
-// These are service layer names for the HW pins.
+// Names for the IO pins.  These are also bit flags and can
+//	OR'd together for pin maps.
 typedef enum { 
 	PIN0 = 0x01,
 	PIN1 = 0x02,
@@ -31,22 +32,16 @@ typedef enum {
 	PIN7 = 0x80
 } PinName_t;	
 
+// This is an abstract defintion for a port/pin combination.
 typedef struct {
 	PortName_t		port;
 	PinName_t			pin;
 }	PinDef_t;
 
+// Convenience macro to initialize a PinDef_t instance.
 #define	PINDEF(port, pin)		((PinDef_t){ port, pin })
 
-#define PIN_0		0x01
-#define PIN_1		0x02
-#define PIN_2		0x04
-#define PIN_3		0x08
-#define PIN_4		0x10
-#define PIN_5		0x20
-#define PIN_6		0x40
-#define PIN_7		0x80
-
+// Include the other HAL modules.
 #include "HAL_PLL.h"
 #include "HAL_SysTick.h"
 #include "HAL_UART.h"
@@ -55,6 +50,7 @@ typedef struct {
 #include "HAL_PWM.h"
 #include "HAL_Timer.h"
 #include "HAL_SPI.h"
+#include "HAL_Flash.h"
 
 #endif
 

@@ -8,6 +8,7 @@
 #include "HAL.h"
 #include "tm4c123gh6pm.h"
 
+// These are the base IO addresses of the UART modules.
 #define UART0_REG_BASE 	((volatile uint32_t *)0x4000C000)
 #define UART1_REG_BASE	((volatile uint32_t *)0x4000D000)
 #define UART2_REG_BASE	((volatile uint32_t *)0x4000E000)
@@ -17,7 +18,9 @@
 #define UART6_REG_BASE	((volatile uint32_t *)0x40012000)
 #define UART7_REG_BASE	((volatile uint32_t *)0x40013000)
 
-
+// This structure represents the registers associated with a UART module.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
 typedef struct {     
 	uint32_t  DR;  
 	uint32_t  RSR_ECR_;
@@ -44,7 +47,7 @@ typedef struct {
 	uint32_t  CC; 
 } UARTRegs_t;
 
-
+// This array is a look table to resolve the UART module name to its base address.
 const volatile uint32_t * UARTBaseAddress[] = {
 	UART0_REG_BASE,
 	UART1_REG_BASE,
@@ -56,15 +59,23 @@ const volatile uint32_t * UARTBaseAddress[] = {
 	UART7_REG_BASE
 };
 
+// This holds the function pointer to the callback functions invoked in the Rx interrupt handler.
+//	(currently this is associated with UART5).
 PFN_RxCallback Rx_Callback;
 
-
+//------------------------- UART_Enable --------------------------
+// Enables the specified UART for 8,N,1 and the specified baud rate.
+// Inputs:  uartId - the ID of the uart.
+//          baud - baud rate to configure, e.g 9600, 18200, etc.
+// Outputs:  none.
 int UART_Enable(UART_ID_t uartId, uint32_t baud)
 {
+	
 	uint32_t baudRateDivisor;
+	uint32_t busClockFreq = PLL_GetBusClockFreq();
 	
 	// FAIL if bus clock not initialized.
-	if (BusClockFreq == 0) {
+	if (PLL_GetBusClockFreq() == 0) {
 		return -1;
 	}
 	
@@ -95,8 +106,8 @@ int UART_Enable(UART_ID_t uartId, uint32_t baud)
 	//  Fraction Part (6 bits) = Floor((0.83333 * 64) + 0.5) = Floor(53.83312) = 53 = 0x35
 	//
 	baudRateDivisor = (16*baud);
-	uart->IBRD = (BusClockFreq / baudRateDivisor); // 0x208; 
-	uart->FBRD = (((BusClockFreq % baudRateDivisor) * 64) / baudRateDivisor) + 0.5; //  0x35;
+	uart->IBRD = (busClockFreq / baudRateDivisor); // 0x208; 
+	uart->FBRD = (((busClockFreq % baudRateDivisor) * 64) / baudRateDivisor) + 0.5; //  0x35;
 	
 	
 	// Use the system clock for the clock source.
@@ -113,7 +124,7 @@ int UART_Enable(UART_ID_t uartId, uint32_t baud)
 		
 		case UART5:
 			// Rx=PE4, Tx=PE5
-			GPIO_EnableAltDigital(PORTE, PIN_4 | PIN_5, 0x1);
+			GPIO_EnableAltDigital(PORTE, PIN4 | PIN5, 0x1);
 			break;
 		
 		default:
@@ -125,6 +136,11 @@ int UART_Enable(UART_ID_t uartId, uint32_t baud)
 	return 0;
 }
 
+//------------------------- UART_WriteChar-------------------------
+// Write a character to a UART.
+// Inputs:  uartId - the ID of the uart.
+//          c - character to write.
+// Outputs:  none.
 void UART_WriteChar(UART_ID_t uartId, char c)
 {
 	volatile UARTRegs_t* uart = (volatile UARTRegs_t*)UARTBaseAddress[uartId];
@@ -137,6 +153,11 @@ void UART_WriteChar(UART_ID_t uartId, char c)
 
 }
 
+//------------------------- UART_WriteString -----------------------
+// Writes a null terminated string to a UART.
+// Inputs:  uartId - the ID of the uart.
+//          sz - null terminated string to write.
+// Outputs:  none.
 void UART_WriteString(UART_ID_t uartId, char* sz)
 {
 	// Transmit each string character until the trailing null is found.
@@ -145,7 +166,11 @@ void UART_WriteString(UART_ID_t uartId, char* sz)
 	}
 }
 
-
+//------------------------- UART_ReadChar ---------------------------
+// Reads a character from a UART.  The function blocks until a character
+//	is received.
+// Inputs:  uartId - the ID of the uart.
+// Outputs:  none.
 char UART_ReadChar(UART_ID_t uartId)
 {
 	volatile UARTRegs_t* uart = (volatile UARTRegs_t*)UARTBaseAddress[uartId];
@@ -158,7 +183,14 @@ char UART_ReadChar(UART_ID_t uartId)
 	return uart->DR;
 }
 
-
+//---------------------- UART_EnableRxInterrupt ----------------------
+// Enables a receive (Rx) interrupt for the given UART.  The callback
+//	function is invoked whenever a character is received and an interrupt
+//	occurs.
+// Inputs:  uartId - the ID of the UART.
+//          priority - interrupt priority (0-7) (see datasheet).
+//          callback - the callback function to invoke.
+// Outputs:  none.
 int UART_EnableRxInterrupt(UART_ID_t uartId, uint8_t priority, PFN_RxCallback callback)
 {
 	volatile UARTRegs_t* uart = (volatile UARTRegs_t*)UARTBaseAddress[uartId];
@@ -196,6 +228,7 @@ int UART_EnableRxInterrupt(UART_ID_t uartId, uint8_t priority, PFN_RxCallback ca
 	return 0;
 }	
 
+// This is the interrupt handler for UART5.  Must be configured in the IRQ vector table.
 void UART5Handler(void)
 {
 	volatile int readback;

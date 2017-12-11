@@ -8,24 +8,29 @@
 #include "tm4c123gh6pm.h"
 #include "HAL.h"
 
-
 // Stores the number of ticks in 10ms based on the bus clock frequency.
+//	Calculated inside SysTick_Init.
 static uint32_t NumTicksPer10ms;
 static uint32_t NumTicksPer10us;
 
+//----------------------- SysTick_Init --------------------------
+// Initializes the SysTick bus clock timer.
+// Inputs:  none.
+// Outputs:  none.
 int SysTick_Init(void)
 {
+	uint32_t busClockFreq = PLL_GetBusClockFreq();
 	
 	// Return failure if the PLL hasn't been initialized.
-	if (BusClockFreq == 0) {
+	if (busClockFreq == 0) {
 		return -1;
 	}
 	
 	// Establish the number of ticks in 10ms for later use...
-	NumTicksPer10ms = BusClockFreq * 0.01;
+	NumTicksPer10ms = busClockFreq * 0.01;
 
 	// Establish the number of ticks in 10us for later use...
-	NumTicksPer10us = BusClockFreq * 0.00001;
+	NumTicksPer10us = busClockFreq * 0.00001;
 
 	// 1) Disable SysTick during initialization.
 	NVIC_ST_CTRL_R = 0;
@@ -43,6 +48,10 @@ int SysTick_Init(void)
 	return 0;
 }
 
+//----------------------- SysTick_Wait --------------------------
+// Waits (blocks) for a given number of bus cycles.
+// Inputs:  delay - the number of bus cycles to wait.
+// Outputs:  none.
 void SysTick_Wait(uint32_t delay)
 {
 	// Delay in number of bus cycle period units
@@ -57,6 +66,10 @@ void SysTick_Wait(uint32_t delay)
 	
 }
 
+//---------------------- SysTick_Wait10ms--------------------------
+// Waits (blocks) for a given number of 10 millisecond intervals.
+// Inputs:  delay - the number of 10ms intervals to wait.
+// Outputs:  none.
 void SysTick_Wait10ms(uint32_t delay)
 {
 	uint32_t i;
@@ -65,6 +78,10 @@ void SysTick_Wait10ms(uint32_t delay)
 	}
 }
 
+//---------------------- SysTick_Wait10us--------------------------
+// Waits (blocks) for a given number of 10 microsecond intervals.
+// Inputs:  delay - the number of 10us intervals to wait.
+// Outputs:  none.
 void SysTick_Wait10us(uint32_t delay)
 {
 	uint32_t i;
