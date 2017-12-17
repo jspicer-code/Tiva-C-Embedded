@@ -9,14 +9,16 @@ Users can configure the system for linear thermal control by setting lower and u
 
 This project evolved from the 12 prior experiments and contains some or all of the features from each.
 
+[![](http://img.youtube.com/vi/YEEtr2Ipl0c/3.jpg)](https://youtu.be/YEEtr2Ipl0c)<br>
+[Watch the video](https://youtu.be/YEEtr2Ipl0c)
+
+### Images
 ![FAN-C](picture1.png)
 
 ![FAN-C](picture2.png)
 
 ![FAN-C](FanController-circuit.png)
 
-[![](http://img.youtube.com/vi/YEEtr2Ipl0c/3.jpg)](https://youtu.be/YEEtr2Ipl0c)<br>
-[Watch the video](https://youtu.be/YEEtr2Ipl0c)
 
 
   
