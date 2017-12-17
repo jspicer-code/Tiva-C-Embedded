@@ -11,7 +11,7 @@ This project evolved from the 12 prior experiments and contains some or all of t
 
 ![FAN-C](picture1.png)
 
-![FAN-C](picture2.png=612x816)
+![FAN-C](picture2.png =612x816)
 
 ![FAN-C](FanController-circuit.png)
 
