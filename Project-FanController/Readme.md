@@ -9,9 +9,9 @@ Users can configure the system for linear thermal control by setting lower and u
 
 This project evolved from the 12 prior experiments and contains some or all of the features from each.
 
-![FAN-C](picture1.JPG)
+![FAN-C](picture1.png)
 
-![FAN-C](picture2.JPG)
+![FAN-C](picture2.png)
 
 ![FAN-C](FanController-circuit.png)
 
