@@ -1,0 +1,2100 @@
+[Main]
+FileType=CIR
+Version=11.00
+Program=Micro-Cap
+Component Version=10.00
+Shape Version=11.00
+Screen=1536,864
+MCAPVersion=11.0.0.3
+Key ID=Demo
+NLCnt=84
+TXCnt=69
+
+[shapedef]
+Name=Animated SPDT Switch
+Animated SPDT Switch=0,0,48,16
+Current=0,24,16,24
+Current=0,-8,16,-8
+Current=32,0,48,0
+
+[shapedef]
+Name=Fixed
+Line=8,0,32,0
+Line=8,0,0,-8
+Line=8,0,0,8
+
+[shapedef]
+Name=Ground
+Line=0,0,12,0
+Line=12,-8,12,8
+Line=18,-4,18,4
+Line=24,0,24,0
+
+[shapedef]
+Name=Input
+PolyClosed=5
+PolyLine=8,0
+PolyLine=16,-8
+PolyLine=48,-8
+PolyLine=48,8
+PolyLine=16,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=Output
+PolyClosed=5
+PolyLine=48,0
+PolyLine=40,-8
+PolyLine=8,-8
+PolyLine=8,8
+PolyLine=40,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=Pot
+Line=0,0,12,0
+Line=12,0,14,-4
+Line=14,-4,18,4
+Line=18,4,22,-4
+Line=22,-4,26,4
+Line=26,4,30,-4
+Line=30,-4,34,4
+Line=34,4,36,0
+Line=36,0,48,0
+PolyClosed=4
+PolyLine=24,4
+PolyLine=24,4
+PolyLine=22,8
+PolyLine=26,8
+Line=24,8,24,16
+
+[compdef]
+Name=Output Port
+Definition=NULL
+Shape=Output
+Mask=4096
+Used=45
+memo=Output Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Input Port
+Definition=NULL
+Shape=Input
+Mask=4096
+Used=58
+memo=Input Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Ground
+Definition=Ground
+Shape=Ground
+Mask=257
+Used=170
+memo=Ground
+Label Offset=0,0,0,0
+PinCnt=1
+Pin="PinA",0,0,-3,-7
+
+[compdef]
+Name=Fixed Analog
+Definition=ANALOG STATE
+Shape=Fixed
+Mask=3840
+Used=67
+memo=Provides a fixed DC voltage
+Label Offset=-14,-7,-6,-27
+PinCnt=1
+Pin="Out",4,0,-8,-3
+
+[compdef]
+Name=Pot
+Definition=Macro
+Shape=Pot
+Mask=4096
+Used=3
+memo=Potentiometer Macro
+Label Offset=32,4,9,11
+PinCnt=3
+Pin="PINA",a,0,0,-13,-5
+Pin="PINB",a,3,2,6,5
+Pin="PINC",a,6,0,-12,-5
+
+[compdef]
+Name=Animated SPDT Switch
+Definition=ANIMATED SPDT SWITCH
+Shape=Animated SPDT Switch
+Mask=4608
+Used=1
+memo=Animated Single Pole, Double Throw Switch
+Label Offset=1,22,11,7
+PinCnt=3
+Pin="A",0,0,4,0
+Pin="B",0,2,3,10
+Pin="C",6,1,-6,-1
+
+[Circuit]
+Window Placement=2,3, -1,-1, -8,-31, 78,78,1150,474
+Default Object=Color=#000080
+Default Object Font=Height=-15,FStyle=0,Color=#000080,Name=Arial
+Default Object Apply Border To Text=No
+Default Object Apply Fill To Text=No
+NodeVoltageFormat=3
+PathDelayFormat=3
+WarningFormat=3
+GridTextFormulaFormat=3
+SpiceType=AMBIGUOUS
+Title_Block_Border=None
+Title_Block=False
+Show Nodes=False
+Show Voltages=False
+Show Current=False
+Show Power=False
+Show Condition=False
+Show Pin Connections=False
+Show Connection Warnings=False
+Show Cross=False
+Show Attribute Text=True
+Show Grid Text=True
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=71,86,206,724
+
+[Comp]
+Name=Output Port
+Px=208,240
+Rot=4
+
+[Attr]
+ON=53,-9,PART
+V=DB1_4
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,264
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=DB1_5
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,288
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=DB1_6
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=DB1_
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,632
+Rot=4
+
+[Attr]
+ON=54,-7,PART
+V=SW_UP
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=THERM
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,608
+Rot=4
+
+[Attr]
+ON=55,-9,PART
+V=SW_CENTER
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,656
+Rot=4
+
+[Attr]
+ON=56,-6,PART
+V=SW_DOWN
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_CTRL_MANUAL
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,680
+Rot=4
+
+[Attr]
+ON=56,-3,PART
+V=SW_LEFT
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,312
+Rot=4
+
+[Attr]
+ON=53,-9,PART
+V=DB1_7
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,336
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=RS1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,360
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=RW1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,384
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=E1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,424
+Rot=4
+
+[Attr]
+ON=53,-9,PART
+V=DB2_4
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,448
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=DB2_5
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,472
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=DB2_6
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=DB1_
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,496
+Rot=4
+
+[Attr]
+ON=53,-9,PART
+V=DB2_7
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,520
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=RS2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,544
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=RW2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,568
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=E2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=208,112
+Rot=4
+
+[Attr]
+ON=52,-5,PART
+V=Hearbeat LED (green onboard)
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,160
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=Marquee Scroll (SW2 onboard)
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=THERM
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,136
+Rot=4
+
+[Attr]
+ON=53,-5,PART
+V=Reset Content (SW1 onboard)
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,200
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_DISPLAY
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=THERM
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=208,704
+Rot=4
+
+[Attr]
+ON=56,-3,PART
+V=SW_RIGHT
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=651,101,796,430
+
+[Comp]
+Name=Input Port
+Px=648,288
+Rot=6
+
+[Attr]
+ON=-86,-4,PART
+V=DB1_4
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,240
+Rot=6
+
+[Attr]
+ON=-81,-5,PART
+V=E1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=E1
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,216
+Rot=6
+
+[Attr]
+ON=-81,-6,PART
+V=RW1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=RW1
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,192
+Rot=6
+
+[Attr]
+ON=-81,-6,PART
+V=RS1
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,360
+Rot=6
+
+[Attr]
+ON=-86,-6,PART
+V=DB1_7
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_CTRL_MANUAL
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,336
+Rot=6
+
+[Attr]
+ON=-86,-4,PART
+V=DB1_6
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=648,312
+Rot=6
+
+[Attr]
+ON=-86,-5,PART
+V=DB1_5
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=616,120,624,120
+
+[Comp]
+Name=Ground
+Px=624,120
+Rot=1
+
+[Wire]
+Pxs=624,120,656,120
+
+[Comp]
+Name=Fixed Analog
+Px=528,120
+Rot=4
+
+[Attr]
+ON=-14,-5,PART
+V=V1
+
+[Attr]
+ON=-14,-17,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Pot
+Px=568,120
+
+[Attr]
+ON=32,4,PART
+V=X1
+
+[Attr]
+ON=32,16,FILE
+V=Pot
+
+[Attr]
+ON=13,-20,Param:POTSIZE
+V=10K
+Style=8192
+
+[Attr]
+ON=32,52,Param:PERCENT
+V=50
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=560,120,568,120
+
+[Wire]
+Pxs=592,168,656,168
+
+[Wire]
+Pxs=592,136,592,168
+
+[Wire]
+Pxs=560,120,560,152
+
+[Wire]
+Pxs=560,152,656,152
+
+[Comp]
+Name=Fixed Analog
+Px=528,384
+Rot=4
+
+[Attr]
+ON=-14,-5,PART
+V=V2
+
+[Attr]
+ON=-14,-17,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=560,384,648,384
+
+[Comp]
+Name=Ground
+Px=624,416
+Rot=1
+
+[Wire]
+Pxs=624,408,624,416
+
+[Wire]
+Pxs=624,408,648,408
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=982,106,1127,435
+
+[Comp]
+Name=Input Port
+Px=984,288
+Rot=6
+
+[Attr]
+ON=-86,-4,PART
+V=DB2_4
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,240
+Rot=6
+
+[Attr]
+ON=-81,-5,PART
+V=E2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=E1
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,216
+Rot=6
+
+[Attr]
+ON=-81,-6,PART
+V=RW2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=RW1
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,192
+Rot=6
+
+[Attr]
+ON=-81,-6,PART
+V=RS2
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,360
+Rot=6
+
+[Attr]
+ON=-86,-6,PART
+V=DB2_7
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_CTRL_MANUAL
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,336
+Rot=6
+
+[Attr]
+ON=-86,-4,PART
+V=DB2_6
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=984,312
+Rot=6
+
+[Attr]
+ON=-86,-5,PART
+V=DB2_5
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=944,120,952,120
+
+[Comp]
+Name=Ground
+Px=952,120
+Rot=1
+
+[Wire]
+Pxs=952,120,984,120
+
+[Comp]
+Name=Fixed Analog
+Px=856,120
+Rot=4
+
+[Attr]
+ON=-14,-5,PART
+V=V3
+
+[Attr]
+ON=-14,-17,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Pot
+Px=896,120
+
+[Attr]
+ON=32,4,PART
+V=X2
+
+[Attr]
+ON=32,16,FILE
+V=Pot
+
+[Attr]
+ON=13,-20,Param:POTSIZE
+V=10K
+Style=8192
+
+[Attr]
+ON=32,52,Param:PERCENT
+V=50
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=888,120,896,120
+
+[Wire]
+Pxs=920,168,984,168
+
+[Wire]
+Pxs=920,136,920,168
+
+[Wire]
+Pxs=888,120,888,152
+
+[Wire]
+Pxs=888,152,984,152
+
+[Comp]
+Name=Animated SPDT Switch
+Px=696,624
+Rot=2
+
+[Attr]
+ON=-56,14,PART
+V=Display Input
+Style=8192
+
+[Attr]
+ON=-15,-46,STATE
+V=Down
+
+[Attr]
+ON=-16,-58,RON
+V=1m
+
+[Attr]
+ON=-25,-70,ROFF
+V=1e15
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=592,616
+Rot=4
+
+[Attr]
+ON=-70,-6,PART
+V=SW_DISPLAY
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=640,616,648,616
+
+[Comp]
+Name=Fixed Analog
+Px=736,576
+Rot=7
+
+[Attr]
+ON=-8,-27,PART
+V=V4
+
+[Attr]
+ON=-8,-15,VALUE
+V=3.3V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=696,608,736,608
+
+[Comp]
+Name=Ground
+Px=736,632
+Rot=1
+
+[Wire]
+Pxs=696,624,736,624
+
+[Wire]
+Pxs=736,624,736,632
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=976,564,1101,704
+
+[Comp]
+Name=Output Port
+Px=976,592
+Rot=2
+
+[Attr]
+ON=-122,-5,PART
+V=SW_CENTER
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=976,616
+Rot=2
+
+[Attr]
+ON=-91,-4,PART
+V=SW_UP
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=976,640
+Rot=2
+
+[Attr]
+ON=-109,-4,PART
+V=SW_DOWN
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=DB1_
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=976,664
+Rot=2
+
+[Attr]
+ON=-104,-5,PART
+V=SW_LEFT
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=976,688
+Rot=2
+
+[Attr]
+ON=-108,-3,PART
+V=SW_RIGHT
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Fixed Analog
+Px=1136,560
+Rot=7
+
+[Attr]
+ON=-8,-27,PART
+V=V5
+
+[Attr]
+ON=-8,-15,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=1104,592,1136,592
+
+[Comp]
+Name=Ground
+Px=1136,624
+Rot=1
+
+[Wire]
+Pxs=1136,616,1136,624
+
+[Wire]
+Pxs=1104,616,1136,616
+
+[Grid Text]
+Text="Experiment 14 - LCD"
+Px=488,40
+Height=-26
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="1"
+Px=696,624
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="2"
+Px=696,608
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="NC"
+Px=632,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="TM4C123GH6PM"
+Px=104,744
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA6"
+Px=176,296
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE5"
+Px=176,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE4"
+Px=176,248
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PD1"
+Px=176,368
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PD0"
+Px=176,344
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA7"
+Px=176,320
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PD2"
+Px=176,392
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE2"
+Px=176,480
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE1"
+Px=176,456
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB5"
+Px=176,432
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA3"
+Px=176,552
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA2"
+Px=176,528
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE3"
+Px=176,504
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA4"
+Px=176,576
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PF3"
+Px=176,120
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PF4"
+Px=176,144
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PF0"
+Px=176,168
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE0"
+Px=176,208
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB0"
+Px=176,616
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB4"
+Px=176,688
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PD3"
+Px=176,664
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB1"
+Px=176,640
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA5"
+Px=176,712
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="RW"
+Px=664,224
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VDD"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub DD\nosupersub\par"
+RTF="}"
+Px=664,152
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VO"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq12\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub O\nosupersub\par"
+RTF="}"
+Px=664,176
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="RS"
+Px=664,200
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VSS"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub SS\nosupersub\par"
+RTF="}"
+Px=664,128
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB0-DB3"
+Px=664,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB4"
+Px=664,296
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB5"
+Px=664,320
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="E"
+Px=664,248
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB6"
+Px=664,344
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB7"
+Px=664,368
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="A"
+Px=664,392
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="K"
+Px=664,416
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Techstar TS1620A-21/B (16x2)"
+Px=648,456
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Display 1 (Left)"
+Px=680,96
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="NC"
+Px=960,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="RW"
+Px=992,224
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VDD1"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\f0\fs18 V\sub DD1\nosupersub\par"
+RTF="}"
+Px=992,152
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VO1"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq12\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\f0\fs18 V\sub O1\nosupersub\par"
+RTF="}"
+Px=992,176
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="RS"
+Px=992,200
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VSS1"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\f0\fs18 V\sub SS1\nosupersub\par"
+RTF="}"
+Px=992,128
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB0-DB4"
+Px=992,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB4"
+Px=992,296
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB5"
+Px=992,320
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="E"
+Px=992,248
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB6"
+Px=992,344
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DB7"
+Px=992,368
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="A1"
+Px=992,392
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="K1"
+Px=992,416
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Lumex LCM-X01601DSR (16x1)"
+Px=976,456
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Display 2 (Right)"
+Px=1016,96
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="NC"
+Px=960,392
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="NC"
+Px=960,416
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="CTR"
+Px=984,600
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="LT"
+Px=984,672
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="DN"
+Px=984,648
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="UP"
+Px=984,624
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="RT"
+Px=984,696
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="VCC"
+Px=1072,600
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="GND"
+Px=1072,624
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Parallax 5-Position #27801"
+Px=976,728
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Schematic]
+CurrentSection 0=0
+CurrentSection 1=0
+CurrentSection 2=0
+CurrentSection 3=0
+Splitter.xs=0
+Splitter.ys=0
+TextQuad=4099
+Scale=1
+GridUser=10
+ShapeGroups="Main","Euro","Polarity","Electrolytic","GroundArrow","DeMorgan"
+CalcRMS=False
+CalcAVG=False
+CalcPeak=False
+CalcVoltage=True
+DisplayMeasure=Last
+ShareScales=True
+
+[Tools]
+Pos=Top
+FILESAVEASOLD=No
+BOM=No
+FILEPCB=No
+PROBE=Yes
+SELECT=Yes
+COMP=Yes
+TEXT=Yes
+WIRE=Yes
+WIRED=Yes
+BUS=Yes
+GRAPHIC=Yes
+LINE=No
+ELLIPSE=No
+RECT=No
+DIAM=No
+ARC=No
+PIE=No
+LEFTBRK=No
+RIGHTBRK=No
+BOTHBRK=No
+META=No
+FLAG=Yes
+INFO=Yes
+HELP=Yes
+HELP_SPICE=No
+LINK=Yes
+REGION_ENABLE=Yes
+TITLE_BLOCK=Yes
+DIGTRC=No
+DIGTRC2=No
+BUILD_COMMAND=Yes
+DIGALL=No
+GRIDTEXT=Yes
+COMPTEXT=Yes
+NODE=Yes
+MEASURED=Yes
+NODEV=Yes
+CURRENT=Yes
+POWER=Yes
+CONDITIN=Yes
+PIN=Yes
+CONNWARN=Yes
+CROSS=No
+GRID=Yes
+BORDER=Yes
+BORDERONE=Yes
+TITLE=Yes
+RUBBER=Yes
+PROPERTY=Yes
+STEP=Yes
+MIRROR=Yes
+ROTATE=Yes
+FLIPY=Yes
+FLIPX=Yes
+CIR_MAKEMACRO=No
+CLEARCUTWIRE=No
+CLIPBOARDCIRPAGE2BMM=No
+FINDCOMP=Yes
+FIND=Yes
+REPEAT=No
+REPLACE=No
+MODEL=Yes
+CIR2CKT=No
+ATTDISP=No
+ENABLE=Yes
+DISABLE=Yes
+TOFRONT=Yes
+TOBACK=Yes
+SELNEXT=No
+PAGEADD=No
+PAGEADDTEXT=No
+ADDSECTION=No
+PAGEDEL=No
+ZOOMIN=Yes
+ZOOMOUT=Yes
+AUTOSCALECIR=Yes
+GOTOFLAG=No
+UPLEVEL=Yes
+COLOR=Yes
+FONT=Yes
+DM_LAST=No
+DM_RMS=No
+DM_AVG=No
+DM_PEAK=No
+GRID_NONE=No
+GRID_NORMAL=No
+GRID_BOLD_5=No
+GRID_BOLD_6=No
+GRID_BOLD_USER=No
+GRAPH_PAPER=No
+SPLITCIRTEXTH=No
+SPLITCIRTEXTV=No
+SPACE_SPLITTERS_EVENLY=No
+NORMALCIR=No
+RENAMEDEFINE=No
+RENAMECMP=No
+ATTALIGN=No
+RESETNODEPOS=No
+FIT2STANDARD=No
+NODESNAP=No
+MOVETEXT=No
+TEXTINC=No
+TOGGLETEXT=No
+TOGGLEMODE=No
+TOLERANCE=No
+ALIGNLEFT=No
+ALIGNRIGHT=No
+ALIGNTOP=No
+ALIGNBOTTOM=No
+
+[Section]
+Index=0
+Name="Experiment14-LCD"
+Type=Main
+Enable=True
+CurrentPage 0=0
+CurrentPage 1=0
+CurrentPage 2=0
+CurrentPage 3=0
+TabSize 0=425
+TabSize 1=425
+TabSize 2=425
+TabSize 3=425
+
+[Page]
+Index=0
+Section=0
+Print=True
+Enable=True
+Name=Main
+PrinterScale=1
+Scale 0=1
+Scale 1=1
+Scale 2=1
+SB 3=0,85
+Scale 3=1
+Px=7,325
+WinBackGround Color=#FFFFFF
+Select Color=#FF0000
+Anchor Color=#000000
+Select Box Color=#000080
+Grid Text Color=Height=-12,FStyle=0,Color=#0000FF,Name=Verdana
+Grid Text RTF=False
+Grid Text Angle=0
+Grid Text GridSnap=True
+Grid Text PinIt=False
+Grid Text JustifyH=Left
+Grid Text JustifyV=Bottom
+Component Color=#0000FF
+Attribute Text=Height=-12,FStyle=0,Color=#008000,Name=Verdana
+Wire Color=#008000
+Bus Color=#008000
+Pin Connection=Height=-10,FStyle=0,Color=#FF0000,Name=Arial
+Pin Marker Color=#008000
+Node Number=Height=-11,FStyle=0,Color=#FF00FF,Name=Arial
+Node Voltage Color=Height=-11,FStyle=0,Color=#000000,Name=Arial
+Dynamic AC Voltage Color=#E4E4E4
+Text Banner Text=Height=-15,FStyle=0,Color=#800000,Name=Arial
+Title Block Background=#C0C0C0
+Current=Height=-11,FStyle=0,Color=#0000FF,Name=Arial
+Power/Condition=Height=-11,FStyle=0,Color=#FF0000,Name=Arial
+Digital Path Color=#FF0000
+Title Block Border=#000000
+Disabled	Color=#C0C0C0
+Search Color=#FFFF00
+Grid Color=#000000
+Graph Paper=#E4E4E4
+Digital 0 Color=#000000
+Digital R Color=#FFFF00
+Digital F Color=#FFFF00
+Digital 1 Color=#FF0000
+Digital X Color=#C0C0C0
+Digital Z Color=#808080
+Block Select Color=#51F998
+
+[Page]
+Index=1
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Text
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=2
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Models
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=3
+Section=0
+Type=Info
+Print=False
+Enable=True
+Name=Info
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Text Area]
+Section=0
+Page=1
+
+[Text Area]
+Section=0
+Page=2
+
+[InfoPage]
+InfoPage=True
+Warnings=True
+System=True
+Defines=True
+Array=True
+Model=True
+Measure=True
+MacroSubckt=True
+NotUsed=True
+ComponentCounts=True
+
+[Limits]
+Analysis=DynamicAC
+FirstValueDisplay=Mag
+SecondValueDisplay=PhaseDeg
+PlaceText=True
+
+[Limits]
+Analysis=DynamicDC
+PlaceText=True
+
+[Pane]
+Analysis=Transient
+
+[Pane]
+Analysis=AC
+
+[Pane]
+Analysis=DC
+
+[Pane]
+Analysis=HmDistortion
+
+[Pane]
+Analysis=ImDistortion
+
+[Pane]
+Analysis=Stability
+
+[WCTolerance]
+Var Width=100
+Nominal Width=72
+Tol Width=152
+
+[OPMethods]
+Analysis=Transient
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=AC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=DC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=Stability
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
