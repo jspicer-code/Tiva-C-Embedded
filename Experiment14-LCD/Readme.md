@@ -12,4 +12,6 @@ The LCD driver is split into lower (raw) and higher level components.  The raw d
 [![](https://i.ytimg.com/vi/5TJ8u1CpPAs/default.jpg)](https://youtu.be/5TJ8u1CpPAs)<br>
 [Watch the video](https://youtu.be/5TJ8u1CpPAs)
 
-  
+
+### Images
+![Experiment14-LCD](Experiment14-LCD-circuit.png)  
