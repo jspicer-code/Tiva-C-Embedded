@@ -1,20 +1,34 @@
-# EEE4243 Embedded Systems
+# Tiva C Series ARM development
 
-This repository contains projects and experiments for the EEE4243 Embedded Systems course.
+This repository contains projects and experiments developed for the EK-TM4C123GXL ARM evaluation board.
 
-# Final Project
-The project is a fan controller system.  It features PWM speed control, a numeric display, and a serial console to the PC. The PWM speed control interfaces with standard 4-wire PWM fans.  It supports thermal and manual control modes and RPM measurement of the fan's tachometer signal.  The display shows the fan speed (0-100), RPM, or current temperature, and the serial console interface provides a menu-driven UI for configuring the temperature control settings.
+# Projects
+
+## Fan Controller
+This project is a fan controller system.  It features PWM speed control, a numeric display, and a serial console to the PC. The PWM speed control interfaces with standard 4-wire PWM fans.  It supports thermal and manual control modes and RPM measurement of the fan's tachometer signal.  The display shows the fan speed (0-100), RPM, or current temperature, and the serial console interface provides a menu-driven UI for configuring the temperature control settings.
 
 Hardware features used on the Tiva TM4C123 board include GPIO, ADC, PWM, SPI, Timers, UART, PLL, SysTick, and Flash storage.   The firmware was written in C using Keil Microvision and uses direct register access to control the hardware.
 
 Users can configure the system for linear thermal control by setting lower and upper temperature limits.  When the environment temperature reaches the lower limit, the fan will turn on at the slowest speed and increase linearly up to the maximum speed, proportional to the higher temperature limit.  Above the high limit the fan will run at full speed.   Thermostatic control can be configured by setting the low and high temperature limits the same, which turns the fan on at full speed when the temperature is the same or above the limit.
 
-This project evolved from the 12 prior experiments and contains some or all of the features from each.
+This project evolved from experiments 1-13 and contains some or all of the features from each.
 
 [![](http://img.youtube.com/vi/YEEtr2Ipl0c/3.jpg)](https://youtu.be/YEEtr2Ipl0c)<br>
 [Watch the video](https://youtu.be/YEEtr2Ipl0c)
 
 # Experiments
+
+## Experiment14-LCD
+This experiment uses the EK-TM4C123GXL to drive two LCD displays based on the Hitachi HD44780 controller spec.  One is a 16x2 display w/backlight (Techstar TS1620-21/B) and the other is a 16x1 reflective display (Lumex LCM-S01601DSR).  The TM4C123 is configured to use GPIO (digital) pins to transfer data to the displays using 4-bit data bus mode.
+
+A two-way switch on the breadboard controls which display receives the input (cursor) focus.  Cursor movement and character entry is controlled by an additional 5-position switch, which has directions for up, down, left, right, and center.  The cursor can be moved around via the up, down, left, and right positions.  Pressing the 5-position switch vertically downward (center position) causes the cursor to blink, and a new character can be selected by moving the switch in the other directions:  left/right traverses the alphabet and symbols, whereas up/down toggles between upper and lower case and a different set of symbols.  Pressing the center switch down again locks in the character. 
+
+Holding down the on-board switch, SW2, causes the both displays to side scroll together, like a single 32x2 marquee. 
+
+The LCD driver is split into lower (raw) and higher level components.  The raw driver handles communication with the HD44780 controller, and implements eight or so of its instruction codes, such as Function Set, Set DDRAM Address, Entry Mode Set, etc.  The higher level LCD driver has more abstract functions for writing text and moving the cursor around, and handles the differences between a 16x1 and 16x2 display, such as selecting DDRAM addresses.
+
+[![](https://i.ytimg.com/vi/5TJ8u1CpPAs/default.jpg)](https://youtu.be/5TJ8u1CpPAs)<br>
+[Watch the video](https://youtu.be/5TJ8u1CpPAs)
 
 ## Experiment13-Flash
 This experiment tests storing data in the TM4C123's Flash memory.  Pressing one of the on-board buttons cycles through eight different LED colors, and pressing the other on-board button stores the color selection into Flash memory.  When the device is reset, it loads the saved color from Flash and sets the LEDs to this color.
