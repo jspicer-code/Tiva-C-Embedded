@@ -1,6 +1,6 @@
 # Tiva C Series ARM development
 
-This repository contains projects and experiments for the Tiva C Series ARM development kits.
+This repository contains projects and experiments developed for the TM4C123G ARM evaluation board.
 
 # Projects
 
