@@ -505,16 +505,6 @@
               <FileType>5</FileType>
               <FilePath>.\utilities\Strings.h</FilePath>
             </File>
-            <File>
-              <FileName>Thermistor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\utilities\Thermistor.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thermistor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\utilities\Thermistor.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

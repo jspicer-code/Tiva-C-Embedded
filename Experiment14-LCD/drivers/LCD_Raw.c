@@ -4,7 +4,7 @@
 // Purpose: LCD driver for Hitachi HD44780 controller variants.
 // Hardware:  TM4C123 Tiva board
 //
-// Tested with:  	Lumex LCM-X01601DSR (16x1)
+// Tested with:  	Lumex LCM-S01601DSR  (16x1)
 //								Techstar TS1620A-21/B (16x2)		
 
 #include "LCD_Raw.h"

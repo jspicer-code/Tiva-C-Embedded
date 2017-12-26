@@ -2,10 +2,10 @@
 // Author: JSpicer
 // Date:  12/23/17
 // Purpose: Experiment to test out Hitachi HD44780 based LCDs.
-//					The program operates a 16x1 and 16x2 LCD simultaneously.
-//					A 5-position switch navigates the cursor and entry modes.
-//					A 2-position switch directs input to one display or the other.
-//					Holding down one of the onboard buttons creates a scrolling marquee effect.
+//          The program operates a 16x1 and 16x2 LCD simultaneously.
+//          A 5-position switch navigates the cursor and entry modes.
+//          A 2-position switch directs input to one display or the other.
+//          Holding down one of the onboard buttons creates a scrolling marquee effect.
 // Hardware:  TM4C123 Tiva board
 
 #include <HAL.h>
