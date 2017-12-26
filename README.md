@@ -1,4 +1,4 @@
-# EEE4243 Embedded Systems
+# Tiva C Series ARM development
 
 This repository contains projects and experiments for the Tiva C Series ARM development kits.
 
