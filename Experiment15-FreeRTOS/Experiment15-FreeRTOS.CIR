@@ -8,7 +8,7 @@ Screen=1536,864
 MCAPVersion=11.0.0.3
 Key ID=Demo
 NLCnt=59
-TXCnt=17
+TXCnt=19
 
 [shapedef]
 Name=a_dip16
@@ -543,6 +543,30 @@ Pxs=568,448,568,488
 Pxs=384,448,456,448
 
 [Grid Text]
+Text="P=V2/R => V = sqrt(0.1W * 8ohm) = 0.894V"
+Text="I = 0.894V/8ohm = 0.112A"
+Text="R = (5V - 0.894V)/0.112A = 36.7ohm ~ 39 ohm"
+RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Verdana;}}"
+RTF="{\colortbl ;\red0\green0\blue0;\red0\green0\blue255;}"
+RTF="\viewkind4\uc1\pard\cf1\f0\fs18 P=V\super 2\nosupersub /R => V = sqrt(0.1W * 8ohm) = 0.894V\line I = 0.894V/8ohm = 0.112A\line R = (5V - 0.894V)/0.112A = 36.7ohm ~ 39 ohm\cf2\par"
+RTF="}"
+Px=1064,304
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Experiment 15 - FreeRTOS"
+Px=608,32
+Height=-21
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
 Text="8 Ohm, 0.1W"
 Px=1120,224
 GridSnap=True
@@ -687,7 +711,7 @@ CurrentSection 3=0
 Splitter.xs=0
 Splitter.ys=0
 TextQuad=4099
-Scale=1.3333333333333333
+Scale=1
 GridUser=10
 ShapeGroups="Main","Euro","Polarity","Electrolytic","GroundArrow","DeMorgan"
 CalcRMS=False
@@ -811,7 +835,7 @@ ALIGNBOTTOM=No
 
 [Section]
 Index=0
-Name="drivers"
+Name="Experiment15-FreeRTOS"
 Type=Main
 Enable=True
 CurrentPage 0=0
@@ -833,8 +857,9 @@ PrinterScale=1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-Scale 3=1.3333333333333333
-Px=867,457
+SB 3=107,0
+Scale 3=1
+Px=690,40
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000
@@ -895,7 +920,6 @@ Type=Text
 Print=False
 Enable=True
 Name=Models
-SB 0=18,1
 Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
 Comment Color=#008000
 WinBackGround Color=#FFFFFF

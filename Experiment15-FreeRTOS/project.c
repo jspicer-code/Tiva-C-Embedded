@@ -2,7 +2,7 @@
 // Author: JSpicer
 // Date:  2/4/18
 // Purpose: Main project file.  This program experiments with FreeRTOS and 
-//	create periodic tasks to toggle LEDs and an aperiodic task to play
+//	creates periodic tasks to toggle LEDs and an aperiodic task to play
 //	a musical note sequence using PWM.
 // Hardware:  TM4C123 Tiva board
 
