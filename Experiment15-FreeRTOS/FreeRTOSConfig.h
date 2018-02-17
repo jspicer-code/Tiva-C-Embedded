@@ -81,6 +81,12 @@ to exclude the API function. */
 #define configKERNEL_INTERRUPT_PRIORITY 		255
 /* !!!! configMAX_SYSCALL_INTERRUPT_PRIORITY must not be set to zero !!!!
 See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
+
+// jspicer.  All interrupts must be given a logical priority less than or equal to 5 (i.e. 5,6 or 7).
+// If this isn't possible then configMAX_SYSCALL_INTERRUPT_PRIORITY could be raised, but not to zero
+// (see the #ifdef check in port.c).  This is because interrupts with priority 0 cannot be masked
+// by the BASEPRI register, which FreeRTOS uses for critical sections (which mask interrupts).
+// See https://www.freertos.org/RTOS-Cortex-M3-M4.html
 #define configMAX_SYSCALL_INTERRUPT_PRIORITY 	191 /* equivalent to 0xa0, or priority 5. */
 
 
