@@ -1,0 +1,16 @@
+--cpu=Cortex-M4.fp
+".\objects\startup_rvmdk.o"
+".\objects\main.o"
+".\objects\list.o"
+".\objects\queue.o"
+".\objects\tasks.o"
+".\objects\timers.o"
+".\objects\port.o"
+".\objects\heap_1.o"
+".\objects\hal_gpio.o"
+".\objects\hal_nvic.o"
+".\objects\hal_pll.o"
+".\objects\hal_uart.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\project.map" -o .\Objects\project.axf
