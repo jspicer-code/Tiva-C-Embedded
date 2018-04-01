@@ -1,0 +1,24 @@
+﻿Build started 4/1/2018 10:10:58 AM.
+     1>Project "C:\Users\jspicer\Desktop\Embedded Systems\GitHub\eee4243\Experiment16-PWM-Music\midifile\visual-studio\midifile.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D WIN32 /D _DEBUG /D _LIB /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"DebugLib\\" /Fd"DebugLib\midifile.pdb" /Gd /TP /analyze- /errorReport:prompt "..\src-library\Binasc.cpp" "..\src-library\MidiEvent.cpp" "..\src-library\MidiEventList.cpp" "..\src-library\MidiFile.cpp" "..\src-library\MidiMessage.cpp" "..\src-library\Options.cpp"
+         Options.cpp
+         MidiMessage.cpp
+         MidiFile.cpp
+         MidiEventList.cpp
+         MidiEvent.cpp
+         Binasc.cpp
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\jspicer\Desktop\Embedded Systems\GitHub\eee4243\Experiment16-PWM-Music\midifile\visual-studio\DebugLib\midifile.lib" /NOLOGO DebugLib\Binasc.obj
+         DebugLib\MidiEvent.obj
+         DebugLib\MidiEventList.obj
+         DebugLib\MidiFile.obj
+         DebugLib\MidiMessage.obj
+         DebugLib\Options.obj
+         midifile.vcxproj -> C:\Users\jspicer\Desktop\Embedded Systems\GitHub\eee4243\Experiment16-PWM-Music\midifile\visual-studio\DebugLib\midifile.lib
+     1>Done Building Project "C:\Users\jspicer\Desktop\Embedded Systems\GitHub\eee4243\Experiment16-PWM-Music\midifile\visual-studio\midifile.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.30

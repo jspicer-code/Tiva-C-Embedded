@@ -18,7 +18,7 @@ This project evolved from experiments 1-13 and contains some or all of the featu
 
 # Experiments
 
-## Experiment16-PWM-Audio
+## Experiment16-PWM-Music
 This experiment uses multiple PWM channels to produce audio signals and play tunes from MIDI files. A MIDI file exporter program was written in Visual Studio using the midifile parsing library (http://midifile.sapp.org/). The exporter generates a .c file that is compiled into the Keil project for the Tiva C. Up to four MIDI tracks are exported. 
 
 Each MIDI track is controlled at run time by a FreeRTOS task that schedules and plays the track's note events. Playing a note involves modulating one of the Tiva's PWM channels to a frequency equal to the note's audio frequency. 
