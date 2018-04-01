@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "midifile", "midifile.vcxproj", "{70028D4B-8E0D-4FF2-BD05-D7AB19B66F30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exportmidi", "ExportMidi\Export.vcxproj", "{AD64886B-95D9-4A25-AEE8-B56356DB8D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70028D4B-8E0D-4FF2-BD05-D7AB19B66F30}.Debug|Win32.ActiveCfg = Debug|Win32
+		{70028D4B-8E0D-4FF2-BD05-D7AB19B66F30}.Debug|Win32.Build.0 = Debug|Win32
+		{70028D4B-8E0D-4FF2-BD05-D7AB19B66F30}.Release|Win32.ActiveCfg = Release|Win32
+		{70028D4B-8E0D-4FF2-BD05-D7AB19B66F30}.Release|Win32.Build.0 = Release|Win32
+		{AD64886B-95D9-4A25-AEE8-B56356DB8D3D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AD64886B-95D9-4A25-AEE8-B56356DB8D3D}.Debug|Win32.Build.0 = Debug|Win32
+		{AD64886B-95D9-4A25-AEE8-B56356DB8D3D}.Release|Win32.ActiveCfg = Release|Win32
+		{AD64886B-95D9-4A25-AEE8-B56356DB8D3D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

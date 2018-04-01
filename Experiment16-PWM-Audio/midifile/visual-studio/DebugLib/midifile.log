@@ -1,0 +1,9 @@
+﻿Build started 3/31/2018 2:27:03 PM.
+     1>Project "C:\Users\jspicer\Desktop\Experiment16-PWM-Audio\midifile\visual-studio\midifile.vcxproj" on node 2 (Build target(s)).
+     1>Lib:
+         midifile.vcxproj -> C:\Users\jspicer\Desktop\Experiment16-PWM-Audio\midifile\visual-studio\DebugLib\midifile.lib
+     1>Done Building Project "C:\Users\jspicer\Desktop\Experiment16-PWM-Audio\midifile\visual-studio\midifile.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.62
