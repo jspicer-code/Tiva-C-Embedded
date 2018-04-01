@@ -50,10 +50,10 @@ Root="Buf",-8,16,0
 Line=16,0,16,4
 
 [shapedef]
-Name=BufTriLo
+Name=BufTriHi
 Root="BufTri.root",0,0,0
-Ellipse=14,4,18,8
-FColor=None
+Line=16,6,16,8
+Line=16,4,16,6
 
 [shapedef]
 Name=Capacitor
@@ -110,19 +110,6 @@ PolyLine=36,0
 PolyLine=48,0
 PolyLine=48,0
 Current=32,8,16,8
-
-[compdef]
-Name=74HC125
-Definition=Subckt
-Shape=BufTriLo
-Mask=4224
-Used=4
-memo=Quad Bus Buffers With 3-State Outputs
-Label Offset=0,34,3,-16
-PinCnt=3
-Pin="1A",d,-1,2,-7,16
-Pin="1GBAR",d,2,0,5,8
-Pin="1Y",d,5,2,-6,16
 
 [compdef]
 Name=EL2600_EL
@@ -205,6 +192,16 @@ PinCnt=2
 Pin="A",0,0,5,0
 Pin="B",6,0,-10,1
 
+[compdef]
+Name=74AC126
+Definition=NULL
+Shape=BufTriHi
+Mask=4224
+Used=5
+memo=Quad Tri-State Buffer
+Label Offset=0,34,3,-16
+PinCnt=0
+
 [Circuit]
 Window Placement=2,3, -1,-1, -8,-31, 0,0,1078,374
 Default Object=Color=#000080,Pattern=Dash
@@ -234,106 +231,6 @@ Object=Rectangle
 CBorder=#000080
 Pattern=Dash
 Px=440,152,575,494
-
-[Comp]
-Name=74HC125
-Px=520,192
-
-[Attr]
-ON=0,34,PART
-V=X1
-Style=8192
-
-[Attr]
-ON=0,48,NAME
-V=74HC125
-
-[Attr]
-ON=0,76,PACKAGE
-V=DIP14
-
-[Attr]
-ON=0,90,GATE
-V=A
-
-[Attr]
-ON=0,104,COMPNAME
-V=UX1
-
-[Comp]
-Name=74HC125
-Px=520,272
-
-[Attr]
-ON=0,34,PART
-V=X2
-Style=8192
-
-[Attr]
-ON=0,48,NAME
-V=74HC125
-
-[Attr]
-ON=0,76,PACKAGE
-V=DIP14
-
-[Attr]
-ON=0,90,GATE
-V=A
-
-[Attr]
-ON=0,104,COMPNAME
-V=UX1
-
-[Comp]
-Name=74HC125
-Px=520,352
-
-[Attr]
-ON=0,34,PART
-V=X3
-Style=8192
-
-[Attr]
-ON=0,48,NAME
-V=74HC125
-
-[Attr]
-ON=0,76,PACKAGE
-V=DIP14
-
-[Attr]
-ON=0,90,GATE
-V=A
-
-[Attr]
-ON=0,104,COMPNAME
-V=UX1
-
-[Comp]
-Name=74HC125
-Px=520,432
-
-[Attr]
-ON=0,34,PART
-V=X4
-Style=8192
-
-[Attr]
-ON=0,48,NAME
-V=74HC125
-
-[Attr]
-ON=0,76,PACKAGE
-V=DIP14
-
-[Attr]
-ON=0,90,GATE
-V=A
-
-[Attr]
-ON=0,104,COMPNAME
-V=UX1
 
 [Comp]
 Name=EL2600_EL
@@ -855,6 +752,91 @@ Name=Ground
 Px=40,232
 Rot=1
 
+[Comp]
+Name=74AC126
+Px=520,192
+
+[Attr]
+ON=0,34,PART
+V=Part1
+
+[Attr]
+ON=0,62,PACKAGE
+V=DIP14
+
+[Attr]
+ON=0,76,GATE
+V=A
+
+[Attr]
+ON=0,90,COMPNAME
+V=UPart1
+
+[Comp]
+Name=74AC126
+Px=520,272
+
+[Attr]
+ON=0,34,PART
+V=Part2
+
+[Attr]
+ON=0,62,PACKAGE
+V=DIP14
+
+[Attr]
+ON=0,76,GATE
+V=A
+
+[Attr]
+ON=0,90,COMPNAME
+V=UPart1
+
+[Comp]
+Name=74AC126
+Px=520,352
+
+[Attr]
+ON=0,34,PART
+V=Part3
+
+[Attr]
+ON=0,62,PACKAGE
+V=DIP14
+
+[Attr]
+ON=0,76,GATE
+V=A
+
+[Attr]
+ON=0,90,COMPNAME
+V=UPart1
+
+[Comp]
+Name=74AC126
+Px=520,432
+
+[Attr]
+ON=0,34,PART
+V=Part4
+
+[Attr]
+ON=0,0,COST
+V
+Style=8192
+
+[Attr]
+ON=0,62,PACKAGE
+V=DIP14
+
+[Attr]
+ON=0,76,GATE
+V=A
+
+[Attr]
+ON=0,90,COMPNAME
+V=UPart1
+
 [Grid Text]
 Text="SN74LS126AN"
 Px=456,512
@@ -1180,8 +1162,9 @@ PrinterScale=-1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-Scale 3=1.3333333333333333
-Px=576,189
+SB 3=82,97
+Scale 3=1
+Px=531,454
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000

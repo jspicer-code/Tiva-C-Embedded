@@ -1000,7 +1000,7 @@ JustifyV=Bottom
 CBorder=None
 
 [Grid Text]
-Text="Experiment 16 - PWM Audio"
+Text="Experiment 16 - PWM Music"
 Px=504,48
 Height=-21
 GridSnap=True
@@ -1140,7 +1140,7 @@ ALIGNBOTTOM=No
 
 [Section]
 Index=0
-Name="Experiment16-PWM-Audio"
+Name="Experiment16-PWM-Music"
 Type=Main
 Enable=True
 CurrentPage 0=0
@@ -1162,9 +1162,8 @@ PrinterScale=-1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-SB 3=82,97
 Scale 3=1
-Px=531,454
+Px=756,36
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000
