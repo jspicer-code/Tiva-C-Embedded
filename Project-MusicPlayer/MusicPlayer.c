@@ -80,7 +80,7 @@ typedef struct {
 	TaskHandle_t taskHandle;
 	SongTrack_t* track;
 	SemaphoreHandle_t startSemaphore;
-	SemaphoreHandle_t stopSemaphore;
+	SemaphoreHandle_t stoppedSemaphore;
 	volatile uint32_t* led;
 	PWMDef_t pwm;
 	uint8_t abort;
@@ -465,7 +465,7 @@ void TrackTask(void *pvParameters)
 			PlayNote(0, params);
 			
 			// Give the Stop semaphore to signal that the track is now stopped.
-			xSemaphoreGive(params->stopSemaphore);
+			xSemaphoreGive(params->stoppedSemaphore);
 				
 		}
 	
@@ -548,7 +548,7 @@ void SongMonitorTask(void *pvParameters)
 		
 		// Wait for the tracks to finish playing...
 		for (int i = 0; i < song_.header->numTracks; i++ ) {	
-			xSemaphoreTake(trackParams_[i].stopSemaphore, portMAX_DELAY);
+			xSemaphoreTake(trackParams_[i].stoppedSemaphore, portMAX_DELAY);
 		}
 			
 		xSemaphoreTake(acceptEventSemaphore_, portMAX_DELAY);				
@@ -787,8 +787,8 @@ int InitTasks()
 			if (!trackParams_[i].startSemaphore) {
 				break;
 			}
-			trackParams_[i].stopSemaphore = xSemaphoreCreateBinary();
-			if (!trackParams_[i].stopSemaphore) {
+			trackParams_[i].stoppedSemaphore = xSemaphoreCreateBinary();
+			if (!trackParams_[i].stoppedSemaphore) {
 				break;
 			}
 			trackSemCount++;
