@@ -5,8 +5,11 @@ In progress...
 
 ### Images
 
+#### Downloader Screen
+![DownloaderScreen](DownloaderScreen.png)
+
 #### Circuit Diagram
-![Circuit](MusicPlayer-circuit.png)
+![CircuitDiagram](MusicPlayer-circuit.png)
 
 #### State Diagram
 ![StateDiagram](StateDiagram.png)
