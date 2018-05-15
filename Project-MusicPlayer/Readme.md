@@ -11,6 +11,9 @@ The firmware was designed as a (Moore) state machine with a total of six states,
 
 This project builds on the work from Experiments 14-16, as well as Experiments 6 & 13.
 
+[![](https://i.ytimg.com/vi/1OvchymIkCs/default.jpg)](https://youtu.be/1OvchymIkCs)<br>
+[Watch the video](https://youtu.be/1OvchymIkCs)
+
 ### Images
 
 #### Music Player
