@@ -19,7 +19,7 @@ Downloader::Downloader(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	ui.comPortComboBox->setCurrentText("COM8");
+	ui.comPortComboBox->setCurrentText("COM7");
 
 	connect(ui.addFilesButton, &QPushButton::clicked, this, &Downloader::addFilesButton_clicked);
 	connect(ui.downloadButton, &QPushButton::clicked, this, &Downloader::downloadButton_clicked);

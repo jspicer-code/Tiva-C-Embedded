@@ -5,6 +5,9 @@ In progress...
 
 ### Images
 
+#### Music Player
+![MusicPlayer](picture1.png)
+
 #### Downloader Screen
 ![DownloaderScreen](DownloaderScreen.png)
 

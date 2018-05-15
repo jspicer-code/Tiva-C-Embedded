@@ -358,9 +358,14 @@ void NoiseTimerCallback(void)
 		uint32_t r = Random_uint32();
 		float f = (float)r / (float)0xFFFFFFFF;
 
-		uint16_t period = 4 + (uint16_t)(f * (float)100);
-		uint16_t duty = period / 2;
-		uint32_t interval = period;
+		// Generate a random frequency between 7kHz and 15kHz.
+		uint16_t period = 83 + (uint16_t)(f * (float)95);
+		
+		// Reducing the duty cyle sharpens the sound.
+		uint16_t duty = period / 12;
+		
+		// Playing for less than the period reduces some of the random "tapping" sounds.  
+		uint32_t interval = 0.8*period;
 		
 		PWM_Enable(noiseParams_.pwm, period, duty);	
 		Timer_Start(pConfig_->noiseTimer, interval);
@@ -369,6 +374,8 @@ void NoiseTimerCallback(void)
 	else {
 		Timer_Stop(pConfig_->noiseTimer);
 		PWM_Disable(noiseParams_.pwm);
+		
+		// Reseed the random number generator to produce the same frequency sequence for each percussion note.
 		Random_Reseed();
 	}
 	

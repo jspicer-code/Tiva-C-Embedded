@@ -1,4 +1,4 @@
-// File:  midi.h
+// File:  Song.h
 // Author: jspicer
 // Date:  3/31/18
 // Purpose: Contains Song data types.
@@ -36,7 +36,6 @@ typedef struct {
 
 typedef struct
 {
-	// TODO:  why is deltaTime int16_t?
 	int16_t deltaTime;
 	uint8_t	status;
 	uint8_t key;

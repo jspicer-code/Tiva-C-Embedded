@@ -4,7 +4,7 @@ Version=11.00
 Program=Micro-Cap
 Component Version=10.00
 Shape Version=11.00
-Screen=1920,1080
+Screen=1536,864
 MCAPVersion=11.0.0.3
 Key ID=Demo
 NLCnt=257
@@ -303,7 +303,7 @@ Label Offset=21,124,-1,16
 PinCnt=0
 
 [Circuit]
-Window Placement=2,3, -1,-1, -8,-31, 0,0,1446,510
+Window Placement=2,3, -1,-1, -8,-31, 0,0,941,364
 Default Object=Color=#000080
 Default Object Font=Height=-15,FStyle=0,Color=#000080,Name=Arial
 Default Object Apply Border To Text=No
@@ -2256,7 +2256,7 @@ V=C9
 
 [Attr]
 ON=-39,-33,CAPACITANCE
-V=47n
+V=4.7n
 Style=8192
 
 [Attr]
@@ -3251,8 +3251,9 @@ PrinterScale=1
 Scale 0=1
 Scale 1=1
 Scale 2=1
+SB 3=0,98
 Scale 3=1.3333333333333333
-Px=2151,95
+Px=591,1009
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000
