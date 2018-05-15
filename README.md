@@ -16,6 +16,8 @@ The firmware was designed as a (Moore) state machine with a total of six states,
 
 This project builds on the work from Experiments 14-16, as well as Experiments 6 & 13.
 
+[![](https://i.ytimg.com/vi/1OvchymIkCs/default.jpg)](https://youtu.be/1OvchymIkCs)<br>
+[Watch the video](https://youtu.be/1OvchymIkCs)
 
 ## Fan Controller
 This project is a fan controller system.  It features PWM speed control, a numeric display, and a serial console to the PC. The PWM speed control interfaces with standard 4-wire PWM fans.  It supports thermal and manual control modes and RPM measurement of the fan's tachometer signal.  The display shows the fan speed (0-100), RPM, or current temperature, and the serial console interface provides a menu-driven UI for configuring the temperature control settings.
