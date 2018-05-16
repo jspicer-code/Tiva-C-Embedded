@@ -245,6 +245,9 @@ static void MessageTask(void *pvParameters)
 			int percentage = ((float)totalReceived / (float)totalExpected) * 100;
 			AckMessage(percentage);
 			
+			// TODO: remove this check for percentage == 100.  This was put in here for 
+			//	troubleshooting and wasn't intended to remain. If totalReceived != totalExpected
+			//  when percentage >= 100, then an error has occurred somewhere.
 			if (percentage == 100 || (totalReceived == totalExpected)) {
 
 				// Show 100% awhile before continuing.

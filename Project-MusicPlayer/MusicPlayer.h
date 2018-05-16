@@ -1,6 +1,6 @@
 // File:  MusicPlayer.h
 // Author: JSpicer
-// Date:  11/24/17
+// Date:  5/15/18
 // Purpose: Player service layer module
 // Hardware:  TM4C123 Tiva board
 
@@ -37,7 +37,7 @@ typedef struct {
 // Runs the Player.  This is the main entry point.  Blocks and 
 //   doesn't return.  Should be called by the main() function upon startup.
 // Inputs:  pConfig - a pointer to the configuration that the 
-//   FanController should use.
+//   MusicPlayer should use.
 // Outputs:  none
 void MusicPlayer_Run(MusicPlayer_Config_t* pConfig);
 
