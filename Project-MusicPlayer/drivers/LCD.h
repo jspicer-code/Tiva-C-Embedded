@@ -1,7 +1,7 @@
 // File:  LCD.h
 // Author: JSpicer
 // Date:  12/23/17
-// Purpose: LCD driver for 16x1 and 16x2 displays.  Augments and simplifies the raw driver.
+// Purpose: LCD driver for 16x1, 16x2, and 20x4 displays.  Augments and simplifies the raw driver.
 // Hardware:  TM4C123 Tiva board
 
 #ifndef LCD_H
