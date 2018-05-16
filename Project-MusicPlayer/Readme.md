@@ -7,7 +7,7 @@ The buttons on the Tiva are used to cycle to the next and previous songs in the 
 
 To produce the musical sounds, the Tiva's PWM channels are used to produce square waves at the audio frequencies of the musical notes.  The player board supports up to four monophonic, instrument tracks, one of which can be used as a percussion track.  The percussion track generates a sound using white noise that simulates a closed hi-hat.
 
-The firmware was designed as a (Moore) state machine with a total of six states, five events, and four actions.  Zero or more actions are invoked when an event causes a transition from one state to another.   The main program is implemented by two interrupt service routines (ISRs) and eight FreeRTOS tasks.  The tasks can be in a running or blocked state at any given time.  The tasks and ISRs synchronize by giving/taking binary semaphores.   
+The firmware was designed as a state machine with a total of six states, five events, and four actions.  Zero or more actions are invoked when an event causes a transition from one state to another.   The main program is implemented by two interrupt service routines (ISRs) and eight FreeRTOS tasks.  The tasks can be in a running or blocked state at any given time.  The tasks and ISRs synchronize by giving/taking binary semaphores.   
 
 This project builds on the work from Experiments 14-16, as well as Experiments 6 & 13.
 
