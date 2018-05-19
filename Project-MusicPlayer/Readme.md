@@ -5,7 +5,7 @@ This project uses the Tiva C EK-TM4C123GXL board to build a device that plays th
 
 The buttons on the Tiva are used to cycle to the next and previous songs in the song list, and the blue button on the board toggles between Play and Stop.  An LCD displays information about the current song, such as its name, song index, track count, size, and length.  Each second, a time marker is incremented as the song plays.  
 
-To produce the musical sounds, the Tiva's PWM channels are used to produce square waves at the audio frequencies of the musical notes.  The player board supports up to four monophonic, instrument tracks, one of which can be used as a percussion track.  The percussion track generates a sound using white noise that simulates a closed hi-hat.
+To produce the musical sounds, the Tiva's PWM channels are used to generate square waves at the audio frequencies of the musical notes.  The square waves are summed together and amplified by an LM386.  The player board supports up to four monophonic, instrument tracks, one of which can be used as a percussion track.  The percussion track generates a sound using white noise that simulates a closed hi-hat.
 
 The firmware was designed as a state machine with a total of six states, five events, and four actions.  Zero or more actions are invoked when an event causes a transition from one state to another.   The main program is implemented by two interrupt service routines (ISRs) and eight FreeRTOS tasks.  The tasks can be in a running or blocked state at any given time.  The tasks and ISRs synchronize by giving/taking binary semaphores.   
 
