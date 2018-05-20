@@ -1,35 +1,6 @@
 # Tiva C Series ARM development
 
-This repository contains projects and experiments developed for the EK-TM4C123GXL ARM evaluation board.
-
-# Projects
-
-## Music Player
-
-This project uses the Tiva C EK-TM4C123GXL board to build a device that plays the music from early video games.  The music data comes from MIDI files, and is converted to an optimized format that is downloaded to the Tiva's Flash memory from the PC's serial port.  Up to 224Kib of song data can be downloaded (about 8 to 12 songs).  The firmware uses FreeRTOS, and is an example of a soft real-time system.
-
-The buttons on the Tiva are used to cycle to the next and previous songs in the song list, and the blue button on the board toggles between Play and Stop.  An LCD displays information about the current song, such as its name, song index, track count, size, and length.  Each second, a time marker is incremented as the song plays.  
-
-To produce the musical sounds, the Tiva's PWM channels are used to generate square waves at the audio frequencies of the musical notes.  The square waves are summed together and amplified by an LM386.  The player board supports up to four monophonic, instrument tracks, one of which can be used as a percussion track.  The percussion track generates a sound using white noise that simulates a closed hi-hat.
-
-The firmware was designed as a state machine with a total of six states, five events, and four actions.  Zero or more actions are invoked when an event causes a transition from one state to another.   The main program is implemented by two interrupt service routines (ISRs) and eight FreeRTOS tasks.  The tasks can be in a running or blocked state at any given time.  The tasks and ISRs synchronize by giving/taking binary semaphores.   
-
-This project builds on the work from Experiments 14-16, as well as Experiments 6 & 13.
-
-[![](https://i.ytimg.com/vi/1OvchymIkCs/default.jpg)](https://youtu.be/1OvchymIkCs)<br>
-[Watch the video](https://youtu.be/1OvchymIkCs)
-
-## Fan Controller
-This project is a fan controller system.  It features PWM speed control, a numeric display, and a serial console to the PC. The PWM speed control interfaces with standard 4-wire PWM fans.  It supports thermal and manual control modes and RPM measurement of the fan's tachometer signal.  The display shows the fan speed (0-100), RPM, or current temperature, and the serial console interface provides a menu-driven UI for configuring the temperature control settings.
-
-Hardware features used on the Tiva TM4C123 board include GPIO, ADC, PWM, SPI, Timers, UART, PLL, SysTick, and Flash storage.   The firmware was written in C using Keil Microvision and uses direct register access to control the hardware.
-
-Users can configure the system for linear thermal control by setting lower and upper temperature limits.  When the environment temperature reaches the lower limit, the fan will turn on at the slowest speed and increase linearly up to the maximum speed, proportional to the higher temperature limit.  Above the high limit the fan will run at full speed.   Thermostatic control can be configured by setting the low and high temperature limits the same, which turns the fan on at full speed when the temperature is the same or above the limit.
-
-This project evolved from experiments 1-13 and contains some or all of the features from each.
-
-[![](http://img.youtube.com/vi/YEEtr2Ipl0c/3.jpg)](https://youtu.be/YEEtr2Ipl0c)<br>
-[Watch the video](https://youtu.be/YEEtr2Ipl0c)
+This repository contains experiments developed for the EK-TM4C123GXL ARM evaluation board.
 
 # Experiments
 
