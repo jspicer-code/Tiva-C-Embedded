@@ -1,0 +1,1100 @@
+[Main]
+FileType=CIR
+Version=11.00
+Program=Micro-Cap
+Component Version=10.00
+Shape Version=11.00
+Screen=1536,864
+MCAPVersion=11.0.0.3
+Key ID=Demo
+NLCnt=41
+TXCnt=5
+
+[shapedef]
+Name=Animated DC Motor
+Animated Motor=0,0,48,40
+Current=-16,24,0,24
+
+[shapedef]
+Name=Animated Relay
+Animated Relay=0,-8,48,56
+Current=0,-8,16,-8
+Current=56,8,56,24
+Ellipse=3,-5,5,-3
+
+[shapedef]
+Name=Animated SPST Switch
+Animated SPST Switch=0,-8,48,8
+Current=16,8,32,8
+
+[shapedef]
+Name=Bjt.root
+Line=0,0,13,0
+Rectangle=13,-12,15,12
+Current=32,-24,32,-16
+Current=32,24,32,16
+Current=0,-8,8,-8
+PolyOpen=3
+PolyLine=24,-24
+PolyLine=24,-12
+PolyLine=14,-2
+PolyOpen=3
+PolyLine=24,24
+PolyLine=24,12
+PolyLine=14,2
+
+[shapedef]
+Name=Diode
+Root="Diode.root",0,0,0
+
+[shapedef]
+Name=Diode.root
+Line=0,0,20,0
+Line=28,0,48,0
+Rectangle=18,-8,20,8
+PolyClosed=3
+PolyLine=20,0
+PolyLine=28,-8
+PolyLine=28,8
+Current=32,16,16,16
+
+[shapedef]
+Name=Fixed
+Line=8,0,32,0
+Line=8,0,0,-8
+Line=8,0,0,8
+
+[shapedef]
+Name=Ground
+Line=0,0,12,0
+Line=12,-8,12,8
+Line=18,-4,18,4
+Line=24,0,24,0
+
+[shapedef]
+Name=Input
+PolyClosed=5
+PolyLine=8,0
+PolyLine=16,-8
+PolyLine=48,-8
+PolyLine=48,8
+PolyLine=16,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=NPN
+Root="Bjt.root",0,0,0
+PolyClosed=3
+PolyLine=20,12
+PolyLine=24,12
+PolyLine=24,8
+
+[shapedef]
+Name=Output
+PolyClosed=5
+PolyLine=48,0
+PolyLine=40,-8
+PolyLine=8,-8
+PolyLine=8,8
+PolyLine=40,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=Resistor
+PolyOpen=12
+PolyLine=0,0
+PolyLine=0,0
+PolyLine=12,0
+PolyLine=14,-4
+PolyLine=18,4
+PolyLine=22,-4
+PolyLine=26,4
+PolyLine=30,-4
+PolyLine=34,4
+PolyLine=36,0
+PolyLine=48,0
+PolyLine=48,0
+Current=32,8,16,8
+
+[compdef]
+Name=Output Port
+Definition=NULL
+Shape=Output
+Mask=4096
+Used=96
+memo=Output Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Input Port
+Definition=NULL
+Shape=Input
+Mask=5632
+Used=125
+memo=Input Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Resistor
+Definition=Resistor
+Shape=Resistor
+Mask=7681
+Used=373
+memo=Resistor
+Label Offset=18,6,8,11
+PinCnt=2
+Pin="Plus",6,0,-10,-4
+Pin="Minus",0,0,-14,-4
+
+[compdef]
+Name=Animated SPST Switch
+Definition=ANIMATED SPST SWITCH
+Shape=Animated SPST Switch
+Mask=5376
+Used=38
+memo=Animated Single Pole, Single Throw Switch
+Label Offset=2,5,11,11
+PinCnt=2
+Pin="A",0,0,5,0
+Pin="B",6,0,-10,1
+
+[compdef]
+Name=Fixed Analog
+Definition=ANALOG STATE
+Shape=Fixed
+Mask=3840
+Used=100
+memo=Provides a fixed DC voltage
+Label Offset=-14,-7,-6,-27
+PinCnt=1
+Pin="Out",4,0,-8,-3
+
+[compdef]
+Name=Ground
+Definition=Ground
+Shape=Ground
+Mask=257
+Used=229
+memo=Ground
+Label Offset=0,0,0,0
+PinCnt=1
+Pin="PinA",0,0,-3,-7
+
+[compdef]
+Name=NPN
+Definition=NPN
+Shape=NPN
+Mask=4097
+Used=30
+memo=NPN Transistor
+Label Offset=37,-17,-14,33
+PinCnt=3
+Pin="Collector",3,-3,4,14
+Pin="Base",0,0,-18,-3
+Pin="Emitter",3,3,5,1
+
+[compdef]
+Name=Diode
+Definition=Diode
+Shape=Diode
+Mask=4865
+Used=78
+memo=Diode
+Label Offset=17,10,12,12
+PinCnt=2
+Pin="Anode",6,0,-9,-8
+Pin="Cathode",0,0,-20,-8
+
+[compdef]
+Name=Animated Relay
+Definition=ANIMATED RELAY
+Shape=Animated Relay
+Mask=4096
+Used=1
+memo=Animated Relay
+Label Offset=58,3,14,1
+PinCnt=4
+Pin="Plus Output",5,0,8,6
+Pin="Minus Output",5,6,6,6
+Pin="Plus Input",0,0,-36,15
+Pin="Minus Input",0,6,-42,15
+
+[compdef]
+Name=Animated DC Motor
+Definition=ANIMATED DC MOTOR
+Shape=Animated DC Motor
+Mask=4096
+Used=1
+memo=Animated DC Motor
+Label Offset=21,33,2,2
+PinCnt=3
+Pin="Plus",0,4,-27,3
+Pin="Minus",0,5,-35,5
+Pin="Velocity",6,0
+
+[Circuit]
+Window Placement=2,3, -1,-1, -8,-31, 52,52,1101,512
+Default Object=Color=#000080
+Default Object Font=Height=-15,FStyle=0,Color=#000080,Name=Arial
+Default Object Apply Border To Text=No
+Default Object Apply Fill To Text=No
+NodeVoltageFormat=3
+PathDelayFormat=3
+WarningFormat=3
+GridTextFormulaFormat=3
+SpiceType=AMBIGUOUS
+Title_Block_Border=None
+Title_Block=False
+Show Nodes=False
+Show Voltages=False
+Show Current=False
+Show Power=False
+Show Condition=False
+Show Pin Connections=False
+Show Connection Warnings=False
+Show Cross=False
+Show Attribute Text=True
+Show Grid Text=True
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=160,118,256,218
+
+[Comp]
+Name=Output Port
+Px=256,168
+Rot=4
+
+[Attr]
+ON=52,-5,PART
+V=OUT_LED
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=256,144
+Rot=4
+
+[Attr]
+ON=53,-5,PART
+V=IN_BUTTON
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=256,192
+Rot=4
+
+[Attr]
+ON=52,-5,PART
+V=OUT_FAN
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=592,192
+Rot=2
+
+[Attr]
+ON=-125,-8,PART
+V=IN_BUTTON
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Resistor
+Px=640,264
+Rot=5
+
+[Attr]
+ON=8,-25,PART
+V=R1
+
+[Attr]
+ON=8,-39,RESISTANCE
+V=10K
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Animated SPST Switch
+Px=640,176
+Rot=5
+
+[Attr]
+ON=11,-25,PART
+V=Push Button
+Style=8192
+
+[Attr]
+ON=11,-39,STATE
+V=Open
+
+[Attr]
+ON=11,-53,RON
+V=1m
+
+[Attr]
+ON=11,-67,ROFF
+V=1e15
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Fixed Analog
+Px=640,80
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V1
+
+[Attr]
+ON=-15,-18,VALUE
+V=3.3V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Ground
+Px=640,264
+Rot=1
+
+[Wire]
+Pxs=640,112,640,128
+
+[Wire]
+Pxs=592,192,640,192
+
+[Wire]
+Pxs=640,192,640,216
+
+[Wire]
+Pxs=640,176,640,192
+
+[Comp]
+Name=NPN
+Px=216,496
+
+[Attr]
+ON=37,-17,PART
+V=Q1
+
+[Attr]
+ON=36,-9,MODEL
+V=2N2222A
+Style=8192
+
+[Attr]
+ON=37,25,PACKAGE
+V=TO-18
+
+[Comp]
+Name=Diode
+Px=240,424
+Rot=3
+
+[Attr]
+ON=16,-30,PART
+V=Green LED
+Style=8192
+
+[Attr]
+ON=-76,-40,MODEL
+V=$GENERIC
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Resistor
+Px=240,472
+Rot=5
+
+[Attr]
+ON=8,-25,PART
+V=R2
+
+[Attr]
+ON=12,-31,RESISTANCE
+V=220
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Ground
+Px=240,544
+Rot=1
+
+[Wire]
+Pxs=240,520,240,544
+
+[Comp]
+Name=Fixed Analog
+Px=240,344
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V2
+
+[Attr]
+ON=-6,-18,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=152,496
+Rot=6
+
+[Attr]
+ON=-112,-8,PART
+V=OUT_LED
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SW_DISP_TEMP
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Resistor
+Px=216,496
+Rot=6
+
+[Attr]
+ON=-34,6,PART
+V=R3
+
+[Attr]
+ON=-39,12,RESISTANCE
+V=8.2K
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=152,496,168,496
+
+[Comp]
+Name=NPN
+Px=576,496
+
+[Attr]
+ON=37,-17,PART
+V=Q2
+
+[Attr]
+ON=36,-9,MODEL
+V=2N2222A
+Style=8192
+
+[Attr]
+ON=37,25,PACKAGE
+V=TO-18
+
+[Comp]
+Name=Ground
+Px=600,544
+Rot=1
+
+[Wire]
+Pxs=600,520,600,544
+
+[Comp]
+Name=Fixed Analog
+Px=600,344
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V3
+
+[Attr]
+ON=-6,-18,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=512,496
+Rot=6
+
+[Attr]
+ON=-111,-8,PART
+V=OUT_FAN
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Resistor
+Px=576,496
+Rot=6
+
+[Attr]
+ON=-34,6,PART
+V=R5
+
+[Attr]
+ON=-39,12,RESISTANCE
+V=3.9K
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=512,496,528,496
+
+[Comp]
+Name=Animated Relay
+Px=616,392
+
+[Attr]
+ON=147,-24,PART
+V
+Style=8192
+
+[Attr]
+ON=58,17,LIN
+V=100m
+
+[Attr]
+ON=58,31,RIN
+V=100
+
+[Attr]
+ON=56,16,ION
+V=Relay 5V 30mA
+Style=8192
+
+[Attr]
+ON=58,59,IOFF
+V=9m
+
+[Attr]
+ON=58,73,RON
+V=1m
+
+[Attr]
+ON=58,87,ROFF
+V=1e15
+
+[Attr]
+ON=58,101,BIDIRECTIONAL
+V=No
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=600,440,600,472
+
+[Comp]
+Name=Fixed Analog
+Px=656,344
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V4
+
+[Attr]
+ON=-16,-19,VALUE
+V=12V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=600,376,600,392
+
+[Comp]
+Name=Animated DC Motor
+Px=840,408
+
+[Attr]
+ON=-35,-24,PART
+V=Fan 12V DC 0.56A
+Style=8192
+
+[Attr]
+ON=21,47,RPSPV
+V=1
+
+[Attr]
+ON=21,61,RMOTOR
+V=1
+
+[Attr]
+ON=21,75,LMOTOR
+V=1
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=840,448,840,544
+
+[Comp]
+Name=Ground
+Px=840,544
+Rot=1
+
+[Comp]
+Name=Diode
+Px=600,392
+Rot=7
+
+[Attr]
+ON=-29,12,PART
+V
+Style=8192
+
+[Attr]
+ON=-65,17,MODEL
+V=1N4001
+Style=8192
+
+[Attr]
+ON=-52,54,PACKAGE
+V=DO-41
+
+[Wire]
+Pxs=656,440,840,440
+
+[Wire]
+Pxs=600,392,616,392
+
+[Wire]
+Pxs=600,440,616,440
+
+[Wire]
+Pxs=656,376,656,392
+
+[Grid Text]
+Text="PE1"
+Px=224,152
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE2"
+Px=224,176
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE3"
+Px=224,200
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="TM4C123GH6PM"
+Px=160,240
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Experiment 3 - GPIO-Relay"
+Px=272,32
+Height=-24
+FStyle=1
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Schematic]
+CurrentSection 0=0
+CurrentSection 1=0
+CurrentSection 2=0
+CurrentSection 3=0
+Splitter.xs=0
+Splitter.ys=0
+TextQuad=4099
+Scale=1
+GridUser=10
+ShapeGroups="Main","Euro","Polarity","Electrolytic","GroundArrow","DeMorgan"
+CalcRMS=False
+CalcAVG=False
+CalcPeak=False
+CalcVoltage=True
+DisplayMeasure=Last
+ShareScales=True
+
+[Tools]
+Pos=Top
+FILESAVEASOLD=No
+BOM=No
+FILEPCB=No
+PROBE=Yes
+SELECT=Yes
+COMP=Yes
+TEXT=Yes
+WIRE=Yes
+WIRED=Yes
+BUS=Yes
+GRAPHIC=Yes
+LINE=No
+ELLIPSE=No
+RECT=No
+DIAM=No
+ARC=No
+PIE=No
+LEFTBRK=No
+RIGHTBRK=No
+BOTHBRK=No
+META=Yes
+FLAG=Yes
+INFO=Yes
+HELP=Yes
+HELP_SPICE=No
+LINK=Yes
+REGION_ENABLE=Yes
+TITLE_BLOCK=Yes
+DIGTRC=No
+DIGTRC2=No
+BUILD_COMMAND=Yes
+DIGALL=No
+GRIDTEXT=Yes
+COMPTEXT=Yes
+NODE=Yes
+MEASURED=Yes
+NODEV=Yes
+CURRENT=Yes
+POWER=Yes
+CONDITIN=Yes
+PIN=Yes
+CONNWARN=Yes
+CROSS=Yes
+GRID=Yes
+BORDER=Yes
+BORDERONE=Yes
+TITLE=Yes
+RUBBER=Yes
+PROPERTY=Yes
+STEP=Yes
+MIRROR=Yes
+ROTATE=Yes
+FLIPY=Yes
+FLIPX=Yes
+CIR_MAKEMACRO=No
+CLEARCUTWIRE=No
+CLIPBOARDCIRPAGE2BMM=No
+FINDCOMP=Yes
+FIND=Yes
+REPEAT=No
+REPLACE=No
+MODEL=Yes
+CIR2CKT=Yes
+ATTDISP=Yes
+ENABLE=Yes
+DISABLE=Yes
+TOFRONT=Yes
+TOBACK=Yes
+SELNEXT=Yes
+PAGEADD=Yes
+PAGEADDTEXT=No
+ADDSECTION=No
+PAGEDEL=Yes
+ZOOMIN=Yes
+ZOOMOUT=Yes
+AUTOSCALECIR=Yes
+GOTOFLAG=Yes
+UPLEVEL=Yes
+COLOR=Yes
+FONT=Yes
+DM_LAST=No
+DM_RMS=No
+DM_AVG=No
+DM_PEAK=No
+GRID_NONE=No
+GRID_NORMAL=No
+GRID_BOLD_5=No
+GRID_BOLD_6=No
+GRID_BOLD_USER=No
+GRAPH_PAPER=No
+SPLITCIRTEXTH=No
+SPLITCIRTEXTV=No
+SPACE_SPLITTERS_EVENLY=No
+NORMALCIR=No
+RENAMEDEFINE=No
+RENAMECMP=No
+ATTALIGN=No
+RESETNODEPOS=No
+FIT2STANDARD=No
+NODESNAP=No
+MOVETEXT=No
+TEXTINC=No
+TOGGLETEXT=No
+TOGGLEMODE=No
+TOLERANCE=No
+ALIGNLEFT=Yes
+ALIGNRIGHT=Yes
+ALIGNTOP=Yes
+ALIGNBOTTOM=Yes
+
+[Section]
+Index=0
+Name="Experiment3-GPIO-Relay-circuit"
+Type=Main
+Enable=True
+CurrentPage 0=0
+CurrentPage 1=0
+CurrentPage 2=0
+CurrentPage 3=0
+TabSize 0=425
+TabSize 1=425
+TabSize 2=425
+TabSize 3=425
+
+[Page]
+Index=0
+Section=0
+Print=True
+Enable=True
+Name=Main
+PrinterScale=1
+Scale 0=1
+Scale 1=1
+Scale 2=1
+SB 3=0,48
+Scale 3=1
+Px=655,393
+WinBackGround Color=#FFFFFF
+Select Color=#FF0000
+Anchor Color=#000000
+Select Box Color=#000080
+Grid Text Color=Height=-12,FStyle=0,Color=#0000FF,Name=Verdana
+Grid Text RTF=False
+Grid Text Angle=0
+Grid Text GridSnap=True
+Grid Text PinIt=False
+Grid Text JustifyH=Left
+Grid Text JustifyV=Bottom
+Component Color=#0000FF
+Attribute Text=Height=-12,FStyle=0,Color=#008000,Name=Verdana
+Wire Color=#008000
+Bus Color=#008000
+Pin Connection=Height=-10,FStyle=0,Color=#FF0000,Name=Arial
+Pin Marker Color=#008000
+Node Number=Height=-11,FStyle=0,Color=#FF00FF,Name=Arial
+Node Voltage Color=Height=-11,FStyle=0,Color=#000000,Name=Arial
+Dynamic AC Voltage Color=#E4E4E4
+Text Banner Text=Height=-15,FStyle=0,Color=#800000,Name=Arial
+Title Block Background=#C0C0C0
+Current=Height=-11,FStyle=0,Color=#0000FF,Name=Arial
+Power/Condition=Height=-11,FStyle=0,Color=#FF0000,Name=Arial
+Digital Path Color=#FF0000
+Title Block Border=#000000
+Disabled	Color=#C0C0C0
+Search Color=#FFFF00
+Grid Color=#000000
+Graph Paper=#E4E4E4
+Digital 0 Color=#000000
+Digital R Color=#FFFF00
+Digital F Color=#FFFF00
+Digital 1 Color=#FF0000
+Digital X Color=#C0C0C0
+Digital Z Color=#808080
+Block Select Color=#51F998
+
+[Page]
+Index=1
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Text
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=2
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Models
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=3
+Section=0
+Type=Info
+Print=False
+Enable=True
+Name=Info
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Text Area]
+Section=0
+Page=1
+
+[Text Area]
+Section=0
+Page=2
+
+[InfoPage]
+InfoPage=True
+Warnings=True
+System=True
+Defines=True
+Array=True
+Model=True
+Measure=True
+MacroSubckt=True
+NotUsed=True
+ComponentCounts=True
+
+[Limits]
+Analysis=DynamicAC
+FirstValueDisplay=Mag
+SecondValueDisplay=PhaseDeg
+PlaceText=True
+
+[Limits]
+Analysis=DynamicDC
+PlaceText=True
+
+[Pane]
+Analysis=Transient
+
+[Pane]
+Analysis=AC
+
+[Pane]
+Analysis=DC
+
+[Pane]
+Analysis=HmDistortion
+
+[Pane]
+Analysis=ImDistortion
+
+[Pane]
+Analysis=Stability
+
+[WCTolerance]
+Var Width=100
+Nominal Width=72
+Tol Width=152
+
+[OPMethods]
+Analysis=Transient
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=AC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=DC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=Stability
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
