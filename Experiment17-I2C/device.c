@@ -78,8 +78,7 @@ static void SetLedPattern(uint8_t pattern)
 static void ReceiveCallback(I2C_Module_t module, uint8_t data, bool firstByteReceived)
 {
 	
-	// The first byte received in a will be the command byte, either 0xA0=Write or 0xA1=Read.
-	// Subsequent bytes will be the data bytes.
+	// The first byte received will be the command byte. Subsequent bytes will be the (payload) data bytes.
 	if (firstByteReceived) {
 		
 		commandStatus_.command = data;
@@ -105,9 +104,10 @@ static void ReceiveCallback(I2C_Module_t module, uint8_t data, bool firstByteRec
 
 static void TransmitCallback(I2C_Module_t module, uint8_t* data)
 {
-	// If the last command byte sent was 0xA1=Read, the master device is reading
+	// If the last command byte sent was COMMAND_READ, the master device is requesting to read
 	//	this device's switch data.
 	if (commandStatus_.command == COMMAND_READ) {
+		
 		// The first payload byte to transmit is the color, and the next is the LED pattern.
 		if (commandStatus_.bytesTransmitted == 0) {
 			*data = settings_.color;
@@ -115,6 +115,7 @@ static void TransmitCallback(I2C_Module_t module, uint8_t* data)
 		else if (commandStatus_.bytesTransmitted == 1) {
 			*data = settings_.pattern;
 		}
+		
 		commandStatus_.bytesTransmitted++;
 	}
 }
