@@ -1,0 +1,13 @@
+.\objects\device.o: device.c
+.\objects\device.o: device.h
+.\objects\device.o: hal/HAL.h
+.\objects\device.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\device.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\device.o: .\startup_TM4C1294\HAL_Config.h
+.\objects\device.o: hal/HAL_PLL.h
+.\objects\device.o: .\startup_TM4C1294\HAL_Config.h
+.\objects\device.o: hal/HAL_SysTick.h
+.\objects\device.o: hal/HAL_GPIO.h
+.\objects\device.o: hal/HAL_NVIC.h
+.\objects\device.o: hal/HAL_I2C.h
+.\objects\device.o: .\startup_TM4C1294\HAL_Config.h

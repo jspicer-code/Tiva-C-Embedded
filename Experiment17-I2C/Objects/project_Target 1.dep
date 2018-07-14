@@ -1,0 +1,69 @@
+Dependencies for Project 'project', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_rvmdk.S)(0x5B3FF8FB)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 524" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup_rvmdk.lst --xref -o .\objects\startup_rvmdk.o --depend .\objects\startup_rvmdk.d)
+F (.\main.c)(0x5B40A2CB)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (hal/hal.h)(0x5B3CCFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (.\HAL_Config.h)(0x5B40A2CB)
+I (hal/HAL_PLL.h)(0x5B3EAAFD)
+I (hal/HAL_SysTick.h)(0x5A2CA236)
+I (hal/HAL_GPIO.h)(0x5B3CCF9D)
+I (hal/HAL_NVIC.h)(0x5B316DE3)
+I (hal/HAL_I2C.h)(0x5B40A7DA)
+F (.\HAL_Config.h)(0x5B40A2CB)()
+F (.\hal\HAL.h)(0x5B3CCFB6)()
+F (.\hal\HAL_GPIO.c)(0x5B3EB34D)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\hal_gpio.o --omf_browse .\objects\hal_gpio.crf --depend .\objects\hal_gpio.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (.\HAL_Config.h)(0x5B40A2CB)
+I (hal\tm4c1294ncpdt.h)(0x5AA52570)
+I (hal\HAL.h)(0x5B3CCFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (hal\HAL_PLL.h)(0x5B3EAAFD)
+I (hal\HAL_SysTick.h)(0x5A2CA236)
+I (hal\HAL_GPIO.h)(0x5B3CCF9D)
+I (hal\HAL_NVIC.h)(0x5B316DE3)
+I (hal\HAL_I2C.h)(0x5B40A7DA)
+F (.\hal\HAL_GPIO.h)(0x5B3CCF9D)()
+F (.\hal\HAL_NVIC.c)(0x5B3EAAC6)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\hal_nvic.o --omf_browse .\objects\hal_nvic.crf --depend .\objects\hal_nvic.d)
+I (hal\HAL_NVIC.h)(0x5B316DE3)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (hal\tm4c123gh6pm.h)(0x59A4971D)
+F (.\hal\HAL_NVIC.h)(0x5B316DE3)()
+F (.\hal\tm4c1294ncpdt.h)(0x5AA52570)()
+F (.\hal\HAL_I2C.c)(0x5B40A89C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\hal_i2c.o --omf_browse .\objects\hal_i2c.crf --depend .\objects\hal_i2c.d)
+I (C:\Keil_v5\ARM\ARMCC\include\assert.h)(0x588C2C04)
+I (hal\tm4c123gh6pm.h)(0x59A4971D)
+I (hal\HAL.h)(0x5B3CCFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (.\HAL_Config.h)(0x5B40A2CB)
+I (hal\HAL_PLL.h)(0x5B3EAAFD)
+I (hal\HAL_SysTick.h)(0x5A2CA236)
+I (hal\HAL_GPIO.h)(0x5B3CCF9D)
+I (hal\HAL_NVIC.h)(0x5B316DE3)
+I (hal\HAL_I2C.h)(0x5B40A7DA)
+F (.\hal\HAL_I2C.h)(0x5B40A7DA)()
+F (.\hal\HAL_PLL.c)(0x5B3EAB0F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\hal_pll.o --omf_browse .\objects\hal_pll.crf --depend .\objects\hal_pll.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (hal\HAL.h)(0x5B3CCFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (.\HAL_Config.h)(0x5B40A2CB)
+I (hal\HAL_PLL.h)(0x5B3EAAFD)
+I (hal\HAL_SysTick.h)(0x5A2CA236)
+I (hal\HAL_GPIO.h)(0x5B3CCF9D)
+I (hal\HAL_NVIC.h)(0x5B316DE3)
+I (hal\HAL_I2C.h)(0x5B40A7DA)
+I (hal\tm4c1294ncpdt.h)(0x5AA52570)
+F (.\hal\HAL_PLL.h)(0x5B3EAAFD)()
+F (.\hal\HAL_SysTick.c)(0x5B393053)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DTM4C1294NCPDT-o .\objects\hal_systick.o --omf_browse .\objects\hal_systick.crf --depend .\objects\hal_systick.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (hal\tm4c123gh6pm.h)(0x59A4971D)
+I (hal\HAL.h)(0x5B3CCFB6)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (.\HAL_Config.h)(0x5B40A2CB)
+I (hal\HAL_PLL.h)(0x5B3EAAFD)
+I (hal\HAL_SysTick.h)(0x5A2CA236)
+I (hal\HAL_GPIO.h)(0x5B3CCF9D)
+I (hal\HAL_NVIC.h)(0x5B316DE3)
+I (hal\HAL_I2C.h)(0x5B40A7DA)
+F (.\hal\HAL_SysTick.h)(0x5A2CA236)()
