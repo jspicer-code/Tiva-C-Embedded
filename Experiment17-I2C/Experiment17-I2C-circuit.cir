@@ -799,7 +799,7 @@ Pxs=264,488,280,488
 Pxs=264,512,280,512
 
 [Wire]
-Pxs=264,536,272,536
+Pxs=264,536,280,536
 
 [Wire]
 Pxs=264,560,280,560
@@ -3422,9 +3422,8 @@ PrinterScale=-1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-SB 3=0,96
 Scale 3=1.3333333333333333
-Px=659,333
+Px=268,533
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000
