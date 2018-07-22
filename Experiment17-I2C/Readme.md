@@ -7,4 +7,7 @@ Each board is configured to be both a master and slave on the bus, and is connec
 
 The Keil project has separate build targets for the TM4C1294 and TM4C123, and there are startup folders for each board that contain a different startup file and main function.  Building the project for one target disables the startup files for the other.  In addition, the HAL modules use conditional compilation when there are implementation difference between the two processors.  Flags in the HAL_Config.h file will turn on/off these conditional features.
  
+[![](https://img.youtube.com/vi/yLTBi-FEyhM/2.jpg)](https://youtu.be/yLTBi-FEyhM)<br>
+[Watch the video](https://youtu.be/yLTBi-FEyhM)
+
 ![Experiment17-I2C](Experiment17-I2C-circuit.png)  
