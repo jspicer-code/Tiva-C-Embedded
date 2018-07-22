@@ -267,7 +267,7 @@ static int InvokeMasterCommand(volatile I2CRegs_t* i2c, uint32_t mcs)
 	// Invoke the command.
 	i2c->MCS = mcs;
 
-	// Wait until the RIS bit is set, which idicates the next byte to transfer is being requested.
+	// Wait until the RIS bit is set, which indicates the next byte to transfer is being requested.
 	while (!(i2c->MRIS & I2C_MRIS_RIS));
 	
 	// Check the error status.
@@ -429,6 +429,7 @@ static void HandleInterrupt(volatile I2CRegs_t* i2c, I2C_Module_t module,
 {
 	volatile uint32_t readback;
 
+	// Is this a data interrupt?
 	if (i2c->SMIS & I2C_SMIS_DATAMIS) {
 		
 		// Clear the interrupt flag
@@ -441,11 +442,15 @@ static void HandleInterrupt(volatile I2CRegs_t* i2c, I2C_Module_t module,
 		uint32_t scr = i2c->SCSR;
 		
 		uint8_t data;
+		// Check whether this is data to be received or transmitted and call
+		//	the appropriate callback.
 		if (scr & I2C_SCSR_RREQ && rxCallback) { 
+			// Data received
 			data = (uint8_t)i2c->SDR;
 			rxCallback(module, data, (bool)(scr & I2C_SCSR_FBR));
 		}
 		else if (scr & I2C_SCSR_TREQ && txCallback) {
+			// Data to be transmitted.
 			txCallback(module, &data);
 			i2c->SDR = data;
 		}

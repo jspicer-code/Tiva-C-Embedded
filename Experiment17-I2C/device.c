@@ -156,6 +156,7 @@ static int InitHardware(DeviceConfig_t* pConfig)
 	
 	I2C_InitModule(pConfig->i2cModule);
 	
+	//  Use Standard 100Kbps mode.
 	I2C_EnableAsMaster(pConfig->i2cModule, 100000, false);
 	
 	uint8_t ownAddress = SLAVE_ADDRESS_BASE | (*slavePins_[1] << 1) | *slavePins_[0];
@@ -274,7 +275,7 @@ int Run(DeviceConfig_t* pConfig)
 		
 		uint8_t buttons = GetButtonState();
 		
-		// On button held down while the other pressed...
+		// One button held down while the other pressed...
 		if ((IsButtonDown(buttons, SW1) && WasButtonPressed(buttons, SW2)) ||
 			  (IsButtonDown(buttons, SW2) && WasButtonPressed(buttons, SW1)) ) {
 			
@@ -305,7 +306,7 @@ int Run(DeviceConfig_t* pConfig)
 			Blink();
 		}
 		
-		// SW1 = Write
+
 		SysTick_Wait10ms(10);
 			
 	}
