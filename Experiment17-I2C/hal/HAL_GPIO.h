@@ -2,7 +2,7 @@
 // Author: JSpicer
 // Date:  9/14/17
 // Purpose: GPIO hardware abstraction layer.  The functions here
-//	can be used for configuing digital and analog I/O.
+//	can be used for configuring digital and analog I/O.
 // Hardware:  TM4C123 and TM4C1294 Tiva board
 
 #ifndef HAL_GPIO_H

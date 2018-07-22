@@ -58,7 +58,7 @@ void I2C_EnableAsSlave(I2C_Module_t module, uint8_t ownAddress);
 //						If repeatedStart is false, the function waits for the bus to become idle before transacting, 
 //						otherwise it assumes it has ownership and does not wait.
 //					generateStop - generates a stop bit at the end of the transaction.  Set to false if
-//						a repeated start will be issue next.
+//						a repeated start will be issued next.
 // Output: zero if success, non-zero if an error.  TODO:  The bits in the return value are not currently
 //						defined for the caller.
 int I2C_MasterWrite(I2C_Module_t module, uint8_t slaveAddress, char* data, int size, bool repeatedStart, bool generateStop);

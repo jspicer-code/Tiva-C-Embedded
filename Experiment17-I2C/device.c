@@ -306,7 +306,6 @@ int Run(DeviceConfig_t* pConfig)
 			Blink();
 		}
 		
-
 		SysTick_Wait10ms(10);
 			
 	}
