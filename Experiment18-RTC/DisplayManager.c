@@ -8,7 +8,6 @@ typedef struct {
 	int column;
 } FieldPosition_t;
 
-
 typedef enum {
 	FIELD_DAY = 0,
 	FIELD_MONTH,	
@@ -32,7 +31,7 @@ static const FieldPosition_t fieldPositions_[NUM_FIELDS] = {
 };
 
 static LCDDisplay_t display_;
-static Display_Clock_t clock_;
+static RTC_Clock_t clock_;
 static int currentField_;
 
 void FormatDigits(char* s, int value) {
@@ -128,13 +127,13 @@ static void RefreshDisplay(void)
 	LCD_PutString(&display_, line, 1, 0);
 }
 
-void Display_UpdateClock(const Display_Clock_t* clock)
+void Display_UpdateClock(const RTC_Clock_t* clock)
 {
 	clock_ = *clock;
 	RefreshDisplay();
 }
 
-void Display_GetClock(Display_Clock_t* clock)
+void Display_GetClock(RTC_Clock_t* clock)
 {
 	*clock = clock_;
 }

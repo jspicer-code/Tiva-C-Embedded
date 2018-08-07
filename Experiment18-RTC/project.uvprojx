@@ -589,16 +589,6 @@
           <GroupName>source</GroupName>
           <Files>
             <File>
-              <FileName>device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\device.c</FilePath>
-            </File>
-            <File>
-              <FileName>device.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\device.h</FilePath>
-            </File>
-            <File>
               <FileName>DisplayManager.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DisplayManager.c</FilePath>
@@ -607,6 +597,16 @@
               <FileName>DisplayManager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\DisplayManager.h</FilePath>
+            </File>
+            <File>
+              <FileName>Device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Device.c</FilePath>
+            </File>
+            <File>
+              <FileName>Device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Device.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -642,6 +642,16 @@
               <FileName>Switch5Position.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\drivers\Switch5Position.h</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\drivers\RTC.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1245,16 +1255,6 @@
           <GroupName>source</GroupName>
           <Files>
             <File>
-              <FileName>device.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\device.c</FilePath>
-            </File>
-            <File>
-              <FileName>device.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\device.h</FilePath>
-            </File>
-            <File>
               <FileName>DisplayManager.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DisplayManager.c</FilePath>
@@ -1263,6 +1263,16 @@
               <FileName>DisplayManager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\DisplayManager.h</FilePath>
+            </File>
+            <File>
+              <FileName>Device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Device.c</FilePath>
+            </File>
+            <File>
+              <FileName>Device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Device.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1298,6 +1308,16 @@
               <FileName>Switch5Position.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\drivers\Switch5Position.h</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\RTC.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\drivers\RTC.h</FilePath>
             </File>
           </Files>
         </Group>

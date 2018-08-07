@@ -1,5 +1,5 @@
 
-#include "../device.h"
+#include "../Device.h"
 
 DeviceConfig_t config_;
 
@@ -21,8 +21,8 @@ int main()
 	config_.switches.rightPin = PINDEF(PORTD, PIN2);
 	config_.switches.downPin = PINDEF(PORTP, PIN0);
 	config_.switches.leftPin = PINDEF(PORTP, PIN1);
-	config_.switches.centerPin = PINDEF(PORTP, PIN4);
 	config_.switches.upPin = PINDEF(PORTQ, PIN0);
+	config_.switches.centerPin = PINDEF(PORTP, PIN4);
 		
 	Run(&config_);
 }
