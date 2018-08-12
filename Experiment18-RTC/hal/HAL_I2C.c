@@ -129,6 +129,13 @@ static void HandleInterrupt(volatile I2CRegs_t* i2c, I2C_Module_t module,
 DEFINE_IRQ_HANDLER(I2C0)
 #endif
 
+#if (halUSE_I2C1 == 1)
+// I2C0 interrupt handler. 
+// INT# 53, IRQ 37.  Same for both TM4C123 and TM4C1294.
+// Must be assigned in the IRQ vector table.
+DEFINE_IRQ_HANDLER(I2C1)
+#endif
+
 #if (halUSE_I2C2 == 1)
 // I2C2 interrupt handler.  
 // TM4C123: INT# 84, IRQ 68
@@ -159,7 +166,7 @@ int I2C_InitModule(I2C_Module_t module)
 			// The TM4C123 and TM4C124 use different PCTL values.
 			// Enable open-drain for SCL but not SDA.
 #if (halCONFIG_1294 == 1)
-			GPIO_EnableAltDigital(PORTB, PIN2, 0x2, false		// SCL
+			GPIO_EnableAltDigital(PORTB, PIN2, 0x2, false);	// SCL
 			GPIO_EnableAltDigital(PORTB, PIN3, 0x2, true);	// SDA (open-drain)
 #else // TM4C123
 			GPIO_EnableAltDigital(PORTB, PIN2, 0x3, false);	// SCL
@@ -168,6 +175,20 @@ int I2C_InitModule(I2C_Module_t module)
 			break;
 #endif
 
+#if (halUSE_I2C1 == 1)
+		case I2C1:
+			// The TM4C123 and TM4C124 use different PCTL values.
+			// Enable open-drain for SCL but not SDA.
+#if (halCONFIG_1294 == 1)
+			GPIO_EnableAltDigital(PORTG, PIN0, 0x2, false);	// SCL
+			GPIO_EnableAltDigital(PORTG, PIN1, 0x2, true);	// SDA (open-drain)
+#else // TM4C123
+			GPIO_EnableAltDigital(PORTA, PIN6, 0x3, false);	// SCL
+			GPIO_EnableAltDigital(PORTA, PIN7, 0x3, true);	// SDA (open-drain)		
+#endif
+			break;
+#endif			
+			
 #if (halUSE_I2C2 == 1)
 		case I2C2:
 			// The TM4C123 and TM4C124 use different PCTL values.
@@ -408,6 +429,12 @@ int I2C_EnableSlaveDataInterrupt(I2C_Module_t module, uint8_t priority,
 			break;
 #endif
 
+#if (halUSE_I2C1 == 1)		
+		case I2C1:
+			ENABLE_IRQ_HANDLER(I2C1, priority, rxCallback, txCallback);
+			break;
+#endif
+				
 #if (halUSE_I2C2 == 1)		
 		case I2C2:
 			ENABLE_IRQ_HANDLER(I2C2, priority, rxCallback, txCallback);

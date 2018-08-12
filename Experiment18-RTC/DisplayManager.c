@@ -155,13 +155,6 @@ int Display_Init(const LCDPinConfig_t* lcdConfig)
 	return 0;
 }
 
-
-void Display_EnableCursor(bool enable)
-{
-	LCD_EnableCursor(&display_, enable, enable);	
-}
-
-
 static void SetCursorPosition(int field)
 {
 	if (field >= NUM_FIELDS) {
@@ -177,8 +170,9 @@ static void SetCursorPosition(int field)
 	currentField_ = field;
 }
 
-void Display_ResetCursorPosition(void)
+void Display_EnableCursor(bool enable)
 {
+	LCD_EnableCursor(&display_, enable, enable);	
 	SetCursorPosition(0);
 }
 
@@ -265,7 +259,7 @@ void SetValue(FieldName_t fieldName, int value)
 		case FIELD_YEAR:
 			
 			if (value < 0) {
-				value = 0;
+				value = 99;
 			}
 			else if (value > 99) {
 				value = 0;

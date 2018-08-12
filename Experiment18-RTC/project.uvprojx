@@ -1002,7 +1002,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\startup_TM4C123</IncludePath>
+              <IncludePath>.\startup_TM4C123;.\hal;.\utilities;.\drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

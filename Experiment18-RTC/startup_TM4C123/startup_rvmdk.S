@@ -95,7 +95,8 @@ __heap_limit
 ; The vector table.
 ;
 ;******************************************************************************
-		EXTERN	I2C_I2C2Handler
+		EXTERN	I2C_I2C1Handler
+		EXTERN	Timer_TIMER1Handler
 		
         EXPORT  __Vectors
 __Vectors
@@ -136,7 +137,7 @@ __Vectors
         DCD     IntDefaultHandler           ; Watchdog timer
         DCD     IntDefaultHandler         	; Timer 0 subtimer A
         DCD     IntDefaultHandler           ; Timer 0 subtimer B
-        DCD     IntDefaultHandler       	; Timer 1 subtimer A
+        DCD     Timer_TIMER1Handler       	; Timer 1 subtimer A
         DCD     IntDefaultHandler           ; Timer 1 subtimer B
         DCD     IntDefaultHandler        	; Timer 2 subtimer A
         DCD     IntDefaultHandler           ; Timer 2 subtimer B
@@ -152,7 +153,7 @@ __Vectors
         DCD     IntDefaultHandler           ; SSI1 Rx and Tx
         DCD     IntDefaultHandler           ; Timer 3 subtimer A
         DCD     IntDefaultHandler           ; Timer 3 subtimer B
-        DCD     IntDefaultHandler           ; I2C1 Master and Slave
+        DCD     I2C_I2C1Handler          	; I2C1 Master and Slave
         DCD     IntDefaultHandler           ; Quadrature Encoder 1
         DCD     IntDefaultHandler           ; CAN0
         DCD     IntDefaultHandler           ; CAN1
@@ -183,7 +184,7 @@ __Vectors
         DCD     0                           ; Reserved
         DCD     0                           ; Reserved
         DCD     0                           ; Reserved
-        DCD     I2C_I2C2Handler          	; I2C2 Master and Slave
+        DCD     IntDefaultHandler           ; I2C2 Master and Slave
         DCD     IntDefaultHandler           ; I2C3 Master and Slave
         DCD     IntDefaultHandler           ; Timer 4 subtimer A
         DCD     IntDefaultHandler           ; Timer 4 subtimer B

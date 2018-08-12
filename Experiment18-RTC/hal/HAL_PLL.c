@@ -52,7 +52,7 @@ static void SetBusClockFreq(uint32_t freq)
 //         the source code for SysCtlClockFreqSet in sysctl.c and the PLL example from
 //				 Valvano's examples at http://users.ece.utexas.edu/~valvano/arm/PLL_4C1294.zip.
 //         There were differences in each source.  The implementation here attempts
-//         fix an apparent typo in the data sheet, remove what seems to be unncessary steps,
+//         fix an apparent typo in the data sheet, remove what seems to be unnecessary steps,
 //				 and reorder them where it's feasible and makes sense to do so.  
 
 //         After power-on reset (POR) the CPU will be using the precision internal

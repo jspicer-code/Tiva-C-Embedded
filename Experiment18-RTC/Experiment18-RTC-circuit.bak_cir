@@ -7,8 +7,8 @@ Shape Version=11.00
 Screen=1536,864
 MCAPVersion=11.0.0.3
 Key ID=Demo
-NLCnt=88
-TXCnt=49
+NLCnt=103
+TXCnt=64
 
 [shapedef]
 Name=a_dip8
@@ -126,7 +126,7 @@ Name=Input Port
 Definition=NULL
 Shape=Input
 Mask=5632
-Used=143
+Used=148
 memo=Input Port connector used to tie nodes together
 Label Offset=17,8,10,18
 PinCnt=0
@@ -171,7 +171,7 @@ Name=Output Port
 Definition=NULL
 Shape=Output
 Mask=4096
-Used=126
+Used=135
 memo=Output Port connector used to tie nodes together
 Label Offset=17,8,10,18
 PinCnt=0
@@ -261,16 +261,16 @@ Show Grid Text=True
 [Object]
 Object=Rectangle
 CBorder=#000080
-Px=112,110,223,512
+Px=75,145,199,547
 
 [Object]
 Object=Rectangle
 CBorder=#000080
-Px=1088,116,1242,445
+Px=1370,156,1469,485
 
 [Comp]
 Name=Input Port
-Px=1088,312
+Px=1368,344
 Rot=6
 
 [Attr]
@@ -288,7 +288,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,264
+Px=1368,296
 Rot=6
 
 [Attr]
@@ -306,7 +306,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,240
+Px=1368,272
 Rot=6
 
 [Attr]
@@ -324,7 +324,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,216
+Px=1368,248
 Rot=6
 
 [Attr]
@@ -342,7 +342,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,384
+Px=1368,416
 Rot=6
 
 [Attr]
@@ -360,7 +360,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,360
+Px=1368,392
 Rot=6
 
 [Attr]
@@ -378,7 +378,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=1088,336
+Px=1368,368
 Rot=6
 
 [Attr]
@@ -395,19 +395,19 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=1056,144,1064,144
+Pxs=1336,176,1344,176
 
 [Comp]
 Name=Ground
-Px=1064,144
+Px=1344,176
 Rot=1
 
 [Wire]
-Pxs=1064,144,1088,144
+Pxs=1344,176,1368,176
 
 [Comp]
 Name=Fixed Analog
-Px=968,144
+Px=1248,176
 Rot=4
 
 [Attr]
@@ -425,7 +425,7 @@ V
 
 [Comp]
 Name=Pot
-Px=1008,144
+Px=1288,176
 
 [Attr]
 ON=32,4,PART
@@ -449,23 +449,23 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=1000,144,1008,144
+Pxs=1280,176,1288,176
 
 [Wire]
-Pxs=1032,192,1088,192
+Pxs=1312,224,1368,224
 
 [Wire]
-Pxs=1032,160,1032,192
+Pxs=1312,192,1312,224
 
 [Wire]
-Pxs=1000,144,1000,176
+Pxs=1280,176,1280,208
 
 [Wire]
-Pxs=1000,176,1088,176
+Pxs=1280,208,1368,208
 
 [Comp]
 Name=Fixed Analog
-Px=968,408
+Px=1248,440
 Rot=4
 
 [Attr]
@@ -482,27 +482,27 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=1000,408,1088,408
+Pxs=1280,440,1368,440
 
 [Comp]
 Name=Ground
-Px=1064,440
+Px=1344,472
 Rot=1
 
 [Wire]
-Pxs=1064,432,1064,440
+Pxs=1344,464,1344,472
 
 [Wire]
-Pxs=1064,432,1088,432
+Pxs=1344,464,1368,464
 
 [Object]
 Object=Rectangle
 CBorder=#000080
-Px=586,131,711,263
+Px=856,156,981,288
 
 [Comp]
 Name=Output Port
-Px=584,144
+Px=856,168
 Rot=2
 
 [Attr]
@@ -516,7 +516,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=584,168
+Px=856,192
 Rot=2
 
 [Attr]
@@ -534,7 +534,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=584,192
+Px=856,216
 Rot=2
 
 [Attr]
@@ -552,7 +552,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=584,216
+Px=856,240
 Rot=2
 
 [Attr]
@@ -566,7 +566,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=584,240
+Px=856,264
 Rot=2
 
 [Attr]
@@ -584,7 +584,7 @@ V
 
 [Comp]
 Name=Fixed Analog
-Px=744,112
+Px=1016,136
 Rot=7
 
 [Attr]
@@ -601,23 +601,23 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=712,144,744,144
+Pxs=984,168,1016,168
 
 [Comp]
 Name=Ground
-Px=744,176
+Px=1016,200
 Rot=1
 
 [Wire]
-Pxs=744,168,744,176
+Pxs=1016,192,1016,200
 
 [Wire]
-Pxs=712,168,744,168
+Pxs=984,192,1016,192
 
 [Comp]
 Name=EL2600_EL
 Style=ShowPinText
-Px=520,448
+Px=776,456
 
 [Attr]
 ON=6,46,PART
@@ -630,7 +630,7 @@ V
 
 [Comp]
 Name=Fixed Analog
-Px=632,368
+Px=888,376
 Rot=7
 
 [Attr]
@@ -648,7 +648,7 @@ V
 
 [Comp]
 Name=Resistor
-Px=680,432
+Px=936,440
 Rot=6
 
 [Attr]
@@ -665,22 +665,22 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=592,432,632,432
+Pxs=848,440,888,440
 
 [Wire]
-Pxs=632,400,632,432
+Pxs=888,408,888,440
 
 [Wire]
-Pxs=592,448,680,448
+Pxs=848,456,936,456
 
 [Comp]
 Name=Ground
-Px=464,544
+Px=720,552
 Rot=7
 
 [Comp]
 Name=Battery
-Px=416,512
+Px=672,520
 Rot=3
 
 [Attr]
@@ -698,20 +698,20 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=464,480,488,480
+Pxs=720,488,744,488
 
 [Wire]
-Pxs=464,480,464,536
+Pxs=720,488,720,544
 
 [Wire]
-Pxs=416,464,488,464
+Pxs=672,472,744,472
 
 [Wire]
-Pxs=416,536,464,536
+Pxs=672,544,720,544
 
 [Comp]
 Name=Xtal
-Px=416,432
+Px=672,440
 
 [Attr]
 ON=17,10,PART
@@ -739,32 +739,32 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=416,432,416,448
+Pxs=672,440,672,456
 
 [Wire]
-Pxs=416,448,488,448
+Pxs=672,456,744,456
 
 [Wire]
-Pxs=464,432,488,432
+Pxs=720,440,744,440
 
 [Wire]
-Pxs=488,480,504,480
+Pxs=744,488,760,488
 
 [Wire]
-Pxs=488,464,504,464
+Pxs=744,472,760,472
 
 [Wire]
-Pxs=488,448,504,448
+Pxs=744,456,760,456
 
 [Wire]
-Pxs=488,432,504,432
+Pxs=744,440,760,440
 
 [Wire]
-Pxs=592,464,744,464
+Pxs=848,472,1000,472
 
 [Comp]
 Name=Resistor
-Px=744,448
+Px=1000,456
 Rot=3
 
 [Attr]
@@ -782,7 +782,7 @@ V
 
 [Comp]
 Name=Fixed Analog
-Px=744,368
+Px=1000,376
 Rot=7
 
 [Attr]
@@ -800,7 +800,7 @@ V
 
 [Comp]
 Name=Resistor
-Px=792,448
+Px=1048,456
 Rot=3
 
 [Attr]
@@ -817,20 +817,20 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=744,400,792,400
+Pxs=1000,408,1048,408
 
 [Wire]
-Pxs=744,448,744,464
+Pxs=1000,456,1000,472
 
 [Wire]
-Pxs=744,464,840,464
+Pxs=1000,472,1096,472
 
 [Wire]
-Pxs=792,448,792,480
+Pxs=1048,456,1048,488
 
 [Comp]
 Name=Capacitor
-Px=632,488
+Px=888,496
 Rot=7
 
 [Attr]
@@ -847,23 +847,23 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=464,536,632,536
+Pxs=720,544,888,544
 
 [Wire]
-Pxs=680,432,680,448
+Pxs=936,440,936,456
 
 [Wire]
-Pxs=464,536,464,544
+Pxs=720,544,720,552
 
 [Wire]
-Pxs=416,512,416,536
+Pxs=672,520,672,544
 
 [Wire]
-Pxs=680,448,688,448
+Pxs=936,456,944,456
 
 [Comp]
 Name=Output Port
-Px=224,136
+Px=200,160
 Rot=4
 
 [Attr]
@@ -877,7 +877,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,160
+Px=200,184
 Rot=4
 
 [Attr]
@@ -891,7 +891,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,184
+Px=200,208
 Rot=4
 
 [Attr]
@@ -905,7 +905,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,208
+Px=200,232
 Rot=4
 
 [Attr]
@@ -919,7 +919,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,232
+Px=200,256
 Rot=4
 
 [Attr]
@@ -933,7 +933,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,256
+Px=200,280
 Rot=4
 
 [Attr]
@@ -947,7 +947,7 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,280
+Px=200,304
 Rot=4
 
 [Attr]
@@ -961,7 +961,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=224,320
+Px=200,344
 Rot=4
 
 [Attr]
@@ -979,7 +979,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=224,344
+Px=200,368
 Rot=4
 
 [Attr]
@@ -997,7 +997,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=224,368
+Px=200,392
 Rot=4
 
 [Attr]
@@ -1015,7 +1015,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=224,392
+Px=200,416
 Rot=4
 
 [Attr]
@@ -1033,7 +1033,7 @@ V
 
 [Comp]
 Name=Input Port
-Px=224,416
+Px=200,440
 Rot=4
 
 [Attr]
@@ -1051,12 +1051,12 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,456
+Px=200,480
 Rot=4
 
 [Attr]
-ON=53,-4,PART
-V=I2C2SCL
+ON=53,-5,PART
+V=SCL
 Style=8192
 
 [Attr]
@@ -1065,12 +1065,12 @@ V
 
 [Comp]
 Name=Output Port
-Px=224,480
+Px=200,504
 Rot=4
 
 [Attr]
 ON=53,-6,PART
-V=I2C2SDA
+V=SDA
 Style=8192
 
 [Attr]
@@ -1079,12 +1079,12 @@ V
 
 [Comp]
 Name=Input Port
-Px=840,480
+Px=1096,488
 Rot=4
 
 [Attr]
 ON=55,-8,PART
-V=I2C2SDA
+V=SDA
 Style=8192
 
 [Attr]
@@ -1097,12 +1097,12 @@ V
 
 [Comp]
 Name=Input Port
-Px=840,464
+Px=1096,472
 Rot=4
 
 [Attr]
 ON=56,-8,PART
-V=I2C2SCL
+V=SCL
 Style=8192
 
 [Attr]
@@ -1114,17 +1114,238 @@ ON=0,0,PACKAGE
 V
 
 [Wire]
-Pxs=592,480,792,480
+Pxs=848,488,1048,488
 
 [Wire]
-Pxs=792,480,840,480
+Pxs=1048,488,1096,488
 
 [Wire]
-Pxs=632,432,632,488
+Pxs=888,440,888,496
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=357,143,472,545
+
+[Comp]
+Name=Output Port
+Px=472,160
+Rot=4
+
+[Attr]
+ON=53,-7,PART
+V=RS
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,184
+Rot=4
+
+[Attr]
+ON=52,-5,PART
+V=RW
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,208
+Rot=4
+
+[Attr]
+ON=53,-6,PART
+V=E
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,232
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=DB4
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,256
+Rot=4
+
+[Attr]
+ON=53,-4,PART
+V=DB5
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,280
+Rot=4
+
+[Attr]
+ON=53,-4,PART
+V=DB6
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,304
+Rot=4
+
+[Attr]
+ON=54,-6,PART
+V=DB7
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=472,344
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_RIGHT
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=472,368
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_DOWN
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=472,392
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_LEFT
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=472,416
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_UP
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=472,440
+Rot=4
+
+[Attr]
+ON=54,-5,PART
+V=SW_CENTER
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,480
+Rot=4
+
+[Attr]
+ON=53,-4,PART
+V=SCL
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=472,504
+Rot=4
+
+[Attr]
+ON=53,-6,PART
+V=SDA
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
 
 [Grid Text]
 Text=" Probe"
-Px=680,448
+Px=936,456
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1132,7 +1353,7 @@ CBorder=None
 
 [Grid Text]
 Text="SDA"
-Px=592,480
+Px=848,488
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1140,7 +1361,7 @@ CBorder=None
 
 [Grid Text]
 Text="SCL"
-Px=592,464
+Px=848,472
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1148,7 +1369,7 @@ CBorder=None
 
 [Grid Text]
 Text="GND"
-Px=488,480
+Px=744,488
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1160,7 +1381,7 @@ RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fprq4\fcharset0
 RTF="{\colortbl ;\red0\green0\blue255;}"
 RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub BAT\nosupersub\par"
 RTF="}"
-Px=488,464
+Px=744,472
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1168,7 +1389,7 @@ CBorder=None
 
 [Grid Text]
 Text="X2"
-Px=488,448
+Px=744,456
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1176,7 +1397,7 @@ CBorder=None
 
 [Grid Text]
 Text="X1"
-Px=488,432
+Px=744,440
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1184,7 +1405,7 @@ CBorder=None
 
 [Grid Text]
 Text="SQW"
-Px=592,448
+Px=848,456
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1196,7 +1417,7 @@ RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fprq13\fcharset
 RTF="{\colortbl ;\red0\green0\blue255;}"
 RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub CC\nosupersub\par"
 RTF="}"
-Px=592,432
+Px=848,440
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1204,7 +1425,7 @@ CBorder=None
 
 [Grid Text]
 Text="TM4C1294NCPDT"
-Px=120,536
+Px=88,568
 Color=#008000
 GridSnap=True
 JustifyH=Left
@@ -1213,7 +1434,7 @@ CBorder=None
 
 [Grid Text]
 Text="PC5"
-Px=192,192
+Px=168,216
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1221,7 +1442,7 @@ CBorder=None
 
 [Grid Text]
 Text="PE4"
-Px=192,144
+Px=168,168
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1229,7 +1450,7 @@ CBorder=None
 
 [Grid Text]
 Text="PC4"
-Px=192,168
+Px=168,192
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1237,7 +1458,7 @@ CBorder=None
 
 [Grid Text]
 Text="PB2"
-Px=192,264
+Px=168,288
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1245,7 +1466,7 @@ CBorder=None
 
 [Grid Text]
 Text="PC7"
-Px=192,240
+Px=168,264
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1253,7 +1474,7 @@ CBorder=None
 
 [Grid Text]
 Text="PD3"
-Px=192,216
+Px=168,240
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1261,7 +1482,7 @@ CBorder=None
 
 [Grid Text]
 Text="PB3"
-Px=192,288
+Px=168,312
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1269,7 +1490,7 @@ CBorder=None
 
 [Grid Text]
 Text="PP0"
-Px=192,352
+Px=168,376
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1277,7 +1498,7 @@ CBorder=None
 
 [Grid Text]
 Text="PP1"
-Px=192,376
+Px=168,400
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1285,7 +1506,7 @@ CBorder=None
 
 [Grid Text]
 Text="PD2"
-Px=192,328
+Px=168,352
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1293,7 +1514,7 @@ CBorder=None
 
 [Grid Text]
 Text="PP4"
-Px=192,424
+Px=168,448
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1301,7 +1522,7 @@ CBorder=None
 
 [Grid Text]
 Text="PQ0"
-Px=192,400
+Px=168,424
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1309,7 +1530,7 @@ CBorder=None
 
 [Grid Text]
 Text="PN5"
-Px=192,464
+Px=168,488
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1317,7 +1538,7 @@ CBorder=None
 
 [Grid Text]
 Text="PN4"
-Px=192,488
+Px=168,512
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1325,7 +1546,7 @@ CBorder=None
 
 [Grid Text]
 Text="NC"
-Px=1072,296
+Px=1352,328
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1333,7 +1554,7 @@ CBorder=None
 
 [Grid Text]
 Text="RW"
-Px=1096,248
+Px=1376,280
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1345,7 +1566,7 @@ RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fchar
 RTF="{\colortbl ;\red0\green0\blue255;}"
 RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub DD\nosupersub\par"
 RTF="}"
-Px=1096,176
+Px=1376,208
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1357,7 +1578,7 @@ RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq12\fchar
 RTF="{\colortbl ;\red0\green0\blue255;}"
 RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub O\nosupersub\par"
 RTF="}"
-Px=1096,200
+Px=1376,232
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1365,7 +1586,7 @@ CBorder=None
 
 [Grid Text]
 Text="RS"
-Px=1096,224
+Px=1376,256
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1377,7 +1598,7 @@ RTF="{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fmodern\fprq10\fchar
 RTF="{\colortbl ;\red0\green0\blue255;}"
 RTF="\viewkind4\uc1\pard\cf1\highlight0\f0\fs18 V\sub SS\nosupersub\par"
 RTF="}"
-Px=1096,152
+Px=1376,184
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1385,7 +1606,7 @@ CBorder=None
 
 [Grid Text]
 Text="DB0-DB3"
-Px=1096,296
+Px=1376,328
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1393,7 +1614,7 @@ CBorder=None
 
 [Grid Text]
 Text="DB4"
-Px=1096,320
+Px=1376,352
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1401,7 +1622,7 @@ CBorder=None
 
 [Grid Text]
 Text="DB5"
-Px=1096,344
+Px=1376,376
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1409,7 +1630,7 @@ CBorder=None
 
 [Grid Text]
 Text="E"
-Px=1096,272
+Px=1376,304
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1417,7 +1638,7 @@ CBorder=None
 
 [Grid Text]
 Text="DB6"
-Px=1096,368
+Px=1376,400
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1425,7 +1646,7 @@ CBorder=None
 
 [Grid Text]
 Text="DB7"
-Px=1096,392
+Px=1376,424
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1433,7 +1654,7 @@ CBorder=None
 
 [Grid Text]
 Text="A"
-Px=1096,416
+Px=1376,448
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1441,7 +1662,7 @@ CBorder=None
 
 [Grid Text]
 Text="K"
-Px=1096,440
+Px=1376,472
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1449,7 +1670,7 @@ CBorder=None
 
 [Grid Text]
 Text="Techstar TS1620A-21/B (16x2)"
-Px=1088,472
+Px=1336,528
 Color=#008000
 GridSnap=True
 JustifyH=Left
@@ -1458,7 +1679,7 @@ CBorder=None
 
 [Grid Text]
 Text="Display"
-Px=1144,112
+Px=1424,144
 Color=#008000
 GridSnap=True
 JustifyH=Left
@@ -1467,7 +1688,7 @@ CBorder=None
 
 [Grid Text]
 Text="CTR"
-Px=592,152
+Px=864,176
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1475,7 +1696,7 @@ CBorder=None
 
 [Grid Text]
 Text="LT"
-Px=592,224
+Px=864,248
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1483,7 +1704,7 @@ CBorder=None
 
 [Grid Text]
 Text="DN"
-Px=592,200
+Px=864,224
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1491,7 +1712,7 @@ CBorder=None
 
 [Grid Text]
 Text="UP"
-Px=592,176
+Px=864,200
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1499,7 +1720,7 @@ CBorder=None
 
 [Grid Text]
 Text="RT"
-Px=592,248
+Px=864,272
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1507,7 +1728,7 @@ CBorder=None
 
 [Grid Text]
 Text="VCC"
-Px=680,152
+Px=952,176
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1515,7 +1736,7 @@ CBorder=None
 
 [Grid Text]
 Text="GND"
-Px=680,176
+Px=952,200
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1523,7 +1744,7 @@ CBorder=None
 
 [Grid Text]
 Text="Parallax 5-Position #27801"
-Px=584,280
+Px=840,312
 Color=#008000
 GridSnap=True
 JustifyH=Left
@@ -1532,9 +1753,130 @@ CBorder=None
 
 [Grid Text]
 Text="Experiment 18 - RTC"
-Px=504,56
+Px=624,56
 Height=-32
 Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="TM4C123GH6PM"
+Px=376,568
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB7"
+Px=440,216
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB2"
+Px=440,168
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE0"
+Px=440,192
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA3"
+Px=440,288
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA4"
+Px=440,264
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB6"
+Px=440,240
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA2"
+Px=440,312
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB0"
+Px=440,376
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB1"
+Px=440,400
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB5"
+Px=440,352
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE5"
+Px=440,448
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE4"
+Px=440,424
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA6"
+Px=440,488
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PA7"
+Px=440,512
 GridSnap=True
 JustifyH=Left
 JustifyV=Bottom
@@ -1694,9 +2036,9 @@ PrinterScale=1
 Scale 0=1
 Scale 1=1
 Scale 2=1
-SB 3=67,0
+SB 3=171,96
 Scale 3=1
-Px=831,245
+Px=497,432
 WinBackGround Color=#FFFFFF
 Select Color=#FF0000
 Anchor Color=#000000

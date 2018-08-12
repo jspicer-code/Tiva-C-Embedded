@@ -126,7 +126,7 @@ DEFINE_IRQ_HANDLER(TIMER1)
 
 #if (halUSE_TIMER2 == 1)
 #define IRQ_HANDLER_DEFINED
-// I2C2 interrupt handler.  
+// TIMER2A interrupt handler.  
 // INT# 39, IRQ 23.  Same for both TM4C123 and TM4C1294.
 // Must be assigned in the IRQ vector table.
 DEFINE_IRQ_HANDLER(TIMER2)

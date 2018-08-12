@@ -12,18 +12,23 @@
 // 0=CLOCK mode, 1=SET mode 
 static bool setMode_;
 
+void UpdateClock(void)
+{
+	RTC_Clock_t clock;
+	RTC_Read(&clock);
+	Display_UpdateClock(&clock);
+}
+
 // Called periodically by the timer ISR.
-void ClockUpdateCallback(void)
+void ClockTimerCallback(void)
 {
 	// If not in SET mode (i.e. in CLOCK mode), then update the clock.
 	if (!setMode_) {
-		RTC_Clock_t clock;
-		RTC_Read(&clock);
-		Display_UpdateClock(&clock);
+		UpdateClock();
 	}
 }
 
-static int InitHardware(DeviceConfig_t* pConfig)
+static bool InitHardware(DeviceConfig_t* pConfig)
 {
 	__disable_irq();
 	
@@ -36,7 +41,12 @@ static int InitHardware(DeviceConfig_t* pConfig)
 	// Use Standard 100Kbps mode.
 	I2C_EnableAsMaster(pConfig->i2cModule, 100000, false);
 	
-	RTC_Init(pConfig->i2cModule);
+	bool isReset;
+	if (!RTC_Init(pConfig->i2cModule, true, &isReset)) {
+		return false;
+	}
+
+	setMode_ = isReset;
 	
 	LCDPinConfig_t lcd;	
 	lcd.rsPin = pConfig->lcd.rsPin;
@@ -52,20 +62,20 @@ static int InitHardware(DeviceConfig_t* pConfig)
 	lcd.rows = 2;
 	lcd.columns = 16;
 	if (Display_Init(&lcd)) {
-		return -1;
+		return false;
 	}
 	
 	if (Switch5_Initialize(&pConfig->switches) < 0) {
-		return -1;
+		return false;
 	}
 		
 	__enable_irq();
 	
 	// Call back frequency is 1Hz.
-	Timer_Init(TIMER1, TIMER_PERIODIC, 7, ClockUpdateCallback);
+	Timer_Init(TIMER1, TIMER_PERIODIC, 7, ClockTimerCallback);
 	Timer_Start(TIMER1, PLL_BusClockFreq);
 	
-	return 0;
+	return true;
 }
 
 
@@ -94,7 +104,6 @@ void ProcessSwitchState(int pollPeriod)
 			// Toggle modes and turn on/off the input cursor.
 			setMode_ = !setMode_;
 			Display_EnableCursor(setMode_);
-			Display_ResetCursorPosition();
 			
 			centerDownTime = 0;
 		}
@@ -124,8 +133,13 @@ void ProcessSwitchState(int pollPeriod)
 int Run(DeviceConfig_t* pConfig)
 {
 
-	if (InitHardware(pConfig)) {
+	if (!InitHardware(pConfig)) {
 		for (;;);
+	}
+	
+	if (setMode_) {
+		Display_EnableCursor(true);
+		UpdateClock();
 	}
 	
 	for (;;) {

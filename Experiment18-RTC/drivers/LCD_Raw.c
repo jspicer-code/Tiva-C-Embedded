@@ -1,4 +1,4 @@
-// File:  LCD_Raw.h
+// File:  LCD_Raw.c
 // Author: JSpicer
 // Date:  12/23/17
 // Purpose: LCD driver for Hitachi HD44780 controller variants.
