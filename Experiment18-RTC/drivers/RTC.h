@@ -20,7 +20,7 @@ typedef struct {
 	uint8_t		month;			// 1-12
 	uint8_t		year;				// 0-99, offset from 1970
 
-	uint8_t		clockHalt;	// 1=Halted, 1=running
+	uint8_t		clockHalt;	// 1=Halted, 0=Running
 	uint8_t 	hourMode; 	// 0=24hr, 1=12hr
 	uint8_t		am_pm;			// 0=AM, 1=PM
 } RTC_Clock_t;
