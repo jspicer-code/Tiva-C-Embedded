@@ -17,7 +17,7 @@ The circuit diagram below shows the connections between the Tiva board and the c
 
 The wire ends are stuck directly into the holes of the breadboard.  Only the GND (Black), TXD (Orange), and RXD (Yellow) wires are used.  The remaining wires (CTS, VCC, and RTS) are left unnconnected.  Jumper wires are connected from the PE4, PE5, and GND pins of the Tiva directly to the cable wire ends on the breadboard.  With RS232, the TXD (transmit) wire from the Host PC is connected to the RX (receive) pin of the Tiva board; and the RXD (receive) wire from the Host PC is connected to the TX (transmit) pin of the board.
 
-On Windows 10, the FTDI cable will be configured as a virtual COM port when it is plugged in.  To determine which COM port is chosen, open the Windows Device Manager and look under the Ports (COM & LPT) node to find the COM number for USB Serial Port when it's plugged in (e.g. COM6):
+On Windows 10, the FTDI cable will be configured as a virtual COM port when it is plugged in.  To determine which COM port is chosen, open the Windows Device Manager and look under Ports (COM & LPT) to find the COM number for the port that is named USB Serial Port (e.g. COM6):
 
 ![Device Manager](device-manager.png)  
 
