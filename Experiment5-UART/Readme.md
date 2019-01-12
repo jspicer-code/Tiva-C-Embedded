@@ -11,6 +11,18 @@ A scope probe was hooked up to the TX pin (PE5) to view the waveform of the char
 ## Circuit
 This experiment uses the TTL-232R-3V3-WE USB to TTL serial cable (wire end version) made by FTDI Chip.  The data sheet is available on FTDI's web site, currently:  https://www.ftdichip.com/Support/Documents/DataSheets/Cables/DS_TTL-232R_CABLES.pdf.  The cable costs around $17 (US) and can be found on Amazon, Mouser, etc.  It is available with or without a header on the wire ends.   
 
-The circuit diagram below shows the connections between the EK-TM4C123GXL and the cable wire ends.
+The circuit diagram below shows the connections between the Tiva board and the cable wire ends.
 
 ![Experiment5-UART](Experiment5-UART-circuit.png)  
+
+The wire ends are stuck directly into the holes of the breadboard.  Only the GND (Black), TXD (Orange), and RXD (Yellow) wires are used.  The remaining wires (CTS, VCC, and RCS) are left unnconnected.  Jumper wires are brought out from the PE4, PE5, and GND pins of the Tiva to make straight though connections with the cable wires.  With RS232, the TXD (transmit) wire from the Host PC is connected to the RX (receive) pin of the Tiva board; and the RXD (receive) wire from the Host PC is connected to the TX (transmit) pin of the board.
+
+On Windows 10, the FTDI cable will be configured as a virtual COM port when it is plugged in.  To determine which COM port is chosen, open the Windows Device Manager and look under the Ports (COM & LPT) node to find the COM number that for USB Serial Port that is assigned (e.g. COM6):
+
+![Device Manager](device-manager.png)  
+
+PuTTY is used here as the serial port terminal, but any terminal application should work (e.g. Tera Term).  The settings are 9600 baud, 8 data bits, 1 stop bit, no parity, no flow control:
+
+![Device Manager](putty-settings.png) 
+
+
