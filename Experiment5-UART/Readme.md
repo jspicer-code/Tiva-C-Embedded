@@ -9,5 +9,8 @@ A scope probe was hooked up to the TX pin (PE5) to view the waveform of the char
 [Watch the video](https://youtu.be/AObu1TXMY2k)
 
 ## Circuit
+This experiment uses the TTL-232R-3V3-WE USB to TTL serial cable (wire end version) made by FTDI Chip.  The data sheet is available on FTDI's web site, currently:  https://www.ftdichip.com/Support/Documents/DataSheets/Cables/DS_TTL-232R_CABLES.pdf.  The cable costs around $17 (US) and can be found on Amazon, Mouser, etc.  It is available with or without a header on the wire ends.   
+
+The circuit diagram below shows the connections between the EK-TM4C123GXL and the cable wire ends.
 
 ![Experiment5-UART](Experiment5-UART-circuit.png)  
