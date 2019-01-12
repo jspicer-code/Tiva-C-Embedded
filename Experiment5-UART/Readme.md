@@ -7,3 +7,7 @@ A scope probe was hooked up to the TX pin (PE5) to view the waveform of the char
 
 [![](http://img.youtube.com/vi/AObu1TXMY2k/1.jpg)](https://youtu.be/AObu1TXMY2k)<br>
 [Watch the video](https://youtu.be/AObu1TXMY2k)
+
+## Circuit
+
+![Experiment5-UART](Experiment5-UART-circuit.png)  
