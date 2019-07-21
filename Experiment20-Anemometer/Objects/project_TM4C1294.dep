@@ -1,192 +1,0 @@
-Dependencies for Project 'project', Target 'TM4C1294': (DO NOT MODIFY !)
-F (.\hal\HAL.h)(0x5CE807CF)()
-F (.\hal\HAL_GPIO.c)(0x5D1E0FAF)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_gpio.o --omf_browse .\objects\hal_gpio.crf --depend .\objects\hal_gpio.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal\tm4c1294ncpdt.h)(0x5AA51762)
-I (hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (hal\HAL_PLL.h)(0x5B49DEF8)
-I (hal\HAL_SysTick.h)(0x5B49DEF8)
-I (hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (hal\HAL_I2C.h)(0x5B549CE8)
-I (hal\HAL_Timer.h)(0x5D2A579D)
-I (hal\HAL_SPI.h)(0x5B9D40A2)
-F (.\hal\HAL_GPIO.h)(0x5B9D2D2C)()
-F (.\hal\HAL_NVIC.c)(0x5B49DF3E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_nvic.o --omf_browse .\objects\hal_nvic.crf --depend .\objects\hal_nvic.d)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (hal\tm4c123gh6pm.h)(0x59A4890E)
-F (.\hal\HAL_NVIC.h)(0x5B49DF3E)()
-F (.\hal\HAL_PLL.c)(0x5B6F3B68)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_pll.o --omf_browse .\objects\hal_pll.crf --depend .\objects\hal_pll.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal\HAL_PLL.h)(0x5B49DEF8)
-I (hal\HAL_SysTick.h)(0x5B49DEF8)
-I (hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (hal\HAL_I2C.h)(0x5B549CE8)
-I (hal\HAL_Timer.h)(0x5D2A579D)
-I (hal\HAL_SPI.h)(0x5B9D40A2)
-I (hal\tm4c1294ncpdt.h)(0x5AA51762)
-F (.\hal\HAL_PLL.h)(0x5B49DEF8)()
-F (.\hal\HAL_SysTick.c)(0x5B49DEF8)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_systick.o --omf_browse .\objects\hal_systick.crf --depend .\objects\hal_systick.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (hal\tm4c123gh6pm.h)(0x59A4890E)
-I (hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal\HAL_PLL.h)(0x5B49DEF8)
-I (hal\HAL_SysTick.h)(0x5B49DEF8)
-I (hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (hal\HAL_I2C.h)(0x5B549CE8)
-I (hal\HAL_Timer.h)(0x5D2A579D)
-I (hal\HAL_SPI.h)(0x5B9D40A2)
-F (.\hal\HAL_SysTick.h)(0x5B49DEF8)()
-F (.\hal\HAL_SPI.c)(0x5B9D69E2)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_spi.o --omf_browse .\objects\hal_spi.crf --depend .\objects\hal_spi.d)
-I (hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal\HAL_PLL.h)(0x5B49DEF8)
-I (hal\HAL_SysTick.h)(0x5B49DEF8)
-I (hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (hal\HAL_I2C.h)(0x5B549CE8)
-I (hal\HAL_Timer.h)(0x5D2A579D)
-I (hal\HAL_SPI.h)(0x5B9D40A2)
-I (hal\tm4c1294ncpdt.h)(0x5AA51762)
-F (.\hal\HAL_SPI.h)(0x5B9D40A2)()
-F (.\hal\HAL_Timer.c)(0x5D334093)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\hal_timer.o --omf_browse .\objects\hal_timer.crf --depend .\objects\hal_timer.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\assert.h)(0x599F920A)
-I (hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal\HAL_PLL.h)(0x5B49DEF8)
-I (hal\HAL_SysTick.h)(0x5B49DEF8)
-I (hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (hal\HAL_NVIC.h)(0x5B49DF3E)
-I (hal\HAL_I2C.h)(0x5B549CE8)
-I (hal\HAL_Timer.h)(0x5D2A579D)
-I (hal\HAL_SPI.h)(0x5B9D40A2)
-I (hal\tm4c1294ncpdt.h)(0x5AA51762)
-F (.\hal\HAL_Timer.h)(0x5D2A579D)()
-F (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)()
-F (.\startup_TM4C1294\main.c)(0x5D3340F2)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (startup_TM4C1294\../Device.h)(0x5D2A5816)
-I (startup_TM4C1294\../hal/HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (startup_TM4C1294\../hal/HAL_PLL.h)(0x5B49DEF8)
-I (startup_TM4C1294\../hal/HAL_SysTick.h)(0x5B49DEF8)
-I (startup_TM4C1294\../hal/HAL_GPIO.h)(0x5B9D2D2C)
-I (startup_TM4C1294\../hal/HAL_NVIC.h)(0x5B49DF3E)
-I (startup_TM4C1294\../hal/HAL_I2C.h)(0x5B549CE8)
-I (startup_TM4C1294\../hal/HAL_Timer.h)(0x5D2A579D)
-I (startup_TM4C1294\../hal/HAL_SPI.h)(0x5B9D40A2)
-F (.\startup_TM4C1294\startup_rvmdk.S)(0x5D334276)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup_rvmdk.lst --xref -o .\objects\startup_rvmdk.o --depend .\objects\startup_rvmdk.d)
-F (.\hal\tm4c1294ncpdt.h)(0x5AA51762)()
-F (.\startup_TM4C123\HAL_Config.h)(0x5CE9CEBB)()
-F (.\startup_TM4C123\main.c)(0x5D0EA04C)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C123 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C123-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (startup_TM4C123\../Device.h)(0x5CE86F59)
-I (startup_TM4C123\../hal/HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C123\HAL_Config.h)(0x5CE9CEBB)
-I (startup_TM4C123\../hal/HAL_PLL.h)(0x5B49DEF8)
-I (startup_TM4C123\../hal/HAL_SysTick.h)(0x5B49DEF8)
-I (startup_TM4C123\../hal/HAL_GPIO.h)(0x5B9D2D2C)
-I (startup_TM4C123\../hal/HAL_NVIC.h)(0x5B49DF3E)
-I (startup_TM4C123\../hal/HAL_I2C.h)(0x5B549CE8)
-I (startup_TM4C123\../hal/HAL_Timer.h)(0x5CE83310)
-I (startup_TM4C123\../hal/HAL_SPI.h)(0x5B9D40A2)
-F (.\startup_TM4C123\startup_rvmdk.S)(0x5CE9D06C)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_TM4C123-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "TM4C1294NCPDT SETA 1"--list .\listings\startup_rvmdk.lst --xref -o .\objects\startup_rvmdk.o --depend .\objects\startup_rvmdk.d)
-F (.\hal\tm4c123gh6pm.h)(0x59A4890E)()
-F (.\Device.c)(0x5D334315)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\device.o --omf_browse .\objects\device.crf --depend .\objects\device.d)
-I (Device.h)(0x5D2A5816)
-I (hal/HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (hal/HAL_PLL.h)(0x5B49DEF8)
-I (hal/HAL_SysTick.h)(0x5B49DEF8)
-I (hal/HAL_GPIO.h)(0x5B9D2D2C)
-I (hal/HAL_NVIC.h)(0x5B49DF3E)
-I (hal/HAL_I2C.h)(0x5B549CE8)
-I (hal/HAL_Timer.h)(0x5D2A579D)
-I (hal/HAL_SPI.h)(0x5B9D40A2)
-I (.\drivers\LCD.h)(0x5AFB8CEA)
-I (.\drivers\LCD_Raw.h)(0x5AEC971A)
-I (.\drivers\Switch.h)(0x5D0E3052)
-I (.\drivers\FrequencyTimer.h)(0x5D332EC1)
-I (utilities/Strings.h)(0x5CE86F66)
-F (.\Device.h)(0x5D2A5816)()
-F (.\drivers\LCD.c)(0x5AFB8CEA)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\lcd.o --omf_browse .\objects\lcd.crf --depend .\objects\lcd.d)
-I (drivers\LCD.h)(0x5AFB8CEA)
-I (drivers\LCD_Raw.h)(0x5AEC971A)
-I (.\hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (.\hal\HAL_PLL.h)(0x5B49DEF8)
-I (.\hal\HAL_SysTick.h)(0x5B49DEF8)
-I (.\hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (.\hal\HAL_NVIC.h)(0x5B49DF3E)
-I (.\hal\HAL_I2C.h)(0x5B549CE8)
-I (.\hal\HAL_Timer.h)(0x5D2A579D)
-I (.\hal\HAL_SPI.h)(0x5B9D40A2)
-I (.\utilities\Strings.h)(0x5CE86F66)
-F (.\drivers\LCD.h)(0x5AFB8CEA)()
-F (.\drivers\LCD_Raw.c)(0x5B6EC4E0)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\lcd_raw.o --omf_browse .\objects\lcd_raw.crf --depend .\objects\lcd_raw.d)
-I (drivers\LCD_Raw.h)(0x5AEC971A)
-I (.\hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (.\hal\HAL_PLL.h)(0x5B49DEF8)
-I (.\hal\HAL_SysTick.h)(0x5B49DEF8)
-I (.\hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (.\hal\HAL_NVIC.h)(0x5B49DF3E)
-I (.\hal\HAL_I2C.h)(0x5B549CE8)
-I (.\hal\HAL_Timer.h)(0x5D2A579D)
-I (.\hal\HAL_SPI.h)(0x5B9D40A2)
-I (.\utilities\Strings.h)(0x5CE86F66)
-I (.\hal\tm4c123gh6pm.h)(0x59A4890E)
-F (.\drivers\LCD_Raw.h)(0x5AEC971A)()
-F (.\drivers\FrequencyTimer.c)(0x5D3343A2)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\frequencytimer.o --omf_browse .\objects\frequencytimer.crf --depend .\objects\frequencytimer.d)
-I (.\hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (.\hal\HAL_PLL.h)(0x5B49DEF8)
-I (.\hal\HAL_SysTick.h)(0x5B49DEF8)
-I (.\hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (.\hal\HAL_NVIC.h)(0x5B49DF3E)
-I (.\hal\HAL_I2C.h)(0x5B549CE8)
-I (.\hal\HAL_Timer.h)(0x5D2A579D)
-I (.\hal\HAL_SPI.h)(0x5B9D40A2)
-I (drivers\FrequencyTimer.h)(0x5D332EC1)
-F (.\drivers\FrequencyTimer.h)(0x5D332EC1)()
-F (.\drivers\Switch.c)(0x5D0E2DC2)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\switch.o --omf_browse .\objects\switch.crf --depend .\objects\switch.d)
-I (drivers\Switch.h)(0x5D0E3052)
-I (.\hal\HAL.h)(0x5CE807CF)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F920E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599F920E)
-I (.\startup_TM4C1294\HAL_Config.h)(0x5D334238)
-I (.\hal\HAL_PLL.h)(0x5B49DEF8)
-I (.\hal\HAL_SysTick.h)(0x5B49DEF8)
-I (.\hal\HAL_GPIO.h)(0x5B9D2D2C)
-I (.\hal\HAL_NVIC.h)(0x5B49DF3E)
-I (.\hal\HAL_I2C.h)(0x5B549CE8)
-I (.\hal\HAL_Timer.h)(0x5D2A579D)
-I (.\hal\HAL_SPI.h)(0x5B9D40A2)
-F (.\drivers\Switch.h)(0x5D0E3052)()
-F (.\utilities\Strings.c)(0x5CE86E32)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\startup_TM4C1294 -I .\hal -I .\utilities -I .\drivers-I.\RTE\_TM4C1294-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C1294NCPDT -DDEBUG-o .\objects\strings.o --omf_browse .\objects\strings.crf --depend .\objects\strings.d)
-I (utilities\Strings.h)(0x5CE86F66)
-F (.\utilities\Strings.h)(0x5CE86F66)()
