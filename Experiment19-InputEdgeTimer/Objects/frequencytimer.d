@@ -1,0 +1,16 @@
+.\objects\frequencytimer.o: drivers\FrequencyTimer.c
+.\objects\frequencytimer.o: .\hal\HAL.h
+.\objects\frequencytimer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\frequencytimer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\frequencytimer.o: .\startup_TM4C123\HAL_Config.h
+.\objects\frequencytimer.o: .\hal\HAL_PLL.h
+.\objects\frequencytimer.o: .\startup_TM4C123\HAL_Config.h
+.\objects\frequencytimer.o: .\hal\HAL_SysTick.h
+.\objects\frequencytimer.o: .\hal\HAL_GPIO.h
+.\objects\frequencytimer.o: .\hal\HAL.h
+.\objects\frequencytimer.o: .\hal\HAL_NVIC.h
+.\objects\frequencytimer.o: .\hal\HAL_I2C.h
+.\objects\frequencytimer.o: .\startup_TM4C123\HAL_Config.h
+.\objects\frequencytimer.o: .\hal\HAL_Timer.h
+.\objects\frequencytimer.o: .\hal\HAL_SPI.h
+.\objects\frequencytimer.o: drivers\FrequencyTimer.h
