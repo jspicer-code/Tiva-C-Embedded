@@ -4,11 +4,16 @@
 #include "HAL.h"
 
 typedef struct {
-	uint8_t 	cycle;
-	uint32_t 	previousCount;
-	uint32_t 	lastInterval;
-	uint32_t 	maxInterval;
-	bool			pulseStarted;
+	TimerBlock_t 	timer;
+	uint8_t 			timeoutCounter;
+	uint8_t				cycleStatus;
+	uint32_t 			previousCount;
+	uint32_t 			lastInterval;
+	uint32_t 			maxInterval;
+	uint32_t			minInterval;	
+	
+	
+	
 } FrequencyTimer_t;
 
 int FrequencyTimer_Enable(TimerBlock_t timer, const PinDef_t* pin, uint32_t maxInterval, uint8_t priority, FrequencyTimer_t* freqTimer);

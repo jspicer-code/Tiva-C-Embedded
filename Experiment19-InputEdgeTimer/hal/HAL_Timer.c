@@ -328,8 +328,25 @@ int Timer_StartEdgeTimer(TimerBlock_t block)
 
 	// Enable timers A and B.  If they were already enabled, then they should now be resynchronized.
 	regs->CTL |= (TIMER_CTL_TAEN | TIMER_CTL_TBEN);
-
+	
 	return 0;
+}	
+
+void Timer_StopEdgeTimer(TimerBlock_t block)
+{
+	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	
+	// Clear interrupts for Timer A capture event and Timer B time-out.
+	regs->ICR = (TIMER_ICR_CAECINT | TIMER_ICR_TBTOCINT);
+
+	// Disable timers A and B. 
+	regs->CTL &= ~(TIMER_CTL_TAEN | TIMER_CTL_TBEN);
+}	
+
+bool Timer_IsTimerStopped(TimerBlock_t block)
+{
+	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	return regs->CTL & TIMER_CTL_TAEN;
 }	
 
 #endif
@@ -469,6 +486,7 @@ int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irq
 	return 0;
 }	
 
+// TODO: Find out where this function is/was called and changed it so clear only the EN bit.
 void Timer_Stop(TimerBlock_t block)
 {	
 	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];	
@@ -500,7 +518,7 @@ static void HandleInterrupt(HandlerInfo_t* info)
 		
 		// Clear the timer timeout flag.
 		regs->ICR = timeoutMask;
-		
+			
 		args.eventType = TIMER_TIMEOUT_EVENT;
 	}
 	else if (regs->MIS & TIMER_MIS_CAEMIS) {
@@ -513,7 +531,6 @@ static void HandleInterrupt(HandlerInfo_t* info)
 		// of the count.  In other words, it isn't necessary to read and shift the TBPS (prescaler) register.
 		args.eventData.timerCount = 0xFFFFFF & regs->TAR;
 		args.eventType = TIMER_EDGE_EVENT;
-		
 	}
 	else {
 		// Shoudn't get here, but just in case...
