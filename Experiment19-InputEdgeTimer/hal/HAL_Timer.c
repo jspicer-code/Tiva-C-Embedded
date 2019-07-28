@@ -309,7 +309,7 @@ static int ConfigureEdgeTimer(TimerBlock_t block, const TimerIRQConfig_t* irqCon
 	return 0;
 }	
 
-int Timer_StartEdgeTimer(TimerBlock_t block)
+int Timer_EnableEdgeTimer(TimerBlock_t block)
 {
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
 	
@@ -332,7 +332,7 @@ int Timer_StartEdgeTimer(TimerBlock_t block)
 	return 0;
 }	
 
-void Timer_StopEdgeTimer(TimerBlock_t block)
+void Timer_DisableEdgeTimer(TimerBlock_t block)
 {
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
 	
@@ -343,7 +343,7 @@ void Timer_StopEdgeTimer(TimerBlock_t block)
 	regs->CTL &= ~(TIMER_CTL_TAEN | TIMER_CTL_TBEN);
 }	
 
-bool Timer_IsTimerStopped(TimerBlock_t block)
+bool Timer_IsTimerEnabled(TimerBlock_t block)
 {
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
 	return regs->CTL & TIMER_CTL_TAEN;
@@ -487,11 +487,11 @@ int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irq
 }	
 
 // TODO: Find out where this function is/was called and changed it so clear only the EN bit.
-void Timer_Stop(TimerBlock_t block)
-{	
-	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];	
-	timer->CTL = 0;
-}
+//void Timer_Stop(TimerBlock_t block)
+//{	
+//	volatile TimerRegs_t* timer = (volatile TimerRegs_t*)TimerBaseAddress[block];	
+//	timer->CTL = 0;
+//}
 
 
 #ifdef IRQ_HANDLER_DEFINED

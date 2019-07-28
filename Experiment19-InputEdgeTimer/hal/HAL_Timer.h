@@ -70,7 +70,7 @@ typedef struct {
 // Outputs:  none.
 int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
 
-bool Timer_IsTimerStopped(TimerBlock_t block);
+bool Timer_IsTimerEnabled(TimerBlock_t block);
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
@@ -93,8 +93,8 @@ void Timer_Wait(TimerBlock_t block, uint32_t count, uint32_t interval);
 
 #if (halUSE_EDGE_TIMERS == 1) 
 
-int Timer_StartEdgeTimer(TimerBlock_t block);
-void Timer_StopEdgeTimer(TimerBlock_t block);
+int Timer_EnableEdgeTimer(TimerBlock_t block);
+void Timer_DisableEdgeTimer(TimerBlock_t block);
 
 #endif
 

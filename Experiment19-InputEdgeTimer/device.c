@@ -48,8 +48,7 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	LCD_EnableCursor(&display_, 0, 0);
 	LCD_SetCursorPosition(&display_, 0, 0);
 	
-	// The maximum interval before "no signal" is detected will be 4 seconds => 250 mHz ~ 0.54 m/s
-	if (FrequencyTimer_Enable(pConfig->edgeTimer, &pConfig->edgeTimerPin, 4 * PLL_BusClockFreq, 7, &freqTimer_)) {
+	if (FrequencyTimer_Enable(pConfig->edgeTimer, 7, &pConfig->edgeTimerPin, 0.25f, &freqTimer_)) {
 		return false;
 	}
 
@@ -81,7 +80,7 @@ int Run(DeviceConfig_t* pConfig)
 
 	for (;;) {
 	
-		SysTick_Wait10ms(1);
+		SysTick_Wait10ms(5);
 	
 		double frequency = FrequencyTimer_GetFrequency(&freqTimer_);
 		UpdateDisplay(frequency);

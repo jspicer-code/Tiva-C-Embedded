@@ -1,10 +1,9 @@
-
 #include "HAL.h"
 #include "FrequencyTimer.h"
 	
-#define CYCLE_UNDETECTED 	0
-#define CYCLE_STARTED			1	
-#define CYCLE_DETECTED		2
+#define CYCLE_UNDETECTED 			0x00
+#define CYCLE_STARTED					0x01
+#define CYCLE_DETECTED				0x02
 
 static void TimerEventCallback(TimerBlock_t block, const TimerEventArgs_t* args)
 {
@@ -12,27 +11,41 @@ static void TimerEventCallback(TimerBlock_t block, const TimerEventArgs_t* args)
 	uint32_t currentCount = (freqTimer->timeoutCounter << 24) | args->eventData.timerCount;
 	uint32_t interval = freqTimer->previousCount - currentCount;
 	
+	bool disableTimer = false;
 	if (args->eventType == TIMER_TIMEOUT_EVENT) {		
+
 		freqTimer->timeoutCounter--;
+		
+		// If the interval exceeds the maximum interval (minimum frequency), then an edge has not occurred
+		// for a "very long" time.  It will mean there is no signal input, so clear the last interval.
+		if (interval > freqTimer->maxInterval) {
+			freqTimer->lastInterval = 0;
+			disableTimer = true;
+		}
+		
 	}
 	else if (args->eventType == TIMER_EDGE_EVENT) {
-		
+
 		if (freqTimer->cycleStatus == CYCLE_UNDETECTED) {
 			freqTimer->cycleStatus = CYCLE_STARTED;
 		}
 		else {
+			
 			freqTimer->lastInterval = interval;
 			freqTimer->cycleStatus = CYCLE_DETECTED;
+			
+			// If a cycle has been detected but the frequency is over a certain limit, stop the timer so
+			// that continual reentry of the ISR does not cause CPU starvation.
+			if (freqTimer->lastInterval < freqTimer->highFreqInterval) {
+				disableTimer = true;
+			}
 		}
 	
 		freqTimer->previousCount = currentCount;
 	}
-	
-	// If the interval exceeds the maximum interval (minimum frequency), then an edge has not occurred
-	// for a "very long" time.  It will mean there is no signal input, so stop the timer.
-	if (interval > freqTimer->maxInterval || 
-		(freqTimer->cycleStatus == CYCLE_DETECTED && freqTimer->lastInterval < freqTimer->minInterval)) {
-		Timer_StopEdgeTimer(block);		
+		
+	if (disableTimer) {
+		Timer_DisableEdgeTimer(block);
 	}
 	
 }
@@ -41,10 +54,9 @@ static void StartTimer(FrequencyTimer_t* freqTimer)
 {
 		freqTimer->timeoutCounter = 255;
 		freqTimer->previousCount = 0;
-		freqTimer->lastInterval = 0;
 		freqTimer->cycleStatus = CYCLE_UNDETECTED;
 	
-		Timer_StartEdgeTimer(freqTimer->timer);
+		Timer_EnableEdgeTimer(freqTimer->timer);
 }
 
 double FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
@@ -62,23 +74,24 @@ double FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 	// This calulates the instantaneous frequency based on the last recorded edge interval.
 	// If the last interval is zero it means that two edges have not been detected.
 	if (lastInterval) {
-			frequency = (double)PLL_BusClockFreq / (double)lastInterval;
+		frequency = (double)PLL_BusClockFreq / (double)lastInterval;		
 	}
 	
-	if (!Timer_IsTimerStopped(freqTimer->timer)) {
-			StartTimer(freqTimer);
+	// The timer will stop if the last interval exceeded the minimum or high frequency limit.
+	if (!Timer_IsTimerEnabled(freqTimer->timer)) {	
+		StartTimer(freqTimer);	
 	}
 	
 	return frequency;	
 }
 
 
-int FrequencyTimer_Enable(TimerBlock_t timer, const PinDef_t* pin, uint32_t maxInterval, uint8_t priority, FrequencyTimer_t* freqTimer)
+int FrequencyTimer_Enable(TimerBlock_t timer, uint8_t priority, const PinDef_t* pin, float minFrequency, FrequencyTimer_t* freqTimer)
 {
 	// Initialize timer state.
 	freqTimer->timer = timer;
-	freqTimer->maxInterval = maxInterval;
-	freqTimer->minInterval = 80000; // 1 kHz
+	freqTimer->maxInterval = (float)PLL_BusClockFreq / minFrequency;
+	freqTimer->highFreqInterval =  (float)PLL_BusClockFreq / 1000.0f; // 1 kHz
 	
 	// Initialize the hardware timer for edge timer mode.
 	TimerIRQConfig_t irqConfig = {priority, TimerEventCallback, (void*)freqTimer};
