@@ -17,8 +17,8 @@ int main()
 	config_.lcd.dataPins[3] = PINDEF(PORTA, PIN2);
 	config_.lcd.waitTimer = TIMER0;
 	
-	config_.edgeTimer = TIMER2;
-	config_.edgeTimerPin = PINDEF(PORTB, PIN0);
+	config_.edgeTimeTimer = TIMER2;
+	config_.edgeTimePin = PINDEF(PORTB, PIN0);
 
 	Run(&config_);
 }

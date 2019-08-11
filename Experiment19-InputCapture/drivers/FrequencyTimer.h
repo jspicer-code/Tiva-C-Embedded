@@ -9,21 +9,36 @@
 
 #include "HAL.h"
 
-// Holds the internal state of the frequency timer.
 typedef struct {
 	TimerBlock_t 	timer;
-	uint8_t 			timeoutCounter;
-	uint8_t				cycleStatus;
-	uint32_t 			previousCount;
-	uint32_t 			lastInterval;
-	uint32_t 			maxInterval;
-	uint32_t			highFreqInterval;
+	PinDef_t 			pin;
+	uint8_t 			priority;
+} FrequencyTimerConfig_t;
+
+
+typedef struct {
+	uint32_t time;
+	uint32_t status;
+} Capture_t;
+
+typedef struct {
+	Capture_t captures[2];
+	uint32_t count;
+} CaptureBuffer_t;
+
+typedef struct {
+	TimerBlock_t timer;
+	CaptureBuffer_t	buffers[2];
+	int readIndex;
+	int writeIndex;
+	uint8_t timerCycle;
 } FrequencyTimer_t;
 
+
 // Enables the frequency timer for given time block, interrupt priority, I/O pin, and minimum frequency
-int FrequencyTimer_Enable(TimerBlock_t timer, uint8_t priority, const PinDef_t* pin, float minFrequency, FrequencyTimer_t* freqTimer);
+int FrequencyTimer_Enable(const FrequencyTimerConfig_t* config, FrequencyTimer_t* freqTimer);
 
 // Polls for the most recently measured pulse frequency.
-double FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer);
+float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer);
 
 #endif

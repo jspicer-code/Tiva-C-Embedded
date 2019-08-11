@@ -47,14 +47,14 @@ typedef struct {
 	int						rows;
 	int						columns;
 
-} LCDPinConfig_t; // TODO:  rename to LCDConfig_t
+} LCDConfig_t;
 
 // This structure holds the internal state of the display.  Its contents can be ignored
 //	outside the driver.  LCD_RawInitialize will take care of initializing it after which it
 //	must be passed into every subsequent raw function.
 typedef struct {
 
-	LCDPinConfig_t pinConfig;
+	LCDConfig_t config;
 	
 	enum DataDirection_t {
 		DATA_UNCONFIGURED = -1,
@@ -69,7 +69,7 @@ typedef struct {
 	
 } LCDRawDisplay_t;
 
-int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDPinConfig_t* pinConfig, LCDLineMode_t lineMode, LCDFontMode_t fontMode);
+int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDConfig_t* pinConfig, LCDLineMode_t lineMode, LCDFontMode_t fontMode);
 void LCD_RawSetDisplayControl(LCDRawDisplay_t* display, uint8_t displayOn, uint8_t cursorOn, uint8_t blinkOn);
 void LCD_RawSetEntryMode(LCDRawDisplay_t* display, uint8_t incrementMode, uint8_t shiftOn);
 void LCD_RawSetDDRAMAddress(LCDRawDisplay_t* display, uint8_t address);

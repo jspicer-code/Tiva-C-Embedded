@@ -22,14 +22,14 @@ static void SetDataDirection(LCDRawDisplay_t* display, enum DataDirection_t dire
 	if (direction != display->dataDirection) {
 		
 		// Set direction for the top four pins if using 4-bit data length, otherwise set all eight.
-		int startPin = (display->pinConfig.dataLen == LCD_DATALEN_4) ? 4 : 0;
+		int startPin = (display->config.dataLen == LCD_DATALEN_4) ? 4 : 0;
 		
 		for (int i = startPin; i < 8; i++) {
 			if (direction == DATA_WRITE) {
-				GPIO_EnableDO(display->pinConfig.dataPins[i].port, display->pinConfig.dataPins[i].pin, DRIVE_2MA, PULL_DOWN);
+				GPIO_EnableDO(display->config.dataPins[i].port, display->config.dataPins[i].pin, DRIVE_2MA, PULL_DOWN);
 			}
 			else if (direction == DATA_READ) {
-				GPIO_EnableDI(display->pinConfig.dataPins[i].port, display->pinConfig.dataPins[i].pin, PULL_DOWN);			
+				GPIO_EnableDI(display->config.dataPins[i].port, display->config.dataPins[i].pin, PULL_DOWN);			
 			}
 		}
 		
@@ -50,13 +50,13 @@ static void Transfer(LCDRawDisplay_t* display, uint8_t value, uint8_t isData)
 	*display->rwPinAddress = 0;
 	
 	// Wait at least 40ns before asserting the ENABLE pin.
-	Timer_Wait100ns(display->pinConfig.waitTimer, 1);
+	Timer_Wait100ns(display->config.waitTimer, 1);
 	
 	// Assert ENABLE
 	*display->enablePinAddress = 1;
 	
 	// For four-bit mode, transfer the upper nibble, otherwise transfer the whole byte.
-	int startPin = (display->pinConfig.dataLen == LCD_DATALEN_4) ? 4 : 0;
+	int startPin = (display->config.dataLen == LCD_DATALEN_4) ? 4 : 0;
 	
 	// Write the data to the data pins.
 	for (int i = startPin; i < 8; i++) {
@@ -64,13 +64,13 @@ static void Transfer(LCDRawDisplay_t* display, uint8_t value, uint8_t isData)
 	}
 	
 	// Wait at least 80ns before de-asserting the ENABLE pin.
-	Timer_Wait100ns(display->pinConfig.waitTimer, 1);
+	Timer_Wait100ns(display->config.waitTimer, 1);
 		
 	// De-assert ENABLE.  The falling edge should latch the value.
 	*display->enablePinAddress = 0;
 	
 	// Wait at least 10ns before another value is written. 
-	Timer_Wait100ns(display->pinConfig.waitTimer, 1);
+	Timer_Wait100ns(display->config.waitTimer, 1);
 	
 }
 
@@ -78,7 +78,7 @@ static void Transfer(LCDRawDisplay_t* display, uint8_t value, uint8_t isData)
 void TransferByte(LCDRawDisplay_t* display, uint8_t value, uint8_t isData)
 {
 	
-	if (display->pinConfig.dataLen == LCD_DATALEN_4) {
+	if (display->config.dataLen == LCD_DATALEN_4) {
 		
 		// Transfer the upper nibble.  (The lower nibble is ignored).
 		Transfer(display, value, isData);
@@ -105,7 +105,7 @@ void LCD_RawSetFunction(LCDRawDisplay_t* display, uint8_t dataBitMode, uint8_t l
 	TransferByte(display, 0x20 | dataBitMode | lineMode | fontMode, 0);
 	
 	// Wait 40us.
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -119,7 +119,7 @@ void LCD_RawSetDisplayControl(LCDRawDisplay_t* display, uint8_t displayOn, uint8
 	TransferByte(display, 0x08 | displayOn | cursorOn | blinkOn, 0);
 	
 	// Wait 40us.
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -129,7 +129,7 @@ void LCD_RawClearDisplay(LCDRawDisplay_t* display)
 	TransferByte(display, 0x01, 0);
 	
 	// Wait 2ms
-	Timer_Wait10us(display->pinConfig.waitTimer, 200);
+	Timer_Wait10us(display->config.waitTimer, 200);
 	
 }
 
@@ -142,7 +142,7 @@ void LCD_RawShiftCursor(LCDRawDisplay_t* display, uint8_t right)
 	TransferByte(display, 0x10 | right, 0);
 	
 	// Wait 40us.
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -155,7 +155,7 @@ void LCD_RawShiftDisplay(LCDRawDisplay_t* display, uint8_t right)
 	TransferByte(display, 0x18 | right, 0);
 	
 	// Wait 40us.
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -169,7 +169,7 @@ void LCD_RawSetEntryMode(LCDRawDisplay_t* display, uint8_t incrementMode, uint8_
 	TransferByte(display, 0x04 | incrementMode | shiftOn, 0);
 	
 	// Wait 40us
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -179,7 +179,7 @@ void LCD_RawPutChar(LCDRawDisplay_t* display, char c)
 	TransferByte(display, (uint8_t)c, 1);
 	
 	// Wait 50us.
-	Timer_Wait10us(display->pinConfig.waitTimer, 5);
+	Timer_Wait10us(display->config.waitTimer, 5);
 	
 }
 
@@ -202,7 +202,7 @@ void LCD_RawSetDDRAMAddress(LCDRawDisplay_t* display, uint8_t address)
 	TransferByte(display, 0x80 | address, 0);
 	
 	// Wait 40us
-	Timer_Wait10us(display->pinConfig.waitTimer, 4);
+	Timer_Wait10us(display->config.waitTimer, 4);
 	
 }
 
@@ -212,16 +212,16 @@ void LCD_RawReturnHome(LCDRawDisplay_t* display)
 	TransferByte(display, 0x02, 0);
 	
 	// Wait 2ms
-	Timer_Wait10us(display->pinConfig.waitTimer, 200);
+	Timer_Wait10us(display->config.waitTimer, 200);
 	
 }
 
 
-int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDPinConfig_t* config, LCDLineMode_t lineMode, LCDFontMode_t fontMode)
+int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDConfig_t* config, LCDLineMode_t lineMode, LCDFontMode_t fontMode)
 {
 	
 	// Store a copy of the configuration.
-	display->pinConfig = *config;
+	display->config = *config;
 	
 	// Initial value...
 	display->dataDirection = DATA_UNCONFIGURED;
@@ -244,7 +244,7 @@ int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDPinConfig_t* config, LC
 	GPIO_EnableDO(config->enablePin.port, config->enablePin.pin, DRIVE_2MA, PULL_DOWN);
 
 	// Wait 100ms for LCD input voltage to stabilize.
-	Timer_Wait10ms(display->pinConfig.waitTimer, 10);
+	Timer_Wait10ms(display->config.waitTimer, 10);
 	
 	
 	// This initialization sequence is required when the power conditions for correctly
@@ -258,13 +258,13 @@ int LCD_RawInitialize(LCDRawDisplay_t* display, const LCDPinConfig_t* config, LC
 		Transfer(display, 0x30, 0);
 	
 		// Wait 5ms...
-		Timer_Wait10us(display->pinConfig.waitTimer, 500);
+		Timer_Wait10us(display->config.waitTimer, 500);
 		
 		// Again...
 		Transfer(display, 0x30, 0);
 		
 		// Wait 100us...
-		Timer_Wait10us(display->pinConfig.waitTimer, 10);
+		Timer_Wait10us(display->config.waitTimer, 10);
 	
 		// And a third time...
 		Transfer(display, 0x30, 0);

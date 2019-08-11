@@ -32,7 +32,7 @@ typedef enum {
 } LCDCursorDirection_t;
 
 
-int LCD_Initialize(LCDDisplay_t* display, const LCDPinConfig_t* config, int rows, int columns);
+int LCD_Initialize(const LCDConfig_t* config, LCDDisplay_t* display);
 void LCD_SetCursorPosition(LCDDisplay_t* display, int row, int column);
 void LCD_ShiftCursor(LCDDisplay_t* display, LCDCursorDirection_t direction);
 void LCD_PutChar(LCDDisplay_t* display, char c, int row, int column);

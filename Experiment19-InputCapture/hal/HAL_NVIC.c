@@ -8,9 +8,14 @@
 
 #if (halCONFIG_1294 == 1)
 #include "tm4c1294ncpdt.h"
+#define LAST_IRQ	(INT_I2C9 - 16)
 #else
 #include "tm4c123gh6pm.h"
+#define LAST_IRQ	(INT_PWM1_FAULT - 16)
 #endif
+
+
+void* NVIC_ISRData[LAST_IRQ + 1] = { 0 };
 
 static void SetPriority(uint8_t irq, uint8_t priority)
 {
@@ -28,7 +33,7 @@ static void SetPriority(uint8_t irq, uint8_t priority)
 	*address |= map;
 }
 
-void NVIC_EnableIRQ(uint8_t irq, uint8_t priority)
+void NVIC_EnableIRQ(uint8_t irq, uint8_t priority, void* isrData)
 {
 	
 	SetPriority(irq, priority);
@@ -40,6 +45,10 @@ void NVIC_EnableIRQ(uint8_t irq, uint8_t priority)
 	// Set the irq bit in the corresponding to enable register.
 	uint32_t bit = irq % 32;
 	*address |= (0x1 << bit);
+	
+	if (isrData) {
+		NVIC_ISRData[irq] = isrData;
+	}
 	
 }
 
@@ -54,7 +63,5 @@ void NVIC_DisableIRQ(uint8_t irq)
 	*address |= (0x1 << bit);
 	
 }
-
-
 
 

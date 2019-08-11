@@ -398,12 +398,12 @@ int GPIO_EnableInterrupt(const PinDef_t* pinDef, uint8_t priority, GPIO_IntTrigg
 	switch (pinDef->port) {
 		
 		case PORTE:
-			NVIC_EnableIRQ(INT_GPIOE - 16, priority);
+			NVIC_EnableIRQ(INT_GPIOE - 16, priority, (void*)0);
 			PortE_Callback = callback;
 			break;
 		
 		case PORTF:
-			NVIC_EnableIRQ(INT_GPIOF - 16, priority);
+			NVIC_EnableIRQ(INT_GPIOF - 16, priority, (void*)0);
 			PortF_Callback = callback;
 			break;
 		

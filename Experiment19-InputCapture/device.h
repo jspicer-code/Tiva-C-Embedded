@@ -18,8 +18,8 @@ typedef struct {
 		TimerBlock_t	waitTimer;
 	} lcd;
 	
-	TimerBlock_t edgeTimer;
-	PinDef_t edgeTimerPin;
+	TimerBlock_t edgeTimeTimer;
+	PinDef_t edgeTimePin;
 	
 } DeviceConfig_t;
 

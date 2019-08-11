@@ -56,6 +56,10 @@ void SysTick_Wait(uint32_t delay)
 	while ((NVIC_ST_CTRL_R & NVIC_ST_CTRL_COUNT) == 0) {
 	}
 	
+	// TODO:  It appears that the timer will continue wrapping (running) with the same reload value.
+	// According to the data sheet, the RELOAD register should be cleared to disable the counter on 
+	// the next wrap.
+	
 }
 
 //---------------------- SysTick_Wait10ms--------------------------

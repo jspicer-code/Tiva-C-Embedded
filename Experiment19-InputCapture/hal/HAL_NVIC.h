@@ -9,7 +9,16 @@
 
 #include <stdint.h>
 
-void NVIC_EnableIRQ(uint8_t irq, uint8_t priority);
+extern void* NVIC_ISRData[];
+
+void NVIC_EnableIRQ(uint8_t irq, uint8_t priority, void* isrData);
 void NVIC_DisableIRQ(uint8_t irq);
+
+__forceinline void* NVIC_GetActiveISRData()
+{
+	register uint32_t _ipsr __asm("ipsr");
+	return NVIC_ISRData[_ipsr - 16];
+}
+
 
 #endif

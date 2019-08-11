@@ -22,25 +22,21 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 		return false;
 	}
 	
-	LCDPinConfig_t lcd;	
-	lcd.rsPin = pConfig->lcd.rsPin;
-	lcd.rwPin = pConfig->lcd.rwPin;
-	lcd.enablePin = pConfig->lcd.enablePin;
-	lcd.dataPins[4] = pConfig->lcd.dataPins[0];
-	lcd.dataPins[5] = pConfig->lcd.dataPins[1];
-	lcd.dataPins[6] = pConfig->lcd.dataPins[2];
-	lcd.dataPins[7] = pConfig->lcd.dataPins[3];
-	lcd.waitTimer = pConfig->lcd.waitTimer;
-	lcd.dataLen = LCD_DATALEN_4;
-	lcd.initByInstruction = 0;
-	lcd.rows = 1;
-	lcd.columns = 16;
-	
-	if (Timer_Init(lcd.waitTimer, TIMER_ONESHOT, (void*)0, (void*)0)) {
-		return false;
-	}
-	
-	if (LCD_Initialize(&display_, &lcd, lcd.rows, lcd.columns) < 0) {
+	LCDConfig_t lcdConfig;	
+	lcdConfig.rsPin = pConfig->lcd.rsPin;
+	lcdConfig.rwPin = pConfig->lcd.rwPin;
+	lcdConfig.enablePin = pConfig->lcd.enablePin;
+	lcdConfig.dataPins[4] = pConfig->lcd.dataPins[0];
+	lcdConfig.dataPins[5] = pConfig->lcd.dataPins[1];
+	lcdConfig.dataPins[6] = pConfig->lcd.dataPins[2];
+	lcdConfig.dataPins[7] = pConfig->lcd.dataPins[3];
+	lcdConfig.waitTimer = pConfig->lcd.waitTimer;
+	lcdConfig.dataLen = LCD_DATALEN_4;
+	lcdConfig.initByInstruction = 0;
+	lcdConfig.rows = 1;
+	lcdConfig.columns = 16;
+
+	if (LCD_Initialize(&lcdConfig, &display_) < 0) {
 		return false;
 	}
 	
@@ -48,7 +44,12 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	LCD_EnableCursor(&display_, 0, 0);
 	LCD_SetCursorPosition(&display_, 0, 0);
 	
-	if (FrequencyTimer_Enable(pConfig->edgeTimer, 7, &pConfig->edgeTimerPin, 0.25f, &freqTimer_)) {
+	FrequencyTimerConfig_t freqTimerConfig;
+	freqTimerConfig.timer = pConfig->edgeTimeTimer;
+	freqTimerConfig.pin = pConfig->edgeTimePin;
+	freqTimerConfig.priority = 7;
+	
+	if (FrequencyTimer_Enable(&freqTimerConfig, &freqTimer_)) {
 		return false;
 	}
 
@@ -57,12 +58,20 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	return true;
 }
 
-static void UpdateDisplay(double frequency)
+static void UpdateDisplay(float frequency)
 {	
 	char line1[32];
 	
-	dtoa(frequency, line1, 5);
-	strncat(line1, " Hz", 3);
+	if (frequency == 0.0f) {
+		strcpy(line1, "No signal");
+	}
+	else if (frequency < 0.0f) {
+		strcpy(line1, "Out of range");
+	}
+	else {
+		dtoa((double)frequency, line1, 5);
+		strncat(line1, " Hz", 3);
+	}
 
 	pad(line1, ' ', 17);
 	LCD_PutString(&display_, line1, 0, 0);
@@ -78,12 +87,35 @@ int Run(DeviceConfig_t* pConfig)
 	
 	LCD_RawClearDisplay(&display_.raw);
 
+	const int maxPeriod = 4000; // => 250 mHz
+	const float minFrequency = 1000.0f / (float)maxPeriod;
+	const int waitDelay = 100;
+
+	int undetectedCount = 0;
+	volatile float frequency = 0.0f;
+	float lastFrequency = 0.0f;
+	
 	for (;;) {
 	
-		SysTick_Wait10ms(5);
+		SysTick_Wait10ms(waitDelay);
 	
-		double frequency = FrequencyTimer_GetFrequency(&freqTimer_);
-		UpdateDisplay(frequency);
+		frequency = FrequencyTimer_GetFrequency(&freqTimer_);
+		if (frequency == 0.0f) {
+			undetectedCount++;
+			if (undetectedCount * 10 * waitDelay < maxPeriod) {
+				frequency = lastFrequency; 
+			}
+		}
+		else if (frequency >= 0.0f && frequency < minFrequency) {
+			frequency = 0.0f;
+		}
+		
+		if (frequency != lastFrequency) {
+			lastFrequency = frequency;
+			undetectedCount = 0;
+		}
+		
+		UpdateDisplay(lastFrequency);
 		
 	}
 	

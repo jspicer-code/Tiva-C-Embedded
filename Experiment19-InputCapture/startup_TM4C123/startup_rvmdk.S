@@ -96,7 +96,8 @@ __heap_limit
 ;
 ;******************************************************************************
 
-		EXTERN	Timer_TIMER2Handler
+		EXTERN	FrequencyTimer_CaptureHandler
+		EXTERN	FrequencyTimer_TimeoutHandler
 			
         EXPORT  __Vectors
 __Vectors
@@ -139,8 +140,8 @@ __Vectors
         DCD     IntDefaultHandler           ; Timer 0 subtimer B
         DCD     IntDefaultHandler       	; Timer 1 subtimer A
         DCD     IntDefaultHandler           ; Timer 1 subtimer B
-        DCD     Timer_TIMER2Handler        	; Timer 2 subtimer A
-        DCD     Timer_TIMER2Handler         ; Timer 2 subtimer B
+        DCD     FrequencyTimer_CaptureHandler  	; Timer 2 subtimer A
+        DCD     FrequencyTimer_TimeoutHandler  	; Timer 2 subtimer B
         DCD     IntDefaultHandler           ; Analog Comparator 0
         DCD     IntDefaultHandler           ; Analog Comparator 1
         DCD     IntDefaultHandler           ; Analog Comparator 2

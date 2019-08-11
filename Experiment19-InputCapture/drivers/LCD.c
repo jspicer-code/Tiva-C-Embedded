@@ -7,15 +7,19 @@
 #include "LCD.h"
 #include "Strings.h"
 
-int LCD_Initialize(LCDDisplay_t* display, const LCDPinConfig_t* pinConfig, int rows, int columns)
+int LCD_Initialize(const LCDConfig_t* config, LCDDisplay_t* display)
 {
 	
-	if (LCD_RawInitialize(&display->raw, pinConfig,  LCD_LINEMODE_2, LCD_FONTMODE_5X8) < 0) {
+	if (Timer_Init(config->waitTimer, TIMER_ONESHOT, (void*)0, (void*)0)) {
 		return -1;
 	}
 	
-	display->rows = rows;
-	display->columns = columns;
+	if (LCD_RawInitialize(&display->raw, config,  LCD_LINEMODE_2, LCD_FONTMODE_5X8) < 0) {
+		return -1;
+	}
+	
+	display->rows = config->rows;
+	display->columns = config->columns;
 	
 	LCD_RawSetDisplayControl(&display->raw, 1, 1, 0);
 	LCD_RawSetEntryMode(&display->raw, 1, 0);

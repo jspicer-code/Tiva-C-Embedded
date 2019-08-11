@@ -24,12 +24,17 @@ typedef enum {
 #endif
 } TimerBlock_t;
 
+typedef enum {
+	TIMERA = 0,
+	TIMERB = 1,
+} TimerSubTimer_t;
+
 // Types of timers.
 typedef enum {
 	TIMER_ONESHOT,
 	TIMER_PERIODIC,
-	TIMER_EDGE_TIMER,
-	TIMER_COUNTER
+	TIMER_EDGE_TIME,
+	TIMER_EDGE_COUNT
 } TimerMode_t;
 
 // Types of timer events (interrupt sources).
@@ -39,24 +44,78 @@ typedef enum {
 	TIMER_EDGE_EVENT
 } TimerEventType_t;
 
+// This structure represents the registers associated with a timer block.
+//	It will be overlayed on top of IO memory so that the structure fields
+//	map to the registers.  (See the datasheet for field/register descriptions).
+typedef struct {
+	uint32_t  CFG;
+	uint32_t  TAMR;
+	uint32_t  TBMR;
+	uint32_t  CTL;
+	uint32_t  SYNC;
+	uint32_t  RESERVED;
+	uint32_t  IMR;
+	uint32_t  RIS;
+	uint32_t  MIS;
+	uint32_t  ICR;
+	uint32_t  TAILR;
+	uint32_t  TBILR;
+	uint32_t  TAMATCHR;
+	uint32_t  TBMATCHR;
+	uint32_t  TAPR;
+	uint32_t  TBPR;
+	uint32_t  TAPMR;
+	uint32_t  TBPMR;
+	uint32_t  TAR;
+	uint32_t  TBR;
+	uint32_t  TAV;
+	uint32_t  TBV;
+	uint32_t  RTCPD;
+	uint32_t  TAPS;
+	uint32_t  TBPS;
+	
+#if (halCONFIG_1294 == 1)
+	uint32_t  RESERVED1[2];
+	uint32_t  DMAEV;
+	uint32_t  ADCEV;
+	uint32_t  RESERVED2[979];
+	uint32_t  PP;
+	uint32_t  RESERVED3;
+	uint32_t  CC;
+#else // TM4C123
+	uint32_t  TAPV;		// 32/64-bit Wide GPTM
+	uint32_t  TBPV;		// 32/64-bit Wide GPTM
+	uint32_t  RESERVED1[981];
+	uint32_t  PP;
+#endif
+
+} TimerRegs_t;
+
 // Timer event callback arguments.
 typedef struct {
 	TimerBlock_t block;
 	void* callbackData;
 	TimerEventType_t eventType;
-	union {
-		uint32_t timerCount;
-	} eventData;
+	volatile TimerRegs_t* regs;
 } TimerEventArgs_t;
 
 // Signature of the Timer callback function 
-typedef void (*PFN_TimerCallback)(TimerBlock_t block, const TimerEventArgs_t* args);
+typedef void (*PFN_TimerCallback)(TimerEventArgs_t* args);
 
 typedef struct {
 	uint8_t priority;
 	PFN_TimerCallback callback;
 	void* callbackData;
 } TimerIRQConfig_t;
+
+// This structure holds information for the interrupt handler.
+typedef struct {
+	TimerBlock_t block;
+	TimerMode_t mode;
+	PFN_TimerCallback callback;
+	void* callbackData;
+	volatile TimerRegs_t* regs;
+} TimerHandlerInfo_t;
 
 
 //------------------ Timer_Init --------------------------
@@ -71,6 +130,8 @@ typedef struct {
 int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
 
 bool Timer_IsTimerEnabled(TimerBlock_t block);
+
+volatile TimerRegs_t* Timer_GetRegisters(TimerBlock_t block);
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
@@ -91,14 +152,14 @@ void Timer_Wait(TimerBlock_t block, uint32_t count, uint32_t interval);
 #endif
 
 
-#if (halUSE_EDGE_TIMERS == 1) 
+#if (halUSE_EDGE_TIME_TIMERS == 1) 
 
-int Timer_EnableEdgeTimer(TimerBlock_t block);
-void Timer_DisableEdgeTimer(TimerBlock_t block);
+int Timer_EnableEdgeTimeTimer(TimerBlock_t block);
+void Timer_DisableEdgeTimeTimer(TimerBlock_t block);
 
 #endif
 
-#if (halUSE_COUNTER_TIMERS == 1) 
+#if (halUSE_EDGE_COUNT_TIMERS == 1) 
 //------------------ Timer_EnableInputCounter --------------------------
 // Initializes a timer block for input edge counter mode.
 //	The timer keeps an accumulator of the number of times
@@ -106,19 +167,21 @@ void Timer_DisableEdgeTimer(TimerBlock_t block);
 // Inputs:  block - the hardware timer block to use.
 //					pinDef - pin mux/pin assignment
 // Outputs:  none.
-int Timer_EnableInputCounter(TimerBlock_t block, PinDef_t pinDef);
+int Timer_EnableEdgeCountTimer(TimerBlock_t block);
+
+void Timer_DisableEdgeCountTimer(TimerBlock_t block);
 
 //------------------ Timer_ResetInputCounter --------------------------
 // Resets the accumulator of a timer configured for input edge counter mode.
 // Inputs:  block - the hardware timer block to use.
 // Outputs:  none.
-void Timer_ResetInputCounter(TimerBlock_t block);
+void Timer_ResetEdgeCountTimer(TimerBlock_t block);
 
 //------------------ Timer_ReadCounterValue --------------------------
 // Reads the accumulator of a timer configured for input edge counter mode.
 // Inputs:  block - the hardware timer block to use.
 // Outputs:  accumlator value.
-uint32_t Timer_ReadCounterValue(TimerBlock_t block);
+uint32_t Timer_ReadEdgeCountValue(TimerBlock_t block);
 #endif
 
 
