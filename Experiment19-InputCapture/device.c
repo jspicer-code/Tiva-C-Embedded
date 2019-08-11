@@ -48,7 +48,7 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	freqTimerConfig.timer = pConfig->edgeTimeTimer;
 	freqTimerConfig.pin = pConfig->edgeTimePin;
 	freqTimerConfig.priority = 7;
-	
+
 	if (FrequencyTimer_Enable(&freqTimerConfig, &freqTimer_)) {
 		return false;
 	}
@@ -77,6 +77,33 @@ static void UpdateDisplay(float frequency)
 	LCD_PutString(&display_, line1, 0, 0);
 }
 
+float GetFrequency(int pollInterval)
+{
+	const int maxPeriod = 4000; // => 250 mHz
+	const float minFrequency = 1000.0f / (float)maxPeriod;
+	
+	static int undetectedCount = 0;
+	static float lastFrequency = 0.0f;
+	
+	volatile float frequency = FrequencyTimer_GetFrequency(&freqTimer_);
+	if (frequency == 0.0f) {
+		undetectedCount++;
+		if (undetectedCount * pollInterval < maxPeriod) {
+			frequency = lastFrequency; 
+		}
+	}
+	else if (frequency >= 0.0f && frequency < minFrequency) {
+		frequency = 0.0f;
+	}
+	
+	if (frequency != lastFrequency) {
+		lastFrequency = frequency;
+		undetectedCount = 0;
+	}
+	
+	return frequency;
+	
+}
 
 int Run(DeviceConfig_t* pConfig)
 {
@@ -87,35 +114,15 @@ int Run(DeviceConfig_t* pConfig)
 	
 	LCD_RawClearDisplay(&display_.raw);
 
-	const int maxPeriod = 4000; // => 250 mHz
-	const float minFrequency = 1000.0f / (float)maxPeriod;
-	const int waitDelay = 100;
-
-	int undetectedCount = 0;
-	volatile float frequency = 0.0f;
-	float lastFrequency = 0.0f;
+	const int waitDelay = 10;
 	
 	for (;;) {
 	
 		SysTick_Wait10ms(waitDelay);
+		
+		float frequency = GetFrequency(10 * waitDelay);
 	
-		frequency = FrequencyTimer_GetFrequency(&freqTimer_);
-		if (frequency == 0.0f) {
-			undetectedCount++;
-			if (undetectedCount * 10 * waitDelay < maxPeriod) {
-				frequency = lastFrequency; 
-			}
-		}
-		else if (frequency >= 0.0f && frequency < minFrequency) {
-			frequency = 0.0f;
-		}
-		
-		if (frequency != lastFrequency) {
-			lastFrequency = frequency;
-			undetectedCount = 0;
-		}
-		
-		UpdateDisplay(lastFrequency);
+		UpdateDisplay(frequency);
 		
 	}
 	

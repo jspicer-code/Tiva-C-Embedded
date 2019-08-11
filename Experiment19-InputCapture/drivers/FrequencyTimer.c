@@ -33,12 +33,11 @@ void FrequencyTimer_CaptureHandler()
 	FrequencyTimer_t* freqTimer = (FrequencyTimer_t*)isrData->callbackData;
 	
 	// Capture the 32-bit "time"
-	// From the 1294 user guide:
-	// 	In capture down count modes, bits 15:0 contain the value of the counter and bits 23:16 contain
-	// 	the current, free-running value of the prescaler, which is the upper 8 bits of the count.
-	// 	In one-shot or periodic down count modes, the prescaler stored in 23:16 is a true prescaler, 
-	// 	meaning bits 23:16 count down before decrementing the value in bits 15:0.
-	uint32_t time = (freqTimer->timerCycle << 24) | (0xFFFFFF & regs->TAR);
+	// From the 123 user guide:
+	// 	In the 16-bit Input Edge Count, Input Edge Time, and PWM modes, bits 15:0 contain the value of
+	//	the counter and bits 23:16 contain the value of the prescaler, which is the upper 8 bits of the count.
+	//	Bits 31:24 always read as 0
+	uint32_t time = (freqTimer->timerCycle << 24) | regs->TAR;
 
 	// Get the current write buffer
 	CaptureBuffer_t* writeBuffer = &freqTimer->buffers[freqTimer->writeIndex];
@@ -50,32 +49,43 @@ void FrequencyTimer_CaptureHandler()
 		freqTimer->writeIndex ^= 1;
 		CaptureBuffer_t* newBuffer = &freqTimer->buffers[freqTimer->writeIndex];
 		
-		// Copy the previous capture into the new buffer.  Must be capture 0.
-		newBuffer->captures[0] = writeBuffer->captures[(writeBuffer->count & 1) ^ 1];
+		// Copy the previous capture into the new buffer.
+		newBuffer->captures[0] = writeBuffer->captures[writeBuffer->count - 1];
 		newBuffer->count = 1;
-	
+		
 		writeBuffer = newBuffer;
 	}
 	
-	// Index for this capture.
-	int captureIndex = writeBuffer->count & 1;
-	
-	// Store the current capture time.
-	Capture_t* capture = &writeBuffer->captures[captureIndex];
-	capture->time = time;
-	
 	int count = writeBuffer->count + 1;
-	if (count > 100 /* limit */) {
+	if (count >= FREQTIMER_BUFFER_SIZE) {
 		// mask interrupt.
 		regs->IMR &= ~TIMER_IMR_CAEIM;
-	}
+	}	
 	
-	// Save the interrupt status bits before leaving.
+	// Store the current capture time.
+	Capture_t* capture = &writeBuffer->captures[count - 1];
+	capture->time = time;
+
+	// Save the raw interrupt status bits before leaving.
 	capture->status = regs->RIS;
 	
 	// This must be atomic.  Must be the last instruction.
 	writeBuffer->count = count;
 		
+}
+
+static void Reset(FrequencyTimer_t* freqTimer)
+{	
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < FREQTIMER_BUFFER_SIZE; j++) {
+			freqTimer->buffers[i].captures[j].time = 0;
+			freqTimer->buffers[i].captures[j].status = 0;
+		}
+		freqTimer->buffers[i].count = 0;
+	}
+	
+	freqTimer->writeIndex = 0;
+	freqTimer->readIndex = 1;	
 }
 
 static uint32_t GetCaptureTime(Capture_t* capture)
@@ -88,22 +98,6 @@ static uint32_t GetCaptureTime(Capture_t* capture)
 	}
 	return time;
 }
-
-
-static void Reset(FrequencyTimer_t* freqTimer)
-{	
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 2; j++) {
-			freqTimer->buffers[i].captures[j].time = 0;
-			freqTimer->buffers[i].captures[j].status = 0;
-		}
-		freqTimer->buffers[i].count = 0;
-	}
-	
-	freqTimer->writeIndex = 0;
-	freqTimer->readIndex = 1;	
-}
-
 
 float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 {
@@ -118,21 +112,31 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 		// write buffer safe to read.  Must be atomic.
 		freqTimer->readIndex = freqTimer->writeIndex;
 		
+		float sum = 0.0f;
+		uint32_t status = 0;
+		
 		// Note that the buffer count is being loaded again in case it changed after checking above.
-		int capture1Index = buffer->count & 1;
-		Capture_t* capture1 = &buffer->captures[capture1Index];
-		Capture_t* capture2 = &buffer->captures[capture1Index ^ 1];
-			
-		if (capture1->status & TIMER_RIS_CAERIS || capture2->status & TIMER_RIS_CAERIS) {
+		for (int i = 1; i < buffer->count; i++) {
+
+			Capture_t* capture1 = &buffer->captures[i-1];	
+			Capture_t* capture2 = &buffer->captures[i];
+						
+			uint32_t time1 = GetCaptureTime(capture1);
+			uint32_t time2 = GetCaptureTime(capture2);
+			uint32_t interval = time1 - time2;
+			sum += interval;
+
+			status |= capture1->status | capture2->status;	
+		}
+		
+		// If at least one capture had a pending capture interrupt...
+		if (status & TIMER_RIS_CAERIS) {
 			// Whoa there!  Frequency too high.
 			frequency = -1.0;
 		}
 		else {
-		
-			uint32_t time1 = GetCaptureTime(capture1);
-			uint32_t time2 = GetCaptureTime(capture2);
-			uint32_t interval = time1 - time2;
-			frequency = (float)PLL_BusClockFreq / (float)interval;		
+			float average = sum / (float)(buffer->count - 1);
+			frequency = (float)PLL_BusClockFreq / average;		
 		}
 	}
 
@@ -140,6 +144,7 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 	volatile TimerRegs_t* regs = Timer_GetRegisters(freqTimer->timer);
 	if (!(regs->IMR & TIMER_IMR_CAEIM)) {
 		Reset(freqTimer);
+		regs->ICR = TIMER_MIS_CAEMIS;	
 		regs->IMR |= TIMER_IMR_CAEIM;
 	}
 
@@ -168,4 +173,3 @@ int FrequencyTimer_Enable(const FrequencyTimerConfig_t* config, FrequencyTimer_t
 		
 	return 0;
 }
-

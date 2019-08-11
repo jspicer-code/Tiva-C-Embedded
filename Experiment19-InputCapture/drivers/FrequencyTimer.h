@@ -15,6 +15,7 @@ typedef struct {
 	uint8_t 			priority;
 } FrequencyTimerConfig_t;
 
+#define FREQTIMER_BUFFER_SIZE		100
 
 typedef struct {
 	uint32_t time;
@@ -22,7 +23,7 @@ typedef struct {
 } Capture_t;
 
 typedef struct {
-	Capture_t captures[2];
+	Capture_t captures[FREQTIMER_BUFFER_SIZE];
 	uint32_t count;
 } CaptureBuffer_t;
 
