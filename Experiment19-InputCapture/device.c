@@ -10,7 +10,7 @@
 #include "utilities/Strings.h"
 
 static LCDDisplay_t display_;
-static FrequencyTimer_t freqTimer_;
+static FrequencyTimer_t* freqTimer_;
 
 static bool InitHardware(DeviceConfig_t* pConfig)
 {
@@ -49,7 +49,8 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	freqTimerConfig.pin = pConfig->edgeTimePin;
 	freqTimerConfig.priority = 7;
 
-	if (FrequencyTimer_Enable(&freqTimerConfig, &freqTimer_)) {
+	freqTimer_ = FrequencyTimer_Enable(&freqTimerConfig);
+	if (!freqTimer_) {
 		return false;
 	}
 
@@ -85,7 +86,7 @@ float GetFrequency(int pollInterval)
 	static int undetectedCount = 0;
 	static float lastFrequency = 0.0f;
 	
-	volatile float frequency = FrequencyTimer_GetFrequency(&freqTimer_);
+	volatile float frequency = FrequencyTimer_GetFrequency(freqTimer_);
 	if (frequency == 0.0f) {
 		undetectedCount++;
 		if (undetectedCount * pollInterval < maxPeriod) {

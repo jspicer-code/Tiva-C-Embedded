@@ -17,7 +17,7 @@ typedef enum { DRIVE_2MA, DRIVE_4MA, DRIVE_8MA } GPIO_Drive_t;
 // Names for the internal pull-up resistor types.
 typedef enum { PULL_NONE, PULL_UP, PULL_DOWN } GPIO_Pull_t;
 
-// Names for the internal pull-up resistor types.
+
 typedef enum { 
 	INT_TRIGGER_NONE, 
 	INT_TRIGGER_LOW_LEVEL,

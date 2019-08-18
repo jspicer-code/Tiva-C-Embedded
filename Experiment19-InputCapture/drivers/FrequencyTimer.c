@@ -1,11 +1,33 @@
 #include "HAL.h"
 #include "FrequencyTimer.h"
+#include <stdlib.h>
 	
 #if (halCONFIG_1294 == 1)
 #include "tm4c1294ncpdt.h"
 #else  // TM4C123
 #include "tm4c123gh6pm.h"
 #endif
+
+#define FREQTIMER_BUFFER_SIZE		100
+
+typedef struct {
+	uint32_t time;
+	uint32_t status;
+} Capture_t;
+
+typedef struct {
+	Capture_t captures[FREQTIMER_BUFFER_SIZE];
+	uint32_t count;
+} CaptureBuffer_t;
+
+
+struct FrequencyTimer {
+	TimerBlock_t timer;
+	CaptureBuffer_t	buffers[2];
+	int readIndex;
+	int writeIndex;
+	uint8_t timerCycle;
+};
 
 
 void FrequencyTimer_TimeoutHandler()
@@ -15,6 +37,8 @@ void FrequencyTimer_TimeoutHandler()
 	
 	// Clear the timer timeout flag and read to force clearing of the interrupt cancel flag.
 	regs->ICR = TIMER_MIS_TBTOMIS;
+	
+	// TODO:  Is this necessary given that the interrupt won't occur again for many cycles?
 	volatile uint32_t readback = regs->ICR;
 	
 	FrequencyTimer_t* freqTimer = (FrequencyTimer_t*)isrData->callbackData;
@@ -49,13 +73,13 @@ void FrequencyTimer_CaptureHandler()
 		freqTimer->writeIndex ^= 1;
 		CaptureBuffer_t* newBuffer = &freqTimer->buffers[freqTimer->writeIndex];
 		
-		// Copy the previous capture into the new buffer.
+		// Copy the most recent capture from the old buffer into the new buffer.
 		newBuffer->captures[0] = writeBuffer->captures[writeBuffer->count - 1];
 		newBuffer->count = 1;
 		
 		writeBuffer = newBuffer;
 	}
-	
+		
 	int count = writeBuffer->count + 1;
 	if (count >= FREQTIMER_BUFFER_SIZE) {
 		// mask interrupt.
@@ -113,7 +137,7 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 		freqTimer->readIndex = freqTimer->writeIndex;
 		
 		float sum = 0.0f;
-		uint32_t status = 0;
+		uint32_t status = buffer->captures[0].status;
 		
 		// Note that the buffer count is being loaded again in case it changed after checking above.
 		for (int i = 1; i < buffer->count; i++) {
@@ -126,7 +150,7 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 			uint32_t interval = time1 - time2;
 			sum += interval;
 
-			status |= capture1->status | capture2->status;	
+			status |= capture2->status;	
 		}
 		
 		// If at least one capture had a pending capture interrupt...
@@ -135,6 +159,7 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 			frequency = -1.0;
 		}
 		else {
+			// The number of input cycles measured is one less than the buffer count.
 			float average = sum / (float)(buffer->count - 1);
 			frequency = (float)PLL_BusClockFreq / average;		
 		}
@@ -152,24 +177,30 @@ float FrequencyTimer_GetFrequency(FrequencyTimer_t* freqTimer)
 }
 
 
-int FrequencyTimer_Enable(const FrequencyTimerConfig_t* config, FrequencyTimer_t* freqTimer)
+FrequencyTimer_t* FrequencyTimer_Enable(const FrequencyTimerConfig_t* config)
 {
-	
-	// Initialize the hardware timer for edge timer mode.
-	TimerIRQConfig_t irqConfig = {config->priority, (void*)0, (void*)freqTimer};
-	if (Timer_Init(config->timer, TIMER_EDGE_TIME, &irqConfig, &config->pin)) {
-		return -1;
-	}
+	// TODO:  maybe have IRQ config config be separate from Timer_Init so this malloc does
+	// not have to occur first.
+	FrequencyTimer_t* freqTimer = (FrequencyTimer_t*)malloc(sizeof(FrequencyTimer_t));
+	if (freqTimer) {
 
-	// Initialize the frequency timer state.
-	freqTimer->timer = config->timer;
-	freqTimer->timerCycle = 0xFF;
-	Reset(freqTimer);
-
-	// Enable it.
-	if (Timer_EnableEdgeTimeTimer(freqTimer->timer)) {
-		return -1;
-	}
+		// Initialize frequency timer state.
+		freqTimer->timer = config->timer;
+		freqTimer->timerCycle = 0xFF;
+		Reset(freqTimer);
 		
-	return 0;
+		// Initialize the hardware timer for edge timer mode.
+		TimerIRQConfig_t irqConfig = {config->priority, (void*)0, (void*)freqTimer};
+		if (Timer_Init(config->timer, TIMER_EDGE_TIME, &irqConfig, &config->pin)) {
+			free(freqTimer);
+			freqTimer = 0;
+		}
+		else {
+			// Enable it.
+			Timer_EnableEdgeTimeTimer(config->timer);
+		}
+	
+	}
+	
+	return freqTimer;
 }

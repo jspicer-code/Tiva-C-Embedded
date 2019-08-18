@@ -154,7 +154,7 @@ void Timer_Wait(TimerBlock_t block, uint32_t count, uint32_t interval);
 
 #if (halUSE_EDGE_TIME_TIMERS == 1) 
 
-int Timer_EnableEdgeTimeTimer(TimerBlock_t block);
+void Timer_EnableEdgeTimeTimer(TimerBlock_t block);
 void Timer_DisableEdgeTimeTimer(TimerBlock_t block);
 
 #endif

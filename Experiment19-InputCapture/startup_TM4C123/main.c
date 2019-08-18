@@ -5,6 +5,7 @@ DeviceConfig_t config_;
 
 int main()
 {
+	
 	config_.sysClkFreq = SYSCLK_80;
 	
 	// The data pin assignments 0-3 will be mapped to DB4-DB7 of the display

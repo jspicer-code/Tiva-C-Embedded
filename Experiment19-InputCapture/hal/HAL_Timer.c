@@ -5,6 +5,7 @@
 // Hardware:  TM4C123 & TM4C1294 Tiva board
 
 #include <stdint.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "HAL.h"
 
@@ -46,48 +47,6 @@ const volatile uint32_t * TimerBaseAddress[TIMER_MAX_BLOCKS] = {
 };
 
 
-#define DEFINE_IRQ_HANDLER(name) \
-static TimerHandlerInfo_t name##_HandlerInfo;
-
-#if (halUSE_TIMER0 == 1)
-#define IRQ_HANDLER_DEFINED
-// TIMER0 interrupt handler.  
-// Must be assigned in the IRQ vector table.
-DEFINE_IRQ_HANDLER(TIMER0)
-#endif
-
-#if (halUSE_TIMER1 == 1)
-#define IRQ_HANDLER_DEFINED
-// TIMER1 interrupt handler.
-// Must be assigned in the IRQ vector table.
-DEFINE_IRQ_HANDLER(TIMER1)
-#endif
-
-#if (halUSE_TIMER2 == 1)
-#define IRQ_HANDLER_DEFINED
-// TIMER2 interrupt handler.  
-// Must be assigned in the IRQ vector table.
-DEFINE_IRQ_HANDLER(TIMER2)
-#endif
-
-#if (halUSE_TIMER3 == 1)
-#define IRQ_HANDLER_DEFINED
-// TIMER3 interrupt handler.  
-// Must be assigned in the IRQ vector table.
-DEFINE_IRQ_HANDLER(TIMER3)
-#endif
-
-
-#define ENABLE_IRQ(name, mode, irqConfig, useTimerA, useTimerB) \
-{ \
-	name##_HandlerInfo.block = name; \
-	name##_HandlerInfo.mode = mode; \
-	name##_HandlerInfo.callback = irqConfig->callback; \
-	name##_HandlerInfo.callbackData = irqConfig->callbackData; \
-	if (useTimerA) { NVIC_EnableIRQ(INT_##name##A - 16, irqConfig->priority, &name##_HandlerInfo); } \
-	if (useTimerB) { NVIC_EnableIRQ(INT_##name##B - 16, irqConfig->priority, &name##_HandlerInfo); } \
-}
-
 static void EnableIRQHandler(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, bool useTimerA, bool useTimerB)
 {
 	
@@ -105,31 +64,8 @@ static void EnableIRQHandler(TimerBlock_t block, TimerMode_t mode, const TimerIR
 		{ INT_TIMER7A, INT_TIMER7B },
 #endif		
 	};
-	
-	TimerHandlerInfo_t* handlers[] = {
-#if (halUSE_TIMER0 == 1) 
-		&TIMER0_HandlerInfo,
-#else
-		0,
-#endif
-#if (halUSE_TIMER1 == 1)
-		&TIMER1_HandlerInfo,
-#else
-		0,
-#endif
-#if (halUSE_TIMER2 == 1)
-		&TIMER2_HandlerInfo,
-#else
-		0,
-#endif
-#if (halUSE_TIMER3 == 1)
-		&TIMER3_HandlerInfo,
-#else
-		0
-#endif
-	};
-	
-	TimerHandlerInfo_t* handler = handlers[block];
+
+	TimerHandlerInfo_t* handler = (TimerHandlerInfo_t*)malloc(sizeof(TimerHandlerInfo_t));
 	handler->block = block;
 	handler->mode = mode;
 	handler->callback = irqConfig->callback;
@@ -270,7 +206,7 @@ static int ConfigureEdgeTimeTimer(TimerBlock_t block, const TimerIRQConfig_t* ir
 	return 0;
 }	
 
-int Timer_EnableEdgeTimeTimer(TimerBlock_t block)
+void Timer_EnableEdgeTimeTimer(TimerBlock_t block)
 {
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
 	
@@ -289,8 +225,7 @@ int Timer_EnableEdgeTimeTimer(TimerBlock_t block)
 
 	// Enable timers A and B.  If they were already enabled, then they should now be resynchronized.
 	regs->CTL |= (TIMER_CTL_TAEN | TIMER_CTL_TBEN);
-	
-	return 0;
+
 }	
 
 void Timer_DisableEdgeTimeTimer(TimerBlock_t block)
