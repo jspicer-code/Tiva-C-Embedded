@@ -78,28 +78,36 @@ static void UpdateDisplay(float frequency)
 	LCD_PutString(&display_, line1, 0, 0);
 }
 
+
 float GetFrequency(int pollInterval)
 {
 	const int maxPeriod = 4000; // => 250 mHz
 	const float minFrequency = 1000.0f / (float)maxPeriod;
 	
-	static int undetectedCount = 0;
+	static int noSignalTimer = 0;
 	static float lastFrequency = 0.0f;
 	
-	volatile float frequency = FrequencyTimer_GetFrequency(freqTimer_);
-	if (frequency == 0.0f) {
-		undetectedCount++;
-		if (undetectedCount * pollInterval < maxPeriod) {
-			frequency = lastFrequency; 
+	float frequency = FrequencyTimer_GetFrequency(freqTimer_);
+	if (frequency > 0.0f) {
+		
+		if (frequency >= minFrequency) {
+			lastFrequency = frequency;
+			noSignalTimer = 0;
 		}
+		else {
+			frequency = 0.0f;			
+		}
+
 	}
-	else if (frequency >= 0.0f && frequency < minFrequency) {
-		frequency = 0.0f;
-	}
-	
-	if (frequency != lastFrequency) {
-		lastFrequency = frequency;
-		undetectedCount = 0;
+	else if (frequency == 0.0f) {
+		
+		if (noSignalTimer < maxPeriod) {
+			frequency = lastFrequency;
+			noSignalTimer += pollInterval;
+		}
+		else {
+			lastFrequency = 0.0f; 				
+		}
 	}
 	
 	return frequency;
