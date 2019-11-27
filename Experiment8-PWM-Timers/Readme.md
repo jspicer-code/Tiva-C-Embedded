@@ -11,7 +11,7 @@ The fan's tachometer output is a square wave.  Every two pulses represent one re
 
 ![Experiment8-PWM-Timers](Experiment8-PWM-Timers-circuit.png)  
 
-Pin and wiring specifications for PWM controlled fans can be found here:<br>
+Pin and signal specifications for PWM controlled fans can be found here:<br>
 https://web.archive.org/web/20110726062453/http://www.formfactors.org/developer/specs/4_Wire_PWM_Spec.pdf
 
 Additional resources for computer fan control can be found on WikiPedia:<br>
