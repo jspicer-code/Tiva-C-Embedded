@@ -7,3 +7,6 @@ The fan's tachometer output is a square wave.  Every two pulses represent one re
 
 [![](http://img.youtube.com/vi/nJTgNQMfvj8/2.jpg)](https://youtu.be/nJTgNQMfvj8)<br>
 [Watch the video](https://youtu.be/nJTgNQMfvj8)
+
+
+![Experiment8-PWM-Timers](Experiment8-PWM-Timers-circuit.png)  
