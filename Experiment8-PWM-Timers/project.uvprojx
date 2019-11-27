@@ -338,7 +338,7 @@
               <MiscControls>--c99</MiscControls>
               <Define>rvmdk PART_TM4C123GH6PM TARGET_IS_TM4C123_RB1</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..;.\driverlib;.\src;.\inc</IncludePath>
+              <IncludePath>.\src;.\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
