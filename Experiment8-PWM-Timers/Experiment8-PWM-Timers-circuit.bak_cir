@@ -1,0 +1,1295 @@
+[Main]
+FileType=CIR
+Version=12.00
+Program=Micro-Cap
+Component Version=10.00
+Shape Version=11.00
+Screen=1920,1080
+MCAPVersion=12.0.2.1
+Key ID=Demo
+NLCnt=60
+TXCnt=14
+
+[shapedef]
+Name=Fixed
+Line=8,0,32,0
+Line=8,0,0,-8
+Line=8,0,0,8
+
+[shapedef]
+Name=Ground
+Line=0,0,12,0
+Line=12,-8,12,8
+Line=18,-4,18,4
+Line=24,0,24,0
+
+[shapedef]
+Name=Input
+PolyClosed=5
+PolyLine=8,0
+PolyLine=16,-8
+PolyLine=48,-8
+PolyLine=48,8
+PolyLine=16,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=LED2
+Line=22,10,16,16
+Line=30,10,24,16
+PolyClosed=3
+PolyLine=18,18
+PolyLine=14,14
+PolyLine=14,18
+PolyClosed=3
+PolyLine=26,18
+PolyLine=22,14
+PolyLine=22,18
+Line=0,0,20,0
+Line=28,0,48,0
+Rectangle=18,-8,20,8
+PolyClosed=3
+PolyLine=20,0
+PolyLine=28,-8
+PolyLine=28,8
+
+[shapedef]
+Name=Output
+PolyClosed=5
+PolyLine=48,0
+PolyLine=40,-8
+PolyLine=8,-8
+PolyLine=8,8
+PolyLine=40,8
+FColor=None
+Line=0,0,8,0
+
+[shapedef]
+Name=Pot
+Line=0,0,12,0
+Line=12,0,14,-4
+Line=14,-4,18,4
+Line=18,4,22,-4
+Line=22,-4,26,4
+Line=26,4,30,-4
+Line=30,-4,34,4
+Line=34,4,36,0
+Line=36,0,48,0
+PolyClosed=4
+PolyLine=24,4
+PolyLine=24,4
+PolyLine=22,8
+PolyLine=26,8
+Line=24,8,24,16
+
+[shapedef]
+Name=Resistor
+PolyOpen=12
+PolyLine=0,0
+PolyLine=0,0
+PolyLine=12,0
+PolyLine=14,-4
+PolyLine=18,4
+PolyLine=22,-4
+PolyLine=26,4
+PolyLine=30,-4
+PolyLine=34,4
+PolyLine=36,0
+PolyLine=48,0
+PolyLine=48,0
+Current=32,8,16,8
+
+[compdef]
+Name=Fixed Analog
+Definition=ANALOG STATE
+Shape=Fixed
+Mask=2816
+Used=22
+memo=Provides a fixed DC voltage
+Label Offset=-14,-7,-6,-27
+PinCnt=1
+Pin="Out",4,0,-8,-3
+
+[compdef]
+Name=Output Port
+Definition=NULL
+Shape=Output
+Mask=4096
+Used=64
+memo=Output Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Resistor
+Definition=Resistor
+Shape=Resistor
+Mask=6401
+Used=203
+memo=Resistor
+Label Offset=18,6,8,11
+PinCnt=2
+Pin="Plus",6,0,-10,-4
+Pin="Minus",0,0,-14,-4
+
+[compdef]
+Name=Input Port
+Definition=NULL
+Shape=Input
+Mask=4096
+Used=55
+memo=Input Port connector used to tie nodes together
+Label Offset=17,8,10,18
+PinCnt=0
+
+[compdef]
+Name=Ground
+Definition=Ground
+Shape=Ground
+Mask=1793
+Used=295
+memo=Ground
+Label Offset=0,0,0,0
+PinCnt=1
+Pin="PinA",0,0,-3,-7
+
+[compdef]
+Name=Pot
+Definition=Macro
+Shape=Pot
+Mask=5376
+Used=5
+memo=Potentiometer Macro
+Label Offset=32,4,9,11
+PinCnt=3
+Pin="PINA",a,0,0,-13,-5
+Pin="PINB",a,3,2,6,5
+Pin="PINC",a,6,0,-12,-5
+
+[compdef]
+Name=LE_UW_Q9WP-TYP
+Definition=NULL
+Shape=LED2
+Mask=4736
+Used=1
+memo=Ultrawhite Compact LED Vf=3.4V
+Label Offset=34,3,11,9
+PinCnt=0
+
+[Circuit]
+Window Placement=2,3, -1,-1, -8,-31, 130,130,1755,755
+Default Object=Color=#000080
+Default Object Font=Height=-15,FStyle=0,Color=#000080,Name=Arial
+Default Object Apply Border To Text=No
+Default Object Apply Fill To Text=No
+Default Object GridSnap=No
+NodeVoltageFormat=3
+CurrentFormat=3
+PowerFormat=3
+PathDelayFormat=3
+WarningFormat=3
+GridTextFormulaFormat=3
+SpiceType=AMBIGUOUS
+Title_Block_Border=None
+Title_Block=False
+Show Nodes=False
+Show Voltages=False
+Show Current=False
+Show Power=False
+Show Condition=False
+Show Pin Connections=False
+Show Connection Warnings=False
+Show Cross=False
+Show Attribute Text=True
+Show Grid Text=True
+
+[Comp]
+Name=Fixed Analog
+Px=872,648
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V3
+
+[Attr]
+ON=-18,-13,VALUE
+V=12V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=944,752
+Rot=4
+
+[Attr]
+ON=56,-7,PART
+V=FAN_12V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=944,720
+Rot=4
+
+[Attr]
+ON=56,-9,PART
+V=FAN_GND
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=872,680,872,752
+
+[Comp]
+Name=Fixed Analog
+Px=656,648
+Rot=7
+
+[Attr]
+ON=-10,-27,PART
+V=V4
+
+[Attr]
+ON=-9,-21,VALUE
+V=5V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Resistor
+Px=656,752
+Rot=5
+
+[Attr]
+ON=8,-25,PART
+V=R9
+
+[Attr]
+ON=8,-39,RESISTANCE
+V=10K
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=944,784
+Rot=4
+
+[Attr]
+ON=57,-8,PART
+V=FAN_TACH
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=656,752,656,784
+
+[Wire]
+Pxs=656,680,656,704
+
+[Comp]
+Name=Output Port
+Px=944,816
+Rot=4
+
+[Attr]
+ON=57,-8,PART
+V=FAN_PWM
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=608,784,656,784
+
+[Wire]
+Pxs=872,752,944,752
+
+[Wire]
+Pxs=776,720,944,720
+
+[Wire]
+Pxs=616,816,944,816
+
+[Wire]
+Pxs=776,720,776,744
+
+[Wire]
+Pxs=656,784,944,784
+
+[Comp]
+Name=Input Port
+Px=616,816
+Rot=6
+
+[Attr]
+ON=-98,-8,PART
+V=PWM
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=560,784
+Rot=4
+
+[Attr]
+ON=-44,-8,PART
+V=TACH
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Ground
+Px=776,744
+Rot=7
+
+[Object]
+Object=Rectangle
+CBorder=#C0C0C0
+Pattern=Dash6
+Px=481,566,1147,855
+
+[Object]
+Object=Rectangle
+CBorder=#000080
+Px=155,197,279,468
+
+[Comp]
+Name=Output Port
+Px=280,224
+Rot=4
+
+[Attr]
+ON=54,-8,PART
+V=LED_R
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=SS
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=280,264
+Rot=4
+
+[Attr]
+ON=55,-5,PART
+V=SPEED_POT
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=280,304
+Rot=4
+
+[Attr]
+ON=54,-7,PART
+V=TACH
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=THERM
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=280,328
+Rot=4
+
+[Attr]
+ON=57,-6,PART
+V=PWM
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=280,376
+Rot=4
+
+[Attr]
+ON=58,-9,PART
+V=UART_RX
+Style=8192
+
+[Attr]
+ON=0,0,COST
+V=FAN
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Output Port
+Px=280,400
+Rot=4
+
+[Attr]
+ON=59,-6,PART
+V=UART_TX
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Object]
+Object=Rectangle
+CBorder=#C0C0C0
+Pattern=Dash6
+Px=100,79,447,540
+
+[Object]
+Object=Rectangle
+FT=SLD
+CFill=#E4E4E4
+CBorder=#585858
+Px=1011,210,1022,226
+
+[Object]
+Object=Rectangle
+FT=SLD
+CFill=#000000
+CBorder=#585858
+Px=960,207,1011,228
+
+[Bus]
+ShowPinNames=True
+Color=#000000
+Px=808,176
+PinCnt=6
+Spacing=2
+BusNodePlacement=Middle
+WireNodeAlignment=Straight
+
+[Attr]
+ON=30,15,PART
+V=TTL-232R-3V3-WE
+Style=8192
+
+[Attr]
+ON=0,-8,LABEL
+V=GND,CTS,VCC,TXD,RXD,RTS
+
+[Wire]
+Pxs=608,224,808,224
+Weight=3
+Color=#FCAD2A
+
+[Wire]
+Pxs=624,176,808,176
+Weight=3
+Color=#000000
+
+[Wire]
+Pxs=616,256,704,256
+Weight=3
+Color=#FFFF00
+
+[Wire]
+Pxs=824,216,960,216
+Weight=5
+Color=#000000
+
+[Comp]
+Name=Pot
+Px=744,472
+Rot=6
+
+[Attr]
+ON=-107,4,PART
+V=X1
+
+[Attr]
+ON=-53,18,FILE
+V=Pot
+
+[Attr]
+ON=-34,-23,Param:POTSIZE
+V=10K
+Style=8192
+
+[Attr]
+ON=-48,60,Param:PERCENT
+V=50
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Fixed Analog
+Px=664,408
+Rot=1
+
+[Attr]
+ON=-6,-27,PART
+V=V5
+
+[Attr]
+ON=-10,-17,VALUE
+V=3.3V
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Ground
+Px=808,480
+Rot=7
+
+[Wire]
+Pxs=664,440,664,472
+
+[Wire]
+Pxs=664,472,696,472
+
+[Wire]
+Pxs=744,472,808,472
+
+[Wire]
+Pxs=808,472,808,480
+
+[Wire]
+Pxs=720,488,720,496
+
+[Wire]
+Pxs=632,496,720,496
+
+[Comp]
+Name=Input Port
+Px=584,496
+Rot=4
+
+[Attr]
+ON=-79,-6,PART
+V=SPEED_POT
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Object]
+Object=Rectangle
+CBorder=#C0C0C0
+Pattern=Dash6
+Px=481,322,830,541
+
+[Comp]
+Name=Ground
+Px=624,176
+Rot=7
+
+[Comp]
+Name=Input Port
+Px=616,256
+Rot=6
+
+[Attr]
+ON=-118,-7,PART
+V=UART_TX
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Comp]
+Name=Input Port
+Px=560,224
+Rot=4
+
+[Attr]
+ON=-62,-9,PART
+V=UART_RX
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=704,240,704,256
+Weight=3
+Color=#FFFF00
+
+[Wire]
+Pxs=704,240,808,240
+Weight=3
+Color=#FFFF00
+
+[Object]
+Object=Rectangle
+CBorder=#C0C0C0
+Pattern=Dash6
+Px=480,79,1144,298
+
+[Comp]
+Name=Resistor
+Px=1088,432
+Rot=6
+
+[Attr]
+ON=-34,6,PART
+V=R11
+
+[Attr]
+ON=-31,-24,RESISTANCE
+V=0
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Wire]
+Pxs=1024,432,1040,432
+
+[Wire]
+Pxs=1112,432,1112,496
+
+[Comp]
+Name=Ground
+Px=1112,496
+Rot=1
+
+[Wire]
+Pxs=1088,432,1112,432
+
+[Comp]
+Name=Input Port
+Px=976,432
+Rot=6
+
+[Attr]
+ON=-97,-8,PART
+V=LED_R
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Object]
+Object=Rectangle
+CBorder=#C0C0C0
+Pattern=Dash6
+Px=855,321,1145,540
+
+[Comp]
+Name=LE_UW_Q9WP-TYP
+Px=1024,432
+Rot=2
+
+[Attr]
+ON=-31,-43,PART
+V=Red
+Style=8192
+
+[Attr]
+ON=0,0,PACKAGE
+V
+
+[Grid Text]
+Text="Fan Control"
+Px=736,608
+Height=-26
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="TM4C123GH6PM"
+Px=168,488
+Color=#008000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PF1"
+Px=248,232
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE3"
+Px=248,272
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB4"
+Px=248,312
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PB5"
+Px=248,336
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE4"
+Px=248,384
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PE5"
+Px=248,408
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Microcontroller"
+Px=168,128
+Height=-26
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="PC USB Port"
+Px=1040,224
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Speed Pot"
+Px=608,360
+Height=-26
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="UART"
+Px=744,120
+Height=-26
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="LED (Onboard)"
+Px=912,360
+Height=-26
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Grid Text]
+Text="Experiment8-PWM-Timers"
+Px=424,48
+Height=-32
+Color=#000000
+GridSnap=True
+JustifyH=Left
+JustifyV=Bottom
+CBorder=None
+
+[Schematic]
+CurrentSection 0=0
+CurrentSection 1=0
+CurrentSection 2=0
+CurrentSection 3=0
+Splitter.xs=0
+Splitter.ys=0
+TextQuad=4099
+Scale=1
+GridUser=10
+ShapeGroups="Main","Euro","Polarity","Main1","Main11","Electrolytic","GroundArrow","DeMorgan"
+CalcRMS=False
+CalcAVG=False
+CalcPeak=False
+CalcVoltage=True
+DisplayMeasure=Last
+ShareScales=True
+
+[Tools]
+Pos=Top
+FILESAVEASOLD=No
+BOM=No
+FILEPCB=No
+PROBE=Yes
+SELECT=Yes
+PAN=Yes
+COMP=Yes
+TEXT=Yes
+WIRE=Yes
+WIRED=Yes
+BUS=Yes
+GRAPHIC=Yes
+FLOWCHART=Yes
+LINE=No
+ELLIPSE=No
+RECT=No
+DIAM=No
+ARC=No
+PIE=No
+TRIANGLE=No
+STAR=No
+LEFTBRK=No
+RIGHTBRK=No
+BOTHBRK=No
+META=Yes
+PARALLELOGRAM=No
+FC_PROCESS=No
+FC_ALT_PROCESS=No
+FC_DECISION=No
+FC_DATA=No
+FC_PREDEFPROCESS=No
+FC_INTERNALSTORAGE=No
+FC_DOCUMENT=No
+FC_MULTIDOCUMENT=No
+FC_TERMINATOR=No
+FC_PREPARATION=No
+FC_MANUALINPUT=No
+FC_MANUALOPERATION=No
+FC_CONNECTOR=No
+FC_OFFPAGECONNECTOR=No
+FC_PUNCHCARD=No
+FC_PUNCHEDTAPE=No
+FC_SUMMING_JUNCTION=No
+FC_OR=No
+FC_COLLATE=No
+FC_SORT=No
+FC_EXTRACT=No
+FC_MERGE=No
+FC_STORED_DATA=No
+FC_DELAY=No
+FC_SAS=No
+FC_MAGNETIC_DISK=No
+FC_DAS=No
+FC_DISPLAY=No
+SPREAD_SHEET=Yes
+POLYCLOS=No
+POLYOPEN=No
+FLAG=Yes
+INFO=Yes
+HELP=Yes
+HELP_SPICE=No
+LINK=Yes
+CHECK=Yes
+REGION_ENABLE=Yes
+TITLE_BLOCK=Yes
+DIGTRC=No
+DIGTRC2=No
+BUILD_COMMAND=Yes
+DIGALL=No
+GRIDTEXT=Yes
+COMPTEXT=Yes
+NODE=Yes
+MEASURED=Yes
+NODEV=Yes
+CURRENT=Yes
+POWER=Yes
+CONDITIN=Yes
+PIN=Yes
+CONNWARN=Yes
+CROSS=Yes
+GRID=Yes
+BORDER=Yes
+BORDERONE=Yes
+TITLE=Yes
+RUBBER=Yes
+PROPERTY=Yes
+STEP=Yes
+MIRROR=Yes
+ROTATE=Yes
+FLIPY=Yes
+FLIPX=Yes
+CIR_MAKEMACRO=No
+CLEARCUTWIRE=No
+CLIPBOARDCIRPAGE2BMM=No
+FINDCOMP=Yes
+FIND=Yes
+REPEAT=No
+REPLACE=No
+MODEL=Yes
+CIR2CKT=Yes
+ATTDISP=Yes
+ENABLE=Yes
+DISABLE=Yes
+ENABLE_WITH=Yes
+TOFRONT=Yes
+TOBACK=Yes
+SELNEXT=Yes
+PAGEADD=Yes
+PAGEADDTEXT=No
+ADDSECTION=No
+PAGEDEL=Yes
+ZOOMIN=Yes
+ZOOMOUT=Yes
+AUTOSCALECIR=Yes
+GOTOFLAG=Yes
+UPLEVEL=Yes
+COLOR=Yes
+FONT=Yes
+STYLE=Yes
+DM_LAST=No
+DM_RMS=No
+DM_AVG=No
+DM_PEAK=No
+GRID_NONE=No
+GRID_NORMAL=No
+GRID_BOLD_5=No
+GRID_BOLD_6=No
+GRID_BOLD_USER=No
+GRAPH_PAPER=No
+SPLITCIRTEXTH=No
+SPLITCIRTEXTV=No
+SPACE_SPLITTERS_EVENLY=No
+NORMALCIR=No
+RENAMEDEFINE=No
+RENAMECMP=No
+ATTALIGN=No
+RESETNODEPOS=No
+FIT2STANDARD=No
+NODESNAP=No
+MOVETEXT=No
+TEXTINC=No
+TOGGLETEXT=No
+TOGGLEMODE=No
+TOLERANCE=No
+ALIGNAB=No
+ALIGNLEFT=Yes
+ALIGNCENTER=Yes
+ALIGNRIGHT=Yes
+ALIGNTOP=Yes
+ALIGNMIDDLES=Yes
+ALIGNBOTTOM=Yes
+
+[Section]
+Index=0
+Name="Experiment8-PWM-Timers-circuit"
+Type=Main
+Enable=True
+CurrentPage 0=0
+CurrentPage 1=0
+CurrentPage 2=0
+CurrentPage 3=0
+TabSize 0=425
+TabSize 1=425
+TabSize 2=425
+TabSize 3=425
+
+[Page]
+Index=0
+Section=0
+Print=True
+Enable=True
+Name=Main
+PrinterScale=1
+Scale 0=1
+Scale 1=1
+Scale 2=1
+Scale 3=1
+Px=1500,138
+WinBackGround Color=#FFFFFF
+Select Color=#FF0000
+Anchor Color=#000000
+Select Box Color=#000080
+Grid Text Color=Height=-12,FStyle=0,Color=#0000FF,Name=Verdana
+Grid Text RTF=False
+Grid Text Angle=0
+Grid Text GridSnap=True
+Grid Text PinIt=False
+Grid Text JustifyH=Left
+Grid Text JustifyV=Bottom
+Grid GradientColor2=None
+Grid OutlineThickness=1
+Grid OutlineColor=None
+Component Color=#0000FF
+Attribute Text=Height=-12,FStyle=0,Color=#008000,Name=Verdana
+Wire Color=#008000
+Bus Color=#008000
+Pin Connection=Height=-10,FStyle=0,Color=#FF0000,Name=Arial
+Pin Marker Color=#008000
+Node Number=Height=-11,FStyle=0,Color=#FF00FF,Name=Arial
+Node Voltage Color=Height=-11,FStyle=0,Color=#000000,Name=Arial
+Dynamic AC Voltage Color=#E4E4E4
+Text Banner Text=Height=-15,FStyle=0,Color=#800000,Name=Arial
+Title Block Background=#C0C0C0
+Current=Height=-11,FStyle=0,Color=#0000FF,Name=Arial
+Power/Condition=Height=-11,FStyle=0,Color=#FF0000,Name=Arial
+Digital Path Color=#FF0000
+Title Block Border=#000000
+Disabled	Color=#C0C0C0
+Search Color=#FFFF00
+Grid Color=#000000
+Graph Paper=#E4E4E4
+Digital 0 Color=#000000
+Digital R Color=#FFFF00
+Digital F Color=#FFFF00
+Digital 1 Color=#FF0000
+Digital X Color=#C0C0C0
+Digital Z Color=#808080
+Block Select Color=#51F998
+
+[Page]
+Index=1
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Text
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=2
+Section=0
+Type=Text
+Print=False
+Enable=True
+Name=Models
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Page]
+Index=3
+Section=0
+Type=Info
+Print=False
+Enable=True
+Name=Info
+Font=Height=-15,FStyle=0,Color=#000000,Name=Courier New
+Comment Color=#008000
+WinBackGround Color=#FFFFFF
+Disabled	Color=#C0C0C0
+KeyWord Color=#0000FF
+Error	Color=#FF0000
+Search Color=#FFFF00
+
+[Text Area]
+Section=0
+Page=1
+
+[Text Area]
+Section=0
+Page=2
+Text=* Schematic File
+Text=*
+Text=* Syntax:
+Text=* .MODEL <model name> [AKO:<reference model name>] <ModelType>
+Text=* +([<parameter name>=<value>][LOT[/#][/GAUSS|/UNIFORM|/WCASE]=[<tol>[%]] |[-<low>%,<high>%]][DEV[/#][/GAUSS|/UNIFORM|/WCASE]=[<tol>[%]]...)
+Text=* ModelType must be one of OPA,D,NPN,NMOS,NJF,PUL,SIN,TRN,CORE,GASFET,VSWITCH,ISWITCH,CAP,IND,RES,PNP,PMOS,PJF,DOUTPUT,DINPUT,UADC,UDAC,UGATE,UTGATE,UEFF,UGFF,UDLY,UPLD,UROM,URAM,UBGT,UIO,LPNP,NIGBT,I,V
+Text=*
+Text=*Examples:
+Text=* .MODEL 2N2222A NPN(BF=150 IS=1E-14)
+Text=* .model M1 NMOS(KP=2.5E-5 VTO=1.345 CGDO=14.67p CGBO=4.566p)
+Text=* .MODEL DK D(IS=1E-18)
+Text=* .model 2N2222A AKO:2N2222 NPN (BF=55 ISE=10F)
+Text=* .Model BJT1 NPN (RE=12 LOT/1/GAUSS=30% DEV/2/UNIFORM=2%)
+Text=*
+Text=* A .cir file is typically found in the data directory
+Text=*
+
+[InfoPage]
+InfoPage=True
+Warnings=True
+System=True
+Defines=True
+Array=True
+Model=True
+Measure=True
+MacroSubckt=True
+NotUsed=True
+ComponentCounts=True
+VariablizePaths=False
+DontShowPaths=False
+SimulationLog=True
+
+[Limits]
+Analysis=DynamicAC
+FirstValueDisplay=Mag
+SecondValueDisplay=PhaseDeg
+PlaceText=True
+
+[Limits]
+Analysis=DynamicDC
+PlaceText=True
+
+[Pane]
+Analysis=Transient
+
+[Pane]
+Analysis=AC
+
+[Pane]
+Analysis=DC
+
+[Pane]
+Analysis=HmDistortion
+
+[Pane]
+Analysis=ImDistortion
+
+[Pane]
+Analysis=Stability
+
+[WCTolerance]
+Var Width=100
+Nominal Width=72
+Tol Width=152
+Tol Name=Drift
+Col Width Neq=50
+Col Width Pos=50
+Col Width Rnd=50
+
+[WCFiles]
+UseFile=<Library>Standard.tlib
+AVAILABLE_FILE=<Library>Standard.tlib
+
+[OPMethods]
+Analysis=Transient
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=AC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=DC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=HmDistortion
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=ImDistortion
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=Stability
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=DynamicAC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
+
+[OPMethods]
+Analysis=DynamicDC
+Standard Newton-Raphson=0,0
+Source Stepping=0,0
+Diagonal Gmin Stepping=0,0
+Junction Gmin Stepping=0,0
+Pseudo Transient=0,0
