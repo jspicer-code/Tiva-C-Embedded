@@ -13,7 +13,7 @@
 
 #define halUSE_INTERVAL_TIMERS 			1
 #define halUSE_EDGE_TIME_TIMERS			1
-#define halUSE_EDGE_COUNT_TIMERS		1
+#define halUSE_EDGE_COUNT_TIMERS		0
 
 #define halUSE_TIMER0								1
 #define halUSE_TIMER1								1

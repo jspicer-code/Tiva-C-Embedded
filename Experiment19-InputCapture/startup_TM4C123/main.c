@@ -19,7 +19,10 @@ int main()
 	config_.lcd.waitTimer = TIMER0;
 	
 	config_.edgeTimeTimer = TIMER2;
-	config_.edgeTimePin = PINDEF(PORTB, PIN0);
+	config_.timerPin = PINDEF(PORTB, PIN0);
+	config_.levelPin = PINDEF(PORTB, PIN4);
+	
+	config_.button = PINDEF(PORTF, PIN0);
 
 	Run(&config_);
 }

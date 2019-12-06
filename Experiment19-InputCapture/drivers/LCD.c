@@ -10,7 +10,7 @@
 int LCD_Initialize(const LCDConfig_t* config, LCDDisplay_t* display)
 {
 	
-	if (Timer_Init(config->waitTimer, TIMER_ONESHOT, (void*)0, (void*)0)) {
+	if (Timer_InitIntervalTimer(config->waitTimer, TIMER_ONESHOT, (void*)0, (void*)0)) {
 		return -1;
 	}
 	

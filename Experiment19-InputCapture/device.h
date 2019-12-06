@@ -19,7 +19,10 @@ typedef struct {
 	} lcd;
 	
 	TimerBlock_t edgeTimeTimer;
-	PinDef_t edgeTimePin;
+	PinDef_t timerPin;
+	PinDef_t levelPin;
+	
+	PinDef_t button;
 	
 } DeviceConfig_t;
 

@@ -33,16 +33,15 @@ typedef enum {
 typedef enum {
 	TIMER_ONESHOT,
 	TIMER_PERIODIC,
-	TIMER_EDGE_TIME,
-	TIMER_EDGE_COUNT
-} TimerMode_t;
+} TimerIntervalMode_t;
 
-// Types of timer events (interrupt sources).
+// Types of timer events (edge events).
 typedef enum {
-	TIMER_NO_EVENT = 0,
-	TIMER_TIMEOUT_EVENT,
-	TIMER_EDGE_EVENT
+	TIMER_EVENT_RISING_EDGE = 0,
+	TIMER_EVENT_FALLING_EDGE = 1,
+	TIMER_EVENT_BOTH_EDGES = 3
 } TimerEventType_t;
+
 
 // This structure represents the registers associated with a timer block.
 //	It will be overlayed on top of IO memory so that the structure fields
@@ -91,31 +90,17 @@ typedef struct {
 
 } TimerRegs_t;
 
-// Timer event callback arguments.
-typedef struct {
-	TimerBlock_t block;
-	void* callbackData;
-	TimerEventType_t eventType;
-	volatile TimerRegs_t* regs;
-} TimerEventArgs_t;
-
-// Signature of the Timer callback function 
-typedef void (*PFN_TimerCallback)(TimerEventArgs_t* args);
 
 typedef struct {
 	uint8_t priority;
-	PFN_TimerCallback callback;
 	void* callbackData;
 } TimerIRQConfig_t;
 
 // This structure holds information for the interrupt handler.
 typedef struct {
-	TimerBlock_t block;
-	TimerMode_t mode;
-	PFN_TimerCallback callback;
-	void* callbackData;
-	volatile TimerRegs_t* regs;
-} TimerHandlerInfo_t;
+	volatile TimerRegs_t* timerRegs;	
+	void* timerState;
+} TimerISRData_t;
 
 
 //------------------ Timer_Init --------------------------
@@ -127,7 +112,7 @@ typedef struct {
 //          priority - interrupt priority.
 //          callback - function to callback when the timer expires.
 // Outputs:  none.
-int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
+//int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
 
 bool Timer_IsTimerEnabled(TimerBlock_t block);
 
@@ -135,9 +120,7 @@ volatile TimerRegs_t* Timer_GetRegisters(TimerBlock_t block);
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
-#define Timer_Wait10ms(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer10ms);
-#define Timer_Wait10us(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer10us);
-#define Timer_Wait100ns(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer100ns);
+int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
 
 int Timer_StartInterval(TimerBlock_t block, uint32_t interval);
 
@@ -149,11 +132,16 @@ int Timer_StartInterval(TimerBlock_t block, uint32_t interval);
 // Outputs:  none.
 void Timer_Wait(TimerBlock_t block, uint32_t count, uint32_t interval);
 
+#define Timer_Wait10ms(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer10ms);
+#define Timer_Wait10us(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer10us);
+#define Timer_Wait100ns(timer, count) Timer_Wait(timer, count, PLL_NumTicksPer100ns);
+
 #endif
 
 
 #if (halUSE_EDGE_TIME_TIMERS == 1) 
 
+int Timer_InitEdgeTimeTimer(TimerBlock_t block, TimerEventType_t eventType, const PinDef_t* pinConfig, const TimerIRQConfig_t* irqConfig);
 void Timer_EnableEdgeTimeTimer(TimerBlock_t block);
 void Timer_DisableEdgeTimeTimer(TimerBlock_t block);
 

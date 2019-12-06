@@ -46,8 +46,18 @@ const volatile uint32_t * TimerBaseAddress[TIMER_MAX_BLOCKS] = {
 #endif
 };
 
-
-static void EnableIRQHandler(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, bool useTimerA, bool useTimerB)
+static void EnableClockSource(TimerBlock_t block)
+{
+	// Enable the clock to the timer block.
+	uint32_t clockBit = (uint32_t)(0x1 << (uint32_t)block);
+	SYSCTL_RCGCTIMER_R |= clockBit;	
+	
+	// Wait for the peripheral ready bit to be set.  If the code doesn't wait
+	// it will hang up when it attempts to set the CFG register.
+	while (!(SYSCTL_PRTIMER_R & clockBit)) {};
+}		
+		
+static void EnableIRQHandler(TimerBlock_t block, TimerSubTimer_t subTimer, const TimerIRQConfig_t* irqConfig)
 {
 	
 	struct { 
@@ -65,29 +75,34 @@ static void EnableIRQHandler(TimerBlock_t block, TimerMode_t mode, const TimerIR
 #endif		
 	};
 
-	TimerHandlerInfo_t* handler = (TimerHandlerInfo_t*)malloc(sizeof(TimerHandlerInfo_t));
-	handler->block = block;
-	handler->mode = mode;
-	handler->callback = irqConfig->callback;
-	handler->callbackData = irqConfig->callbackData;
-	handler->regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	TimerISRData_t* data = (TimerISRData_t*)malloc(sizeof(TimerISRData_t));
+	data->timerRegs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	data->timerState = irqConfig->callbackData;
 
-	if (useTimerA) {
-		NVIC_EnableIRQ(intNumbers[block].subTimer[0] - 16, irqConfig->priority, handler);
+	if (subTimer == TIMERA) {
+		NVIC_EnableIRQ(intNumbers[block].subTimer[0] - 16, irqConfig->priority, data);
 	}
-	
-	if (useTimerB) {
-		NVIC_EnableIRQ(intNumbers[block].subTimer[1] - 16, irqConfig->priority, handler);
+	else {
+		NVIC_EnableIRQ(intNumbers[block].subTimer[1] - 16, irqConfig->priority, data);
 	}
 	
 }
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
-static int ConfigureIntervalTimer(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig)
+int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig)
 {
+	EnableClockSource(block);
+	
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	
+	// Disable the timer block while configuring.  Specifically, clear the TAEN and TBEN (enable) bits.
+	regs->CTL = 0;
 
+	// Disable and clear pending interrupts.
+	regs->IMR = 0;
+	regs->ICR = (TIMER_ICR_CAECINT | TIMER_ICR_TBTOCINT);
+	
 	// 32-bit mode.
 	regs->CFG = 0;
 
@@ -103,7 +118,7 @@ static int ConfigureIntervalTimer(TimerBlock_t block, TimerMode_t mode, const Ti
 	if (irqConfig) {
 	
 		// Enable IRQ handler for timer A only.
-		EnableIRQHandler(block, mode, irqConfig, true, false);
+		EnableIRQHandler(block, TIMERA, irqConfig);
 		
 		// Unmask timeout interrupt.
 		regs->IMR = TIMER_IMR_TATOIM;
@@ -152,9 +167,18 @@ int Timer_StartInterval(TimerBlock_t block, uint32_t interval)
 
 #if (halUSE_EDGE_TIME_TIMERS == 1)
 
-static int ConfigureEdgeTimeTimer(TimerBlock_t block, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig)
+int Timer_InitEdgeTimeTimer(TimerBlock_t block, TimerEventType_t eventType, const PinDef_t* pinConfig, const TimerIRQConfig_t* irqConfig)
 {
+	EnableClockSource(block);
+
 	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
+	
+		// Disable the timer block while configuring.  Specifically, clear the TAEN and TBEN (enable) bits.
+	regs->CTL = 0;
+
+	// Disable and clear pending interrupts.
+	regs->IMR = 0;
+	regs->ICR = (TIMER_ICR_CAECINT | TIMER_ICR_TBTOCINT);
 	
 	// Selects the 16-bit timer configuration.  This allows sub-timers A and B to be used simultaneously.
 	regs->CFG = TIMER_CFG_16_BIT;
@@ -173,6 +197,15 @@ static int ConfigureEdgeTimeTimer(TimerBlock_t block, const TimerIRQConfig_t* ir
 	regs->TAILR = 0xFFFF;
 	regs->TBPR = 0xFF;
 	regs->TBILR = 0xFFFF;
+	
+	// Clear the event field so that it defaults to postive edge, then set accordingly.
+	regs->CTL &= ~(TIMER_CTL_TAEVENT_M);
+	if (eventType == TIMER_EVENT_BOTH_EDGES) {
+		regs->CTL |= TIMER_CTL_TAEVENT_BOTH;
+	}
+	else if (eventType == TIMER_EVENT_FALLING_EDGE) {
+		regs->CTL |= TIMER_CTL_TAEVENT_NEG;		
+	}
 	
 #if (halCONFIG_1294 == 1)
 	uint8_t pinCtl = 0x3;
@@ -196,7 +229,8 @@ static int ConfigureEdgeTimeTimer(TimerBlock_t block, const TimerIRQConfig_t* ir
 		// If Timer B is handled first while Timer A is pending, then logically it means that the timeout event
 		// occurred slightly before the edge event (e.g. an edge occured while inside Timer B's handler) and will
 		// execute to completion before the edge capture is handled.
-		EnableIRQHandler(block, TIMER_EDGE_TIME, irqConfig, true, true);
+		EnableIRQHandler(block, TIMERA, irqConfig);
+		EnableIRQHandler(block, TIMERB, irqConfig);
 		
 		// Enable interrupts for Timer A capture event and Timer B time-out.
 		// The timeout event for Timer B occurs when its down counter reaches 0x0.
@@ -204,7 +238,8 @@ static int ConfigureEdgeTimeTimer(TimerBlock_t block, const TimerIRQConfig_t* ir
 	}
 	
 	return 0;
-}	
+	
+}
 
 void Timer_EnableEdgeTimeTimer(TimerBlock_t block)
 {
@@ -238,6 +273,7 @@ void Timer_DisableEdgeTimeTimer(TimerBlock_t block)
 	// Disable timers A and B. 
 	regs->CTL &= ~(TIMER_CTL_TAEN | TIMER_CTL_TBEN);
 }	
+
 
 #endif
 
@@ -344,53 +380,6 @@ uint32_t Timer_ReadEdgeCountValue(TimerBlock_t block)
 
 #endif
 
-int Timer_Init(TimerBlock_t block, TimerMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig)
-{
-	
-	// Enable the clock to the timer block.
-	uint32_t clockBit = (uint32_t)(0x1 << (uint32_t)block);
-	SYSCTL_RCGCTIMER_R |= clockBit;	
-	
-	// Wait for the peripheral ready bit to be set.  If the code doesn't wait
-	//	it will hang up when it attempts to set the CFG register below.
-	while (!(SYSCTL_PRTIMER_R & clockBit)) {};
-	
-	volatile TimerRegs_t* regs = (volatile TimerRegs_t*)TimerBaseAddress[block];
-	
-	// Disable the timer block while configuring.  Specifically, clear the TAEN and TBEN (enable) bits.
-	regs->CTL = 0;
-
-	// Disable and clear pending interrupts.
-	regs->IMR = 0;
-	regs->ICR = (TIMER_ICR_CAECINT | TIMER_ICR_TBTOCINT);
-	
-	switch (mode) {
-				
-#if (halUSE_INTERVAL_TIMERS == 1)
-		case TIMER_ONESHOT:
-		case TIMER_PERIODIC:
-			ConfigureIntervalTimer(block, mode, irqConfig);
-			break;
-#endif		
-		
-#if (halUSE_EDGE_TIME_TIMERS == 1)
-		case TIMER_EDGE_TIME:
-			ConfigureEdgeTimeTimer(block, irqConfig, pinConfig);
-			break;
-#endif
-		
-#if (halUSE_EDGE_COUNT_TIMERS == 1)
-		case TIMER_EDGE_COUNT:
-			ConfigureEdgeCountTimer(block, irqConfig, pinConfig);
-			break;
-#endif		
-
-		default:
-			break;
-	}
-			
-	return 0;
-}	
 
 volatile TimerRegs_t* Timer_GetRegisters(TimerBlock_t block)
 {

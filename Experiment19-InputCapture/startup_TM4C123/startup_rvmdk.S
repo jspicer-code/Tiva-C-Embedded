@@ -53,8 +53,8 @@ Stack   EQU     0x00000400
 ;
 ;******************************************************************************
 ;Heap    EQU     0x00000000
-;Heap size changed to 16KiB. jspicer
-Heap    EQU     0x00001000
+;Heap size changed to 8KiB. jspicer
+Heap    EQU     0x00002000
 
 ;******************************************************************************
 ;
@@ -98,8 +98,8 @@ __heap_limit
 ;
 ;******************************************************************************
 
-		EXTERN	FrequencyTimer_CaptureHandler
-		EXTERN	FrequencyTimer_TimeoutHandler
+		EXTERN	CaptureTimer_CaptureHandler
+		EXTERN	CaptureTimer_TimeoutHandler
 			
         EXPORT  __Vectors
 __Vectors
@@ -142,8 +142,8 @@ __Vectors
         DCD     IntDefaultHandler           ; Timer 0 subtimer B
         DCD     IntDefaultHandler       	; Timer 1 subtimer A
         DCD     IntDefaultHandler           ; Timer 1 subtimer B
-        DCD     FrequencyTimer_CaptureHandler  	; Timer 2 subtimer A
-        DCD     FrequencyTimer_TimeoutHandler  	; Timer 2 subtimer B
+        DCD     CaptureTimer_CaptureHandler ; Timer 2 subtimer A
+        DCD     CaptureTimer_TimeoutHandler ; Timer 2 subtimer B
         DCD     IntDefaultHandler           ; Analog Comparator 0
         DCD     IntDefaultHandler           ; Analog Comparator 1
         DCD     IntDefaultHandler           ; Analog Comparator 2

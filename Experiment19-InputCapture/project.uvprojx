@@ -627,16 +627,6 @@
               <FilePath>.\drivers\LCD_Raw.h</FilePath>
             </File>
             <File>
-              <FileName>FrequencyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\drivers\FrequencyTimer.c</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\drivers\FrequencyTimer.h</FilePath>
-            </File>
-            <File>
               <FileName>Switch.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\drivers\Switch.c</FilePath>
@@ -645,6 +635,16 @@
               <FileName>Switch.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\drivers\Switch.h</FilePath>
+            </File>
+            <File>
+              <FileName>CaptureTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\CaptureTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>CaptureTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\drivers\CaptureTimer.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1028,7 +1028,7 @@
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>.\Objects\project.sct</ScatterFile>
+            <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -1286,16 +1286,6 @@
               <FilePath>.\drivers\LCD_Raw.h</FilePath>
             </File>
             <File>
-              <FileName>FrequencyTimer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\drivers\FrequencyTimer.c</FilePath>
-            </File>
-            <File>
-              <FileName>FrequencyTimer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\drivers\FrequencyTimer.h</FilePath>
-            </File>
-            <File>
               <FileName>Switch.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\drivers\Switch.c</FilePath>
@@ -1304,6 +1294,16 @@
               <FileName>Switch.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\drivers\Switch.h</FilePath>
+            </File>
+            <File>
+              <FileName>CaptureTimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\CaptureTimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>CaptureTimer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\drivers\CaptureTimer.h</FilePath>
             </File>
           </Files>
         </Group>
