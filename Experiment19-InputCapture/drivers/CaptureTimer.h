@@ -20,14 +20,13 @@ typedef struct {
 	PinDef_t 			timerPin;
 	PinDef_t			levelPin;
 	uint8_t 			irqPriority;
-	int						maxPeriod;
 	bool					measureDutyCycle;
 } CaptureTimer_Config_t;
 
 typedef struct {
 	float frequency;
 	float dutyCycle;
-} CaptureTimer_Pulse_t;
+} CaptureTimer_PulseInfo_t;
 
 typedef struct CaptureTimer CaptureTimer_t;
 
@@ -37,7 +36,7 @@ CaptureTimer_t* CaptureTimer_Init(const CaptureTimer_Config_t* config);
 // Terminates the capture timer, disabling it and freeing memory.
 void CaptureTimer_Terminate(CaptureTimer_t* capTimer);
 
-// Polls for the average pulse frequency and duty cycle since the last poll.
-CaptureTimer_PulseStatus_t CaptureTimer_Poll(CaptureTimer_t* capTimer, int pollInterval, CaptureTimer_Pulse_t* pulse);
+// Polls for the average pulse frequency and duty cycle.
+CaptureTimer_PulseStatus_t CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse);
 
 #endif

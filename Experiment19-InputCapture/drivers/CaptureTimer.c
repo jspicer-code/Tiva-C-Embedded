@@ -19,25 +19,26 @@ typedef struct {
 
 struct CaptureTimer {
 	
-	// Hardware timer and timeout counter
+	// Hardware timer and cycle counter
 	TimerBlock_t timer;
 	uint8_t timerCycle;
 
-	// Configuration options.
+	// Configuration options
 	bool measureDutyCycle;
 	volatile uint32_t* levelPin;
-	int maxPeriod;
 	
-	// Buffer polling state.
-	int noSignalDuration;
-	float lastFrequency;
-	float lastDutyCycle;
-	
-	// Circular buffer.
+	// Circular buffer
 	Capture_t captures[CAPTIMER_BUFFER_SIZE];
 	BufferIndex_t readIndex;
 	BufferIndex_t writeIndex;
 };
+
+typedef struct {
+	int captureCount;
+	int cycleCount;
+	float periodSum;
+	float dutyCycleSum;
+} BufferTotals_t;
 
 static const uint32_t LEVEL_HIGH = 1;
 
@@ -63,7 +64,7 @@ void CaptureTimer_CaptureHandler()
 	
 	// Clear the capture flag.  NOTE:  reading back to force clearing of the interrupt cancel flag
 	// doesn't seem to be necessary here and it also increases the time spent in the ISR, so that
-	// step is ommitted.
+	// step is omitted.
 	regs->ICR = TIMER_MIS_CAEMIS;	
 	
 	CaptureTimer_t* capTimer = (CaptureTimer_t*)isrData->timerState;
@@ -79,7 +80,7 @@ void CaptureTimer_CaptureHandler()
 	BufferIndex_t next = capTimer->writeIndex + 1;
 	
 	if (next == capTimer->readIndex) {
-		// mask the input capture interrupt.
+		// Mask the input capture interrupt and stop capturing when the buffer is full.
 		regs->IMR &= ~TIMER_IMR_CAEIM;
 	}
 	else {
@@ -92,7 +93,7 @@ void CaptureTimer_CaptureHandler()
 		// Save the new buffer count.
 		capTimer->writeIndex = next;
 	}
-		
+	
 }
 
 static void ResetBuffer(CaptureTimer_t* capTimer)
@@ -119,177 +120,193 @@ static uint32_t GetCaptureTime(Capture_t* capture)
 	return time;
 }
 
-CaptureTimer_PulseStatus_t ReadBuffer(CaptureTimer_t* capTimer, CaptureTimer_Pulse_t* pulse)
+static void AnalyzeCycle(CaptureTimer_t* capTimer, BufferIndex_t edges[3], BufferTotals_t* totals)
 {
-	float periodSum = 0.0f;
-	float dutyCycleSum = 0.0f;
-	int cycleCount = 0;
-
-	// These pointers keep track of the edges within one input cycle.
-	Capture_t* risingCapture1 = NULL;
-	Capture_t* risingCapture2 = NULL;
-	Capture_t* fallingCapture = NULL;
+	Capture_t* risingCapture1 = &capTimer->captures[edges[0]];
+	Capture_t* risingCapture2 = &capTimer->captures[edges[2]];
 	
+	// Get the differences in their capture times (i.e. the cycle period) and add this to the total.
+	uint32_t risingTime1 = GetCaptureTime(risingCapture1);
+	uint32_t risingTime2 = GetCaptureTime(risingCapture2);
+	uint32_t period = risingTime1 - risingTime2;
+	totals->periodSum += (float)(period);
+	
+	if (capTimer->measureDutyCycle) {
+
+		Capture_t* fallingCapture = &capTimer->captures[edges[1]];
+		
+		// Calculate the duty cycle and add to the total.
+		uint32_t fallingTime = GetCaptureTime(fallingCapture);
+		uint32_t pulseWidth = risingTime1 - fallingTime;
+		float dutyCycle = (float)pulseWidth / (float)period;
+		totals->dutyCycleSum += dutyCycle;
+	}
+	
+	totals->cycleCount++;
+}
+
+
+static void ReadBuffer(CaptureTimer_t* capTimer, BufferTotals_t* totals)
+{
+	enum { STATE_RESET, STATE_RISING, STATE_FALLING } state = STATE_RESET;
+	enum { ACTION_RESET, ACTION_RISING, ACTION_FALLING, ACTION_DETECTED } action = ACTION_RESET;
+	enum InputType { INPUT_NODUTY_LOW = 0, INPUT_NODUTY_HIGH = 1, INPUT_DUTY_LOW = 2, INPUT_DUTY_HIGH = 3 } input;
+	
+	BufferIndex_t edges[3];
+
 	// Make copies the write and read indices to prevent a race condition within the capture ISR.
-	// Per the disassembly, these instructions are (and must be) atomic.
+	// Per the disassembly, these instructions are (and must be) atomic, i.e. non-interruptible.
 	BufferIndex_t writeIndex = capTimer->writeIndex;
 	BufferIndex_t readIndex = capTimer->readIndex;
+	BufferIndex_t finalIndex = readIndex;
 
-	// Maintain an index that points to the last rising edge in the buffer.
-	BufferIndex_t lastRisingIndex;
+	// Unsigned subtraction
+	totals->captureCount = (BufferIndex_t)(writeIndex - readIndex);
 	
-	CaptureTimer_PulseStatus_t status = CAPTIMER_PULSE_VALID;
-	
-	// Advance the read index until it reaches the end of available data (i.e. buffer empty)
-	// or an invalid condition is detected.
-	while (readIndex != writeIndex && status != CAPTIMER_PULSE_INVALID) {
-				
+	for (;readIndex != writeIndex; readIndex++) {
+		
 		Capture_t* capture = &capTimer->captures[readIndex];
+		input = (enum InputType) ((capTimer->measureDutyCycle << 1) | capture->level);
 		
 		if (capture->status & TIMER_RIS_CAERIS) {
 			// A capture interrupt was pending while the ISR was executing for this capture, which likely means
-			// that the frequency was too high or the pulse too narrow.  In other words, the ISR can't execute
+			// that the frequency was too high or the pulse too narrow.  In other words, the ISR isn't executing
 			// fast enough to keep up with the incoming edges.
- 			status = CAPTIMER_PULSE_INVALID;
-		}
-		else if (risingCapture1 == NULL) {
-			// Is this the first rising edge in the buffer?  If so, mark it and start cycle analysis here.
-			if (capture->level) {
-				risingCapture1 = capture;
-			}
-		}
-		else if (!capture->level) {
-			// If a low level was detected but the timer is not configured to detect both edges then
-			// something may be wrong with the signal.  Also, if two or more low levels were detected
-			// in succession, then likewise the signal will be considered invalid.
-			if (!capTimer->measureDutyCycle || fallingCapture != NULL) {
-				status = CAPTIMER_PULSE_INVALID;
-			}
-			else {
-				// This falling edge capture immediately follows a rising edge, so mark it.
-				fallingCapture = capture;
-			}
+ 			state = STATE_RESET;
+			action = ACTION_RESET;
 		}
 		else {
 			
-			// Now there are two rising edges, which represents one cycle.
-			risingCapture2 = &capTimer->captures[readIndex];
-			
-			// Get the differences in their capture times (i.e. the cycle period) and add this to the total.
-			uint32_t risingTime1 = GetCaptureTime(risingCapture1);
-			uint32_t risingTime2 = GetCaptureTime(risingCapture2);
-			uint32_t period = risingTime1 - risingTime2;
-			periodSum += (float)(period);
-			
-			if (capTimer->measureDutyCycle) {
-
-				// If a falling edge is expected between the two rising edges but was not detected,
-				// then the signal is invalid.
-				if (fallingCapture == NULL) {
-					status = CAPTIMER_PULSE_INVALID;
-				}
-				else {
-					// Calculate the duty cycle and add to the total.
-					uint32_t fallingTime = GetCaptureTime(fallingCapture);
-					uint32_t pulseWidth = risingTime1 - fallingTime;
-					float dutyCycle = (float)pulseWidth / (float)period;
-					dutyCycleSum += dutyCycle;
-				}
-			}
-			
-			risingCapture1 = risingCapture2;
-			fallingCapture = NULL;
-			cycleCount++;
-
-			// Save the index of the last rising edge.
-			lastRisingIndex = readIndex;
-		}
-						
-		// As an optimzation, this performs a modulo 256 operation when BufferIndex_t is uint8_t.
-		readIndex++;		
-	}
-
-	// Were all captures valid?
-	if (status == CAPTIMER_PULSE_VALID) {
-		
-		if (cycleCount == 0) {
-			// No cycles were detected.
-			status = CAPTIMER_PULSE_NOSIGNAL;
-		}
-		else {
-			
-			// Update the readIndex so that it points to the last rising edge capture.  This means the last
-			// capture(s) will remain in the buffer to become the start of the next cycle when the buffer
-			// is read again. NOTE:  This assignment will be an atomic instruction (see dissassembly),
-			// avoiding a race condition.
-			capTimer->readIndex = lastRisingIndex;
+			switch (state) {
 				
-			// Calculate the average frequency and duty cycle.
-			float periodAverage = periodSum / (float)cycleCount;
-			pulse->frequency = (float)PLL_BusClockFreq / periodAverage;
-			pulse->dutyCycle = dutyCycleSum / (float)cycleCount;
+				case STATE_RESET:
+					
+					switch (input) {
+						
+						case INPUT_NODUTY_HIGH:
+						case INPUT_DUTY_HIGH:
+							state = STATE_RISING;
+							action = ACTION_RISING;
+							break;
+						
+						default:
+							action = ACTION_RESET;
+							break;
+					}
+					
+					break;
 
+				case STATE_RISING:
+					
+					switch (input) {
+						
+						case INPUT_NODUTY_LOW:
+							state = STATE_RESET;
+							action = ACTION_RESET;
+							break;
+						
+						case INPUT_NODUTY_HIGH:
+							state = STATE_RISING;
+							action = ACTION_DETECTED;
+							break;
+						
+						case INPUT_DUTY_LOW:
+							state = STATE_FALLING;
+							action = ACTION_FALLING;
+							break;
+						
+						case INPUT_DUTY_HIGH:
+							action = ACTION_RISING;
+							break;
+						
+					}
+					
+					break;
+				
+				case STATE_FALLING:
+					
+					switch (input) {
+						
+						case INPUT_NODUTY_LOW:
+						case INPUT_DUTY_LOW:
+							state = STATE_RESET;
+							action = ACTION_RESET;
+							break;
+						
+						case INPUT_NODUTY_HIGH:
+						case INPUT_DUTY_HIGH:
+							state = STATE_RISING;
+							action = ACTION_DETECTED;
+							break;
+					}
+			
+					break;
+	
+			}
+			
 		}
+		
+		switch (action) {
+			
+			case ACTION_RESET:
+				finalIndex = readIndex;
+				break;
+			
+			case ACTION_RISING:
+				edges[0] = readIndex;
+				finalIndex = readIndex;
+				break;
+			
+			case ACTION_FALLING:
+				edges[1] = readIndex;
+				break;
+			
+			case ACTION_DETECTED:
+				edges[2] = readIndex;
+				AnalyzeCycle(capTimer, edges, totals);
+			  edges[0] = readIndex;
+				finalIndex = readIndex;
+				break;
+			
+		}
+
 	}
 	
-	// Reset the timer and interrupt mask if the buffer overflowed and/or the signal was invalid.
+	// Update the readIndex so that it points to the beginning of the last potential cycle.  This means the
+	// final capture(s) will remain in the buffer to become the start of the next cycle when the buffer is
+	// read again.  This assignment is an atomic instruction (see dissassembly), avoiding a race condition.
+	capTimer->readIndex = finalIndex;
+	
+	// In the meantime, did the buffer overflow and the ISR disable itself?
 	volatile TimerRegs_t* regs = Timer_GetRegisters(capTimer->timer);
-	if (status == CAPTIMER_PULSE_INVALID || !(regs->IMR & TIMER_IMR_CAEIM)) {
+	if (!(regs->IMR & TIMER_IMR_CAEIM)) {
+		// The ISR is disabled, so reset the timer and reenable the ISR.  It is necessary to reset the buffer, 
+		// i.e. empty it, because the last capture(s) will be older and not in sequence with the input signal
+		// once capturing resumes.
 		ResetBuffer(capTimer);
 		regs->ICR = TIMER_MIS_CAEMIS;	
 		regs->IMR |= TIMER_IMR_CAEIM;
-	}
-
-	return status;
-	
+	}	
 }
 
-CaptureTimer_PulseStatus_t CaptureTimer_Poll(CaptureTimer_t* capTimer, int pollInterval, CaptureTimer_Pulse_t* pulse)
+CaptureTimer_PulseStatus_t CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse)
 {
+	BufferTotals_t totals = { 0 };
+	ReadBuffer(capTimer, &totals);
 	
-	const float minFrequency = 1000.0f / (float)capTimer->maxPeriod;
-			
-	CaptureTimer_PulseStatus_t status = ReadBuffer(capTimer, pulse);
-	
-	switch (status) {
-	
-		case CAPTIMER_PULSE_VALID:
-
-			if (pulse->frequency >= minFrequency) {
-				capTimer->lastFrequency = pulse->frequency;
-				capTimer->lastDutyCycle = pulse->dutyCycle;
-			}
-			else {
-				// A frequency was detected but below the minimum, so change the status to "no signal".
-				status = CAPTIMER_PULSE_NOSIGNAL;
-			}
-			capTimer->noSignalDuration = 0;
-			
-			break;
-			
-		case CAPTIMER_PULSE_NOSIGNAL:
-			
-			if (capTimer->noSignalDuration < capTimer->maxPeriod) {
-		
-				pulse->frequency = capTimer->lastFrequency;
-				pulse->dutyCycle = capTimer->lastDutyCycle;
-				capTimer->noSignalDuration += pollInterval;
-				
-				status = CAPTIMER_PULSE_VALID;
-			}
-		
-			break;
-			
-		case CAPTIMER_PULSE_INVALID:
-		default:
-			// At least one capture in the buffer was invalid or out of range.  Set the no signal
-			// duration to the maximum to prevent returning a valid status in the case above.
-			capTimer->noSignalDuration = capTimer->maxPeriod;
-			break;
+	CaptureTimer_PulseStatus_t status = CAPTIMER_PULSE_NOSIGNAL;
+	if (totals.cycleCount > 0) {
+		// Calculate the average frequency and duty cycle.
+		float periodAverage = totals.periodSum / (float)totals.cycleCount;
+		pulse->frequency = (float)PLL_BusClockFreq / periodAverage;
+		pulse->dutyCycle = totals.dutyCycleSum / (float)totals.cycleCount;
+		status = CAPTIMER_PULSE_VALID;
 	}
-	
-	return status;
-			
+	else if (totals.captureCount >= (capTimer->measureDutyCycle ? 3 : 2)) {
+		status = CAPTIMER_PULSE_INVALID;
+	}
+
+	return status;			
 }
 
 
@@ -309,15 +326,8 @@ CaptureTimer_t* CaptureTimer_Init(const CaptureTimer_Config_t* config)
 		else {
 	
 			// Initialize the capture timer's state.	
-			capTimer->noSignalDuration = 0;
-			capTimer->lastFrequency = 0.0f;
-			capTimer->lastDutyCycle = 0.0f;
 			capTimer->timer = config->timer;
 			capTimer->timerCycle = 0xFF;
-			capTimer->maxPeriod = config->maxPeriod;
-			if (capTimer->maxPeriod <= 0) {
-				capTimer->maxPeriod = 1000;
-			}
 			
 			// If configured to measure the duty cycle then enable the corresponding GPIO pin for level checking.
 			// If not, point the level pin field to a constant "HIGH" value to simplify/optimize the capture ISR.
