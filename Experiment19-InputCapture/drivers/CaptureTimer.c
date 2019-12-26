@@ -25,10 +25,10 @@ struct CaptureTimer {
 
 	// Configuration options
 	bool measureDutyCycle;
-	volatile uint32_t* levelPin;
+	volatile uint32_t* timerBit;
 	
 	// Circular buffer
-	Capture_t captures[CAPTIMER_BUFFER_SIZE];
+	Capture_t buffer[CAPTIMER_BUFFER_SIZE];
 	BufferIndex_t readIndex;
 	BufferIndex_t writeIndex;
 };
@@ -85,10 +85,10 @@ void CaptureTimer_CaptureHandler()
 	}
 	else {
 		// Store the current capture time and raw interrupt status bits.
-		Capture_t* capture = &capTimer->captures[capTimer->writeIndex];
+		Capture_t* capture = &capTimer->buffer[capTimer->writeIndex];
 		capture->time = time;
 		capture->status = regs->RIS; //
-		capture->level = *capTimer->levelPin;
+		capture->level = *capTimer->timerBit;
 	
 		// Save the new buffer count.
 		capTimer->writeIndex = next;
@@ -122,8 +122,8 @@ static uint32_t GetCaptureTime(Capture_t* capture)
 
 static void AnalyzeCycle(CaptureTimer_t* capTimer, BufferIndex_t edges[3], BufferTotals_t* totals)
 {
-	Capture_t* risingCapture1 = &capTimer->captures[edges[0]];
-	Capture_t* risingCapture2 = &capTimer->captures[edges[2]];
+	Capture_t* risingCapture1 = &capTimer->buffer[edges[0]];
+	Capture_t* risingCapture2 = &capTimer->buffer[edges[2]];
 	
 	// Get the differences in their capture times (i.e. the cycle period) and add this to the total.
 	uint32_t risingTime1 = GetCaptureTime(risingCapture1);
@@ -133,7 +133,7 @@ static void AnalyzeCycle(CaptureTimer_t* capTimer, BufferIndex_t edges[3], Buffe
 	
 	if (capTimer->measureDutyCycle) {
 
-		Capture_t* fallingCapture = &capTimer->captures[edges[1]];
+		Capture_t* fallingCapture = &capTimer->buffer[edges[1]];
 		
 		// Calculate the duty cycle and add to the total.
 		uint32_t fallingTime = GetCaptureTime(fallingCapture);
@@ -165,7 +165,7 @@ static void ReadBuffer(CaptureTimer_t* capTimer, BufferTotals_t* totals)
 	
 	for (;readIndex != writeIndex; readIndex++) {
 		
-		Capture_t* capture = &capTimer->captures[readIndex];
+		Capture_t* capture = &capTimer->buffer[readIndex];
 		input = (enum InputType) ((capTimer->measureDutyCycle << 1) | capture->level);
 		
 		if (capture->status & TIMER_RIS_CAERIS) {
@@ -331,15 +331,14 @@ CaptureTimer_t* CaptureTimer_Init(const CaptureTimer_Config_t* config)
 			
 			// If configured to measure the duty cycle then enable the corresponding GPIO pin for level checking.
 			// If not, point the level pin field to a constant "HIGH" value to simplify/optimize the capture ISR.
-			capTimer->measureDutyCycle = config->measureDutyCycle;			
+			capTimer->measureDutyCycle = config->measureDutyCycle;
 			if (config->measureDutyCycle) {
-				GPIO_EnableDI(config->levelPin.port, config->levelPin.pin, PULL_NONE);
-				capTimer->levelPin = GPIO_GetBitBandIOAddress(&config->levelPin);
+				capTimer->timerBit = GPIO_GetBitBandIOAddress(&config->timerPin);
 			}
 			else {
-				capTimer->levelPin = (volatile uint32_t*)&LEVEL_HIGH;
+				capTimer->timerBit = (volatile uint32_t*)&LEVEL_HIGH;
 			}
-
+			
 			ResetBuffer(capTimer);
 		
 			// Enable the hardware timer.

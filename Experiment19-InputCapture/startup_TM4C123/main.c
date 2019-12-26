@@ -20,7 +20,6 @@ int main()
 	
 	config_.edgeTimeTimer = TIMER2;
 	config_.timerPin = PINDEF(PORTB, PIN0);
-	config_.levelPin = PINDEF(PORTB, PIN4);
 	
 	config_.button = PINDEF(PORTF, PIN0);
 

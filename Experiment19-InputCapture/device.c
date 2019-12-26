@@ -62,7 +62,6 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	
 	capTimerConfig_.timer = pConfig->edgeTimeTimer;
 	capTimerConfig_.timerPin = pConfig->timerPin;
-	capTimerConfig_.levelPin = pConfig->levelPin;
 	capTimerConfig_.irqPriority = 7;
 	capTimerConfig_.measureDutyCycle = true;
 	
