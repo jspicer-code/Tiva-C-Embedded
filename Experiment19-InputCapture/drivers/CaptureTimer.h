@@ -36,7 +36,7 @@ CaptureTimer_t* CaptureTimer_Init(const CaptureTimer_Config_t* config);
 // Terminates the capture timer, disabling it and freeing memory.
 void CaptureTimer_Terminate(CaptureTimer_t* capTimer);
 
-// Polls for the average pulse frequency and duty cycle.
-CaptureTimer_PulseStatus_t CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse);
+// Polls for the average pulse frequency and duty cycle.  Returns true if a pulse was detected.
+bool CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse);
 
 #endif

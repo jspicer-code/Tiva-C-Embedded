@@ -90,7 +90,7 @@ static void EnableIRQHandler(TimerBlock_t block, TimerSubTimer_t subTimer, const
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
-int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig)
+int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const PinDef_t* pinConfig, const TimerIRQConfig_t* irqConfig)
 {
 	EnableClockSource(block);
 	

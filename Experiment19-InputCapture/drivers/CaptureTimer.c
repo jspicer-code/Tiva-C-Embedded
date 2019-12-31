@@ -34,7 +34,6 @@ struct CaptureTimer {
 };
 
 typedef struct {
-	int captureCount;
 	int cycleCount;
 	float periodSum;
 	float dutyCycleSum;
@@ -159,9 +158,6 @@ static void ReadBuffer(CaptureTimer_t* capTimer, BufferTotals_t* totals)
 	BufferIndex_t writeIndex = capTimer->writeIndex;
 	BufferIndex_t readIndex = capTimer->readIndex;
 	BufferIndex_t finalIndex = readIndex;
-
-	// Unsigned subtraction
-	totals->captureCount = (BufferIndex_t)(writeIndex - readIndex);
 	
 	for (;readIndex != writeIndex; readIndex++) {
 		
@@ -276,8 +272,16 @@ static void ReadBuffer(CaptureTimer_t* capTimer, BufferTotals_t* totals)
 	// final capture(s) will remain in the buffer to become the start of the next cycle when the buffer is
 	// read again.  This assignment is an atomic instruction (see dissassembly), avoiding a race condition.
 	capTimer->readIndex = finalIndex;
+
+}
+
+bool CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse)
+{
 	
-	// In the meantime, did the buffer overflow and the ISR disable itself?
+	BufferTotals_t totals = { 0 };
+	ReadBuffer(capTimer, &totals);
+	
+	// Did the buffer overflow and the ISR disable itself?
 	volatile TimerRegs_t* regs = Timer_GetRegisters(capTimer->timer);
 	if (!(regs->IMR & TIMER_IMR_CAEIM)) {
 		// The ISR is disabled, so reset the timer and reenable the ISR.  It is necessary to reset the buffer, 
@@ -287,26 +291,17 @@ static void ReadBuffer(CaptureTimer_t* capTimer, BufferTotals_t* totals)
 		regs->ICR = TIMER_MIS_CAEMIS;	
 		regs->IMR |= TIMER_IMR_CAEIM;
 	}	
-}
-
-CaptureTimer_PulseStatus_t CaptureTimer_GetPulse(CaptureTimer_t* capTimer, CaptureTimer_PulseInfo_t* pulse)
-{
-	BufferTotals_t totals = { 0 };
-	ReadBuffer(capTimer, &totals);
 	
-	CaptureTimer_PulseStatus_t status = CAPTIMER_PULSE_NOSIGNAL;
+	pulse->frequency = pulse->dutyCycle = 0.0f;
+	
 	if (totals.cycleCount > 0) {
 		// Calculate the average frequency and duty cycle.
 		float periodAverage = totals.periodSum / (float)totals.cycleCount;
 		pulse->frequency = (float)PLL_BusClockFreq / periodAverage;
 		pulse->dutyCycle = totals.dutyCycleSum / (float)totals.cycleCount;
-		status = CAPTIMER_PULSE_VALID;
 	}
-	else if (totals.captureCount >= (capTimer->measureDutyCycle ? 3 : 2)) {
-		status = CAPTIMER_PULSE_INVALID;
-	}
-
-	return status;			
+		
+	return (totals.cycleCount > 0);
 }
 
 

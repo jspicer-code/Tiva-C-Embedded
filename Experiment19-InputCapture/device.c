@@ -10,9 +10,10 @@
 #include "Switch.h"
 #include "utilities/Strings.h"
 
-#define MAX_PERIOD 			(4000) 	// milliseconds, => 250 mHz
-#define MIN_FREQUENCY 	(1000.0f / (float)MAX_PERIOD)
-#define POLL_INTERVAL 	(100) 	// milliseconds
+#define POLL_INTERVAL 						(250) 	// milliseconds
+#define MAX_PULSE_PERIOD 					(4000) 	// milliseconds, => 250 mHz
+#define MIN_PULSE_FREQUENCY 			(1000.0f / (float)MAX_PULSE_PERIOD)
+#define MAX_DETECTION_FAILURES 		(MAX_PULSE_PERIOD / POLL_INTERVAL)
 
 
 static LCDDisplay_t display_;
@@ -78,20 +79,20 @@ static bool InitHardware(DeviceConfig_t* pConfig)
 	return true;
 }
 
-static void UpdateDisplay(CaptureTimer_PulseStatus_t status, const CaptureTimer_PulseInfo_t* pulse)
+static void UpdateDisplay(const CaptureTimer_PulseInfo_t* pulse, int failures)
 {	
+	static const float FAILURES_PER_ELLIPSIS_DOT = (16.0f / (float)MAX_DETECTION_FAILURES);
+	
 	char line1[32] = "";
 	char line2[32] = "";
+	char line4[32] = "";
 	
-	if (status == CAPTIMER_PULSE_NOSIGNAL) {
-		strcpy(line1, "No signal");
-		strcpy(line2, "");
-	}
-	else if (status == CAPTIMER_PULSE_INVALID) {
-		strcpy(line1, "Out of range");
+	if (pulse->frequency <= 0.0f) {
+		strcpy(line1, "No pulse detected");
 		strcpy(line2, "");
 	}
 	else {
+		
 		strncat(line1, "F: ", 3);
 		dtoa((double)pulse->frequency, &line1[3], 5);
 		strncat(line1, " Hz", 3);
@@ -104,6 +105,15 @@ static void UpdateDisplay(CaptureTimer_PulseStatus_t status, const CaptureTimer_
 			dtoa((double)dutyCycle, &line2[3], 2);
 			strncat(line2, "%", 1);
 		}
+		
+		if (failures > 0) {
+			strcpy(line4, "Wait");
+			float ellipsisLength = (float)failures * FAILURES_PER_ELLIPSIS_DOT;
+			for (int i = 0; i < (int)ellipsisLength; i++) {
+				strncat(line4, ".", 1);
+			}
+		}
+	
 	}
 
 	pad(line1, ' ', display_.columns + 1);
@@ -111,6 +121,10 @@ static void UpdateDisplay(CaptureTimer_PulseStatus_t status, const CaptureTimer_
 	
 	pad(line2, ' ', display_.columns + 1);
 	LCD_PutString(&display_, line2, 1, 0);
+
+	pad(line4, ' ', display_.columns + 1);
+	LCD_PutString(&display_, line4, 3, 0);
+	
 }
 
 static void EnableDutyCycle(bool enable)
@@ -129,48 +143,25 @@ static void EnableDutyCycle(bool enable)
 }
 
 
-static CaptureTimer_PulseStatus_t GetPulse(CaptureTimer_PulseInfo_t* pulse)
+static int GetPulse(CaptureTimer_PulseInfo_t* pulse)
 {
-
-	static int noSignalCount = 0;
-	static const int MAX_NOSIGNAL_COUNT = (MAX_PERIOD / POLL_INTERVAL);
+	static int failures = 0;
 	static CaptureTimer_PulseInfo_t lastPulse = { 0 };
-	static bool isLastPulseValid = false;
 	
-	CaptureTimer_PulseStatus_t status = CaptureTimer_GetPulse(capTimer_ , pulse);
-
-	switch (status) {
-		
-		case CAPTIMER_PULSE_NOSIGNAL:
-		
-			if (isLastPulseValid && noSignalCount < MAX_NOSIGNAL_COUNT) {
-				*pulse = lastPulse;
-				status = CAPTIMER_PULSE_VALID;
-				++noSignalCount;
-			}
-			break;
-
-		case CAPTIMER_PULSE_INVALID:
-			isLastPulseValid = false;
-			break;
-			
-		case CAPTIMER_PULSE_VALID:
-			
-			if (pulse->frequency >= MIN_FREQUENCY) {
-				isLastPulseValid = true;
-				lastPulse = *pulse;
-				noSignalCount = 0;
-			} 
-			else {
-				isLastPulseValid = false;
-				status = CAPTIMER_PULSE_NOSIGNAL;
-			}
-				
-			break;
+	CaptureTimer_GetPulse(capTimer_, pulse);
+	
+	if (pulse->frequency >= MIN_PULSE_FREQUENCY) {
+		lastPulse = *pulse;
+		failures = 0;
+	} 
+	else if (failures++ < MAX_DETECTION_FAILURES) {
+		*pulse = lastPulse;
+	}
+	else {
+		pulse->frequency = pulse->dutyCycle = 0.0f;
 	}
 	
-	return status;
-	
+	return failures;
 }
 
 int Run(DeviceConfig_t* pConfig)
@@ -195,10 +186,9 @@ int Run(DeviceConfig_t* pConfig)
 		}
 		
 		CaptureTimer_PulseInfo_t pulse;
-		CaptureTimer_PulseStatus_t status = GetPulse(&pulse);
+		int failures = GetPulse(&pulse);
 	
-		UpdateDisplay(status, &pulse);
-		
+		UpdateDisplay(&pulse, failures);
 	}
 	
 }

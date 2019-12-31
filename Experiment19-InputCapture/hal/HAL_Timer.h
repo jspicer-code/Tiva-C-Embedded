@@ -120,7 +120,7 @@ volatile TimerRegs_t* Timer_GetRegisters(TimerBlock_t block);
 
 #if (halUSE_INTERVAL_TIMERS == 1)
 
-int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const TimerIRQConfig_t* irqConfig, const PinDef_t* pinConfig);
+int Timer_InitIntervalTimer(TimerBlock_t block, TimerIntervalMode_t mode, const PinDef_t* pinConfig, const TimerIRQConfig_t* irqConfig);
 
 int Timer_StartInterval(TimerBlock_t block, uint32_t interval);
 
